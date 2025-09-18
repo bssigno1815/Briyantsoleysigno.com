@@ -1,58 +1,31 @@
 import Head from "next/head";
-import NavBar from "../components/NavBar";
+import Layout from "../components/Layout";
 
 export default function Home() {
   return (
     <>
       <Head>
-        <title>briyantsoleysigno.com</title>
-        <meta name="description" content="Portfolio — orange & black theme, built with Next.js on Vercel." />
-        <link rel="icon" href="/favicon.ico" />
+        <title>Briyant Soley Signo</title>
+        <meta name="description" content="Portfolio & services" />
       </Head>
 
-      <NavBar />
-
-      <main className="container">
+      <Layout>
         <section className="hero">
-          <h1 className="title">Design & Dev that pops 🍊</h1>
+          <h1 className="title">
+            Design & code in bold <span style={{ color: "var(--orange)" }}>orange</span> on black.
+          </h1>
           <p className="subtitle">
-            Sleek black background with an orange glow. Fast, responsive, and deployed on Vercel.
+            Fast, modern, mobile-first sites with Next.js + Vercel. Clean UI, solid SEO, and easy updates.
           </p>
-          <div>
-            <a className="btn" href="#contact">Get in touch</a>
+
+          <div className="grid">
+            <div className="card"><h3>Websites</h3><p>Next.js sites deployed to Vercel.</p></div>
+            <div className="card"><h3>Branding</h3><p>Logo, color system, typography.</p></div>
+            <div className="card"><h3>UI Components</h3><p>Reusable React components.</p></div>
+            <div className="card"><h3>Support</h3><p>DNS, domains, migrations, fixes.</p></div>
           </div>
         </section>
-
-        <section id="services" className="card-grid">
-          <div className="card">
-            <h3>Web Design</h3>
-            <p>Modern layouts, bold color, clean typography.</p>
-          </div>
-          <div className="card">
-            <h3>Development</h3>
-            <p>Next.js, APIs, and smooth deployments.</p>
-          </div>
-          <div className="card">
-            <h3>Optimization</h3>
-            <p>Speed, SEO, and accessibility best practices.</p>
-          </div>
-        </section>
-
-        <section id="work" style={{marginTop: 48}}>
-          <h2 className="sectionTitle">Recent Work</h2>
-          <div className="card-grid">
-            <div className="card"><h3>Project A</h3><p>Coming soon.</p></div>
-            <div className="card"><h3>Project B</h3><p>Coming soon.</p></div>
-          </div>
-        </section>
-
-        <section id="contact" style={{marginTop: 48}}>
-          <h2 className="sectionTitle">Contact</h2>
-          <p className="subtitle">Email: <a href="mailto:hello@briyantsoleysigno.com">hello@briyantsoleysigno.com</a></p>
-        </section>
-
-        <footer>© {new Date().getFullYear()} briyantsoleysigno.com</footer>
-      </main>
+      </Layout>
     </>
   );
 }
