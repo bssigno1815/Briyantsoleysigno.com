@@ -1,8 +1,23 @@
 export default function Home() {
   return (
-    <main style={{ padding: 24, fontFamily: "system-ui, sans-serif" }}>
-      <h1>briyantsoleysigno.com</h1>
-      <p>It works! 🚀</p>
+    <main
+      style={{
+        minHeight: '100vh',
+        display: 'grid',
+        placeItems: 'center',
+        margin: 0,
+        background: 'linear-gradient(180deg,#000 0%,#0a0a0a 40%,#ff7a00 100%)',
+        color: '#ff7a00',
+        fontFamily:
+          'system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif',
+      }}
+    >
+      <div style={{ textAlign: 'center' }}>
+        <h1 style={{ margin: 0, fontSize: 'clamp(28px,6vw,56px)' }}>
+          briyantsoleysigno.com
+        </h1>
+        <p style={{ marginTop: 12 }}>It works! 🚀</p>
+      </div>
     </main>
   );
 }
