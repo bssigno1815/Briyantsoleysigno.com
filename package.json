@@ -1,14 +1,11 @@
+// package.json
 {
-  "name": "briyantsol-eysigno",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "eslint ."
   },
-  "dependencies": {
-    "next": "14.2.4",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
-  }
+  "engines": { "node": "20.x" }
 }
