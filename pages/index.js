@@ -8,14 +8,16 @@ export default function Home() {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        background: "linear-gradient(black, orange)",
+        background: "linear-gradient(160deg, black 40%, orange 100%)",
         color: "orange",
         fontFamily: "Arial, sans-serif",
         textAlign: "center",
       }}
     >
-      <h1>Briyant Solèy Signo 1815</h1>
-      <p>Nou toujou kléré 🔥</p>
+      <h1 style={{ fontSize: 56, margin: 0 }}>BRIYANT SOLEY SIGNO</h1>
+      <p style={{ opacity: 0.9, marginTop: 10 }}>
+        Welcome — this is the home page.
+      </p>
     </div>
   );
 }
