@@ -5,6 +5,13 @@ export default async function handler(req, res) {
   if (!auth?.uid) return; // response already sent on fail
 
   // ... your secure logic here ...
+}import { requireRole } from "../lib/admin";
+
+export default async function handler(req, res) {
+  const auth = await requireRole(req, res, ['admin','super']);
+  if (!auth?.uid) return; // response already sent on fail
+
+  // ... your secure logic here ...
 }// lib/admin.js
 import * as admin from "firebase-admin";
 
