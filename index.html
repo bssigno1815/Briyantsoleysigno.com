@@ -1,4 +1,13 @@
-<a class="btn" href="/admin/checkins.html">Live Check-Ins</a><!doctype html>
+<a class="btn" id="auditBtn" style="display:none" href="/admin/audit.html">Audit Log</a>
+<script>
+  (async ()=>{
+    const user = await new Promise(r=>firebase.auth().onAuthStateChanged(u=>r(u)));
+    if(!user) return;
+    const tok = await user.getIdToken();
+    const me = await fetch('/api/whoami', { headers:{ Authorization:'Bearer '+tok }}).then(r=>r.json());
+    if(me.ok && me.role==='super') document.getElementById('auditBtn').style.display='inline-flex';
+  })();
+</script><a class="btn" href="/admin/checkins.html">Live Check-Ins</a><!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
