@@ -1,9 +1,13 @@
-<!-- HEADER (include in each page) -->
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BRIYANT SOLEY SIGNO 1815</title>
+<link rel="stylesheet" href="css/base.css">
+</head><body>
+
+<!-- header -->
 <header class="header">
   <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:16px;">
-    <a class="brand" href="index.html" aria-label="Briyant Soley Signo 1815">
-      <span class="dot"></span><span>BRIYANT SOLEY SIGNO 1815</span>
-    </a>
+    <a class="brand" href="index.html"><span class="dot"></span><span>BRIYANT SOLEY SIGNO 1815</span></a>
     <nav class="nav">
       <a href="index.html">Home</a>
       <a href="leaders.html">Leaders</a>
@@ -15,7 +19,23 @@
   </div>
 </header>
 
-<!-- FOOTER (include in each page) -->
+<section class="hero">
+  <div class="container">
+    <h1 style="margin:0 0 12px;font-size:40px;letter-spacing:.03em;">Bold. Orange + Black.</h1>
+    <p>Site is live — fast static setup on Vercel. Uniform orange links, black background, no white UI.</p>
+    <p><a class="btn-primary" href="videos.html" style="padding:12px 16px;border-radius:12px;display:inline-block">Watch</a></p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container grid cols-2">
+    <article class="card"><h3>Merch & Apparel</h3><p>Quality pieces in the signature orange + black palette.</p><p><a href="store.html">Shop now →</a></p></article>
+    <article class="card"><h3>Video Gallery</h3><p>Clips, highlights, and promos — all in one place.</p><p><a href="videos.html">Explore videos →</a></p></article>
+    <article class="card"><h3>Leaders</h3><p>Profiles and shoutouts to the team behind the brand.</p><p><a href="leaders.html">Meet the leaders →</a></p></article>
+    <article class="card"><h3>About</h3><p>The story, the mission, the vision.</p><p><a href="about.html">Learn more →</a></p></article>
+  </div>
+</section>
+
 <footer class="footer">
   <div class="container" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;">
     <small class="muted">© 2025 Briyant Soley Signo 1815. All rights reserved.</small>
@@ -24,9 +44,7 @@
 </footer>
 
 <script>
-  // highlight active nav
-  const path = location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.nav a').forEach(a=>{
-    if(a.getAttribute('href')===path){a.classList.add('active')}
-  });
+const path = location.pathname.split('/').pop() || 'index.html';
+document.querySelectorAll('.nav a').forEach(a=>{ if(a.getAttribute('href')===path){a.classList.add('active')} });
 </script>
+</body></html>
