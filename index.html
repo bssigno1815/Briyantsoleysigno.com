@@ -1,4 +1,9 @@
-<span class="bss-badge">BSS</span><a class="btn" id="weeklyBtn" style="display:none" href="/api/audit-weekly-digest">Send Weekly Digest</a>
+<svg class="bss-logo" width="34" height="24" viewBox="0 0 34 24" aria-label="BSS">
+  <rect width="100%" height="100%" fill="#000000"/>
+  <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle"
+        font-family="Inter, system-ui, sans-serif" font-weight="700"
+        font-size="14" fill="#ff7a00">BSS</text>
+</svg><span class="bss-badge">BSS</span><a class="btn" id="weeklyBtn" style="display:none" href="/api/audit-weekly-digest">Send Weekly Digest</a>
 <script>
   (async ()=>{
     const user = await new Promise(r=>firebase.auth().onAuthStateChanged(u=>r(u)));
