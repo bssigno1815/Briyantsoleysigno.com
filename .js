@@ -1,4 +1,28 @@
-// /api/roles-revoke.js (super only) — removes admin access
+// /api/session-login.js
+import { adminAuth, adminDb } from "../lib/admin";
+
+export default async function handler(req, res) {
+  if (req.method !== "POST") return res.status(405).end();
+  try {
+    const { token } = req.body || {};
+    if (!token) return res.status(400).json({ ok:false, error:'Missing token' });
+
+    const decoded = await adminAuth.verifyIdToken(token);
+    const uid = decoded.uid;
+    const roleDoc = await adminDb.doc(`roles/${uid}`).get();
+    const role = roleDoc.exists ? roleDoc.data().role : null;
+
+    if (!role) return res.status(403).json({ ok:false, error:'Not an admin' });
+
+    // Set short-lived session cookie (ID token itself)
+    res.setHeader("Set-Cookie",
+      `bss_session=${token}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=3600`
+    );
+    res.status(200).json({ ok:true, role });
+  } catch (e) {
+    res.status(401).json({ ok:false, error:'Login failed' });
+  }
+}// /api/roles-revoke.js (super only) — removes admin access
 import { adminDb } from "../lib/admin";
 import { requireRole } from "../lib/admin";
 
