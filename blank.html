@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Blank Vendor Registration • Admin</title>
+<link rel="stylesheet" href="/css/base.css">
+<style>
+  body{background:#0a0a0a;color:#f5f5f5}
+  .wrap{max-width:720px;margin:24px auto}
+  .btn{background:#ff7a00;color:#000;border:0;border-radius:10px;padding:10px 14px;font-weight:800}
+  p.muted{color:#9a9a9a}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <h2>Blank Vendor Registration (Editable PDF)</h2>
+  <p class="muted">Click the button to generate a clean, **blank PDF** with the BSS logo and orange/black theme. You can type into the fields or print.</p>
+  <button class="btn" onclick="makePDF()">Download Blank Form</button>
+</div>
+
+<script>
+async function makePDF(){
+  const { PDFDocument, StandardFonts, rgb } = PDFLib;
+  const pdf = await PDFDocument.create();
+  const page = pdf.addPage([612,792]);
+  const font = await pdf.embedFont(StandardFonts.Helvetica);
+  const bold = await pdf.embedFont(StandardFonts.HelveticaBold);
+
+  // header/logo
+  try{
+    const logo = await fetch('/logo.png').then(r=>r.arrayBuffer());
+    const img = await pdf.embedPng(logo);
+    const w=140,h=(img.height/img.width)*w;
+    page.drawImage(img,{x:(612-w)/2,y:740,width:w,height:h});
+  }catch{}
+  page.drawRectangle({x:0,y:710,width:612,height:24,color:rgb(1,0.4,0)});
+  page.drawText("BSS 1815 • TI MACHANN REGISTRATION", {x:50,y:716,size:12,font:bold,color:rgb(0,0,0)});
+
+  let y=680, lh=16, left=50;
+  const line = (label) => {
+    page.drawText(label, {x:left,y,size:10,font:bold,color:rgb(1,0.4,0)});
+    page.drawRectangle({x:left,y:y-10,width:512,height:1,color:rgb(0.5,0.5,0.5)});
+    y -= lh;
+  };
+
+  ["Vendor Name","Company","Email","Phone","Alternate Phone","Category / Goods",
+   "Social / Website","Tax ID (if any)","Address","Emergency Contact (name/phone)","Notes"].forEach(line);
+
+  // footer
+  page.drawText("By registering, vendor agrees to event rules & safety policy.", {x:left,y:60,size:9,font,color:rgb(1,1,1)});
+  page.drawText("Briyant Solèy se yon mountain, yon vision, yon limyè ki pap janm ka etenn.", {x:left,y:44,size:9,font,color:rgb(1,0.4,0)});
+
+  const bytes = await pdf.save();
+  const blob = new Blob([bytes], {type:"application/pdf"});
+  const url = URL.createObjectURL(blob); const a=document.createElement('a');
+  a.href=url; a.download="BSS_TiMachann_Blank_Registration.pdf"; a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),600);
+}
+</script>
+</body>
+</html>
