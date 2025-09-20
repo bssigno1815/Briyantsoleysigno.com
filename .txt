@@ -1,0 +1,24 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{db}/documents {
+    function isSignedIn() { return request.auth != null; }
+    function myRole() { return get(/databases/$(db)/documents/roles/$(request.auth.uid)).data.role; }
+    function isAdmin() { return isSignedIn() && (myRole() == 'admin' || myRole() == 'super'); }
+    function isSuper() { return isSignedIn() && myRole() == 'super'; }
+
+    match /vendors/{id}       { allow read, write: if isAdmin(); }
+    match /contracts/{id}     { allow read, write: if isAdmin(); }
+    match /transactions/{id}  { allow read, write: if isAdmin(); }
+
+    match /roles/{uid} {
+      allow read: if isAdmin();
+      allow create, update, delete: if isSuper();
+    }
+
+    match /audit/{logId} {
+      allow read: if isAdmin();
+      allow create: if isAdmin();
+      allow update, delete: if false;
+    }
+  }
+}
