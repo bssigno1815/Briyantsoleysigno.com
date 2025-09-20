@@ -1,4 +1,4 @@
-// /api/vendor-finalize.js
+npm i firebase-admin// /api/vendor-finalize.js
 import nodemailer from "nodemailer";
 import twilio from "twilio";
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
