@@ -1,4 +1,110 @@
-<a class="btn" id="auditBtn" style="display:none" href="/admin/audit.html">Audit Log</a>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Audit Diff • Super Admin • BSS 1815</title>
+<link rel="stylesheet" href="/css/base.css">
+<style>
+  :root { --orange:#ff7a00; --bg:#0a0a0a; --card:#111; }
+  body{background:var(--bg);color:#f5f5f5;font-family:system-ui,Segoe UI,Roboto}
+  header{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#111;border-bottom:1px solid rgba(255,122,0,.25)}
+  header img{height:32px}
+  .wrap{max-width:900px;margin:16px auto;padding:0 12px}
+  .card{background:#111;border:1px solid rgba(255,122,0,.35);border-radius:12px;padding:14px}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .input{background:#000;border:1px solid #333;color:#fff;padding:10px;border-radius:10px}
+  .btn{background:var(--orange);color:#000;border:0;border-radius:10px;padding:8px 12px;font-weight:800;cursor:pointer}
+  .btn.secondary{background:#222;color:#fff;border:1px solid #333}
+  table{width:100%;border-collapse:collapse;margin-top:12px}
+  th,td{border-bottom:1px solid #222;padding:10px;text-align:left}
+  th{color:var(--orange)}
+  .tag{padding:2px 8px;border-radius:8px;background:#1b1b1b;border:1px solid #333;color:#ddd;font-size:12px}
+  .diff{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .box{background:#000;border:1px solid #333;border-radius:10px;padding:10px}
+  .muted{color:#9a9a9a}
+</style>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+</head>
+<body>
+<header>
+  <div style="display:flex;align-items:center;gap:10px">
+    <img src="/logo.png" alt="BSS"><strong>Audit Diff • Super Admin</strong>
+  </div>
+  <div id="me" class="muted"></div>
+</header>
+
+<div class="wrap">
+  <div class="card">
+    <div class="row">
+      <input id="uid" class="input" style="min-width:280px" placeholder="Target UID (the user you changed)">
+      <button id="run" class="btn">Load Role History</button>
+      <span id="status" class="muted"></span>
+    </div>
+    <div id="out" style="margin-top:12px"></div>
+  </div>
+</div>
+
+<script>
+  const firebaseConfig = { apiKey:"YOUR_API_KEY", authDomain:"YOUR_PROJECT.firebaseapp.com", projectId:"YOUR_PROJECT_ID" };
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  let token = null;
+
+  const $ = id=>document.getElementById(id);
+
+  async function ensureSuper(){
+    const user = await new Promise(r=>firebase.auth().onAuthStateChanged(u=>r(u)));
+    if(!user){ location.href="/admin/login.html"; return false; }
+    token = await user.getIdToken();
+    const me = await fetch('/api/whoami', { headers:{ Authorization:'Bearer '+token }}).then(r=>r.json());
+    if (!me.ok || me.role!=='super'){ document.body.innerHTML = "<div style='padding:24px;color:#ff7a00'>Super Admin only.</div>"; return false; }
+    $("me").textContent = me.email + " • role: " + me.role;
+    return true;
+  }
+
+  $("run").onclick = async ()=>{
+    const uid = $("uid").value.trim();
+    if(!uid){ $("status").textContent = "Enter a UID."; return; }
+    $("status").textContent = "Loading…";
+    const res = await fetch('/api/audit-role-history', {
+      method:'POST',
+      headers: { 'Content-Type':'application/json', Authorization: 'Bearer '+token },
+      body: JSON.stringify({ uid, limit: 50 })
+    }).then(r=>r.json());
+    if(!res.ok){ $("status").textContent = "Failed: "+(res.error||""); return; }
+    $("status").textContent = "";
+    render(res.items||[]);
+  };
+
+  function render(items){
+    const out = $("out");
+    if(!items.length){ out.innerHTML = "<div class='muted'>No role changes found.</div>"; return; }
+    out.innerHTML = `
+      <table>
+        <thead><tr><th>When</th><th>Actor</th><th>Change</th></tr></thead>
+        <tbody>
+          ${items.map(x=>`
+            <tr>
+              <td>${x.at||""}</td>
+              <td>${x.actorEmail||x.actorUid||""} <span class="tag">${x.actorRole||""}</span></td>
+              <td>
+                <div class="diff">
+                  <div class="box"><strong>Before</strong><br>${x.prevRole ?? "—"}</div>
+                  <div class="box"><strong>After</strong><br>${x.newRole ?? "—"}</div>
+                </div>
+              </td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+    `;
+  }
+
+  (async ()=>{ await ensureSuper(); })();
+</script>
+</body>
+</html><a class="btn" id="auditBtn" style="display:none" href="/admin/audit.html">Audit Log</a>
 <script>
   (async ()=>{
     const user = await new Promise(r=>firebase.auth().onAuthStateChanged(u=>r(u)));
