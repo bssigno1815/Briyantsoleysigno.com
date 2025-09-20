@@ -1,0 +1,8 @@
+<a class="btn" id="rolesBtn" style="display:none" href="/admin/roles.html">Manage Roles</a>
+<script>
+  // reveal button only for super
+  fetch('/api/whoami', { headers: { Authorization: 'Bearer ' + (await firebase.auth().currentUser.getIdToken()) }})
+    .then(r=>r.json()).then(me=>{
+      if (me.ok && me.role === 'super') document.getElementById('rolesBtn').style.display = 'inline-flex';
+    }).catch(()=>{});
+</script>
