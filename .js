@@ -1,4 +1,33 @@
-await adminDb.collection('audit').add({
+// pages/api/roles-assign.js
+import { adminDb } from "../../lib/admin";
+import { requireRole } from "../../lib/admin";
+
+export default async function handler(req,res){
+  if (req.method !== "POST") return res.status(405).end();
+  const auth = await requireRole(req,res,['super']);
+  if (!auth?.uid) return;
+
+  const { uid, email, role } = req.body || {};
+  if (!uid || !email || !['admin','super'].includes(role)) {
+    return res.status(400).json({ ok:false, error:'uid, email, role=admin|super required' });
+  }
+
+  const now = new Date();
+  const prevSnap = await adminDb.doc(`roles/${uid}`).get();
+  const prevRole = prevSnap.exists ? (prevSnap.data().role || null) : null;
+
+  await adminDb.doc(`roles/${uid}`).set({ email, role, updatedAt: now, createdAt: prevSnap.exists ? prevSnap.data().createdAt || now : now }, { merge:true });
+
+  await adminDb.collection('audit').add({
+    actorUid: auth.uid, actorRole: auth.role, actorEmail: auth.email,
+    action: 'roles.assign',
+    target: { uid, email },
+    at: now,
+    details: { prevRole, newRole: role }
+  });
+
+  res.status(200).json({ ok:true });
+}await adminDb.collection('audit').add({
   actorUid: 'system', actorRole: 'system',
   action: 'transaction.created',
   target: { email, amount, currency },
