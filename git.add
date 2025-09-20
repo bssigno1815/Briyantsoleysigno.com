@@ -1,3 +1,5 @@
 git add .
+git commit -m "BSS1815: admin area, vendor form, badge, brand 404"
+git push origin maingit add .
 git commit -m "Add admin area, vendor form, uniform orange/black theme, rules"
 git push origin main
