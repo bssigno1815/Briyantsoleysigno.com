@@ -1,4 +1,18 @@
-import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
+const amount = (session.amount_total || session.amount || 0) / 100;
+const currency = (session.currency || "usd").toUpperCase();
+const email = session.customer_details?.email || session.charges?.data?.[0]?.billing_details?.email || "unknown";
+const name = session.customer_details?.name || session.charges?.data?.[0]?.billing_details?.name || "unknown";
+
+const receiptPdf = await buildReceiptPDF({ id: session.id, amount, currency, email, name });
+
+await transporter.sendMail({
+  from: `"BSS Store" <${process.env.GMAIL_USER}>`,
+  to: [email, process.env.EMAIL_TO || process.env.GMAIL_USER].filter(Boolean),
+  subject: `Receipt — $${amount} ${currency} — ${name}`,
+  html: htmlBody("BSS 1815 Receipt", `Amount: $${amount} ${currency}\nBuyer: ${name} <${email}>`),
+  text: `Amount: $${amount} ${currency}\nBuyer: ${name} <${email}>`,
+  attachments: [{ filename: `BSS_Receipt_${session.id}.pdf`, content: Buffer.from(receiptPdf) }]
+});import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 
 async function buildReceiptPDF(payment) {
   const pdfDoc = await PDFDocument.create();
