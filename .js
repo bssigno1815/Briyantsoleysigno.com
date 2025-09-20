@@ -1,4 +1,10 @@
-// /api/session-login.js
+fetch('/api/whoami', { headers: { 'Authorization': 'Bearer ' + (await firebase.auth().currentUser.getIdToken()) }})
+  .then(r=>r.json()).then(me=>{
+    if (me.role === 'super') {
+      // reveal “Manage Roles” button
+      document.getElementById('rolesBtn').style.display = 'inline-flex';
+    }
+  });// /api/session-login.js
 import { adminAuth, adminDb } from "../lib/admin";
 
 export default async function handler(req, res) {
