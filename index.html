@@ -1,4 +1,21 @@
-<!doctype html>
+<a class="btn" id="weeklyBtn" style="display:none" href="/api/audit-weekly-digest">Send Weekly Digest</a>
+<script>
+  (async ()=>{
+    const user = await new Promise(r=>firebase.auth().onAuthStateChanged(u=>r(u)));
+    if(!user) return;
+    const tok = await user.getIdToken();
+    const me = await fetch('/api/whoami',{ headers:{ Authorization:'Bearer '+tok }}).then(r=>r.json());
+    if(me.ok && me.role==='super'){
+      const b = document.getElementById('weeklyBtn');
+      b.style.display='inline-flex';
+      b.onclick = async (e)=>{
+        e.preventDefault();
+        await fetch('/api/audit-weekly-digest', { headers:{ Authorization:'Bearer '+tok }});
+        alert('Weekly digest sent.');
+      };
+    }
+  })();
+</script><!doctype html>
 <html>
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
