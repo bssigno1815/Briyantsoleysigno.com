@@ -1,4 +1,43 @@
-// pages/api/roles-assign.js
+// pages/api/audit-role-history.js  (Super only)
+import { adminDb } from "../../lib/admin";
+import { requireRole } from "../../lib/admin";
+
+export default async function handler(req,res){
+  if (req.method !== "POST") return res.status(405).end();
+  const auth = await requireRole(req,res,['super']);
+  if (!auth?.uid) return;
+
+  try{
+    const { uid, limit=50 } = req.body || {};
+    if (!uid) return res.status(400).json({ ok:false, error:'uid required' });
+
+    // Filter just this user's role events
+    const snap = await adminDb.collection('audit')
+      .where('action','==','roles.assign')
+      .where('target.uid','==', uid)
+      .orderBy('at','desc')
+      .limit(Math.min(parseInt(limit)||50, 200))
+      .get();
+
+    const items = snap.docs.map(d=>{
+      const x = d.data();
+      const at = x.at?.toDate ? x.at.toDate().toLocaleString() : '';
+      const det = x.details || {};
+      return {
+        at,
+        actorUid: x.actorUid || "",
+        actorEmail: x.actorEmail || "",
+        actorRole: x.actorRole || "",
+        prevRole: det.prevRole ?? null,
+        newRole: det.newRole ?? null
+      };
+    });
+
+    res.status(200).json({ ok:true, items });
+  }catch(e){
+    res.status(500).json({ ok:false, error: e.message });
+  }
+}// pages/api/roles-assign.js
 import { adminDb } from "../../lib/admin";
 import { requireRole } from "../../lib/admin";
 
