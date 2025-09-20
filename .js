@@ -1,4 +1,181 @@
-// pages/api/audit-daily-digest.js  (Super-only or signed by secret)
+// pages/api/audit-weekly-digest.js
+import { adminDb } from "../../lib/admin";
+import { requireRole } from "../../lib/admin";
+import nodemailer from "nodemailer";
+import fetch from "node-fetch"; // if using Node 18+, global fetch exists; keep for safety
+
+export default async function handler(req, res) {
+  const viaCron = req.headers['x-vercel-cron'] === '1' || req.query.cron === '1';
+  const useSecret = !!process.env.DIGEST_SECRET;
+
+  // Auth: Super token OR cron secret
+  if (useSecret && viaCron) {
+    const ok = (req.headers['x-digest-secret'] === process.env.DIGEST_SECRET);
+    if (!ok) return res.status(401).json({ ok:false, error:'bad secret' });
+  } else {
+    const auth = await requireRole(req, res, ['super']);
+    if (!auth?.uid) return;
+  }
+
+  try {
+    // Ranges
+    const now = new Date();
+    const startThis = startOfDay(addDays(now, -6));  // last 7 days inclusive
+    const startPrev = startOfDay(addDays(startThis, -7)); // prior 7 days
+    const endPrev   = endOfDay(addDays(startThis, -1));
+
+    // Pull audit events in the last 14 days (we’ll split)
+    const snap = await adminDb.collection('audit')
+      .where('at', '>=', startPrev)
+      .orderBy('at', 'asc')
+      .limit(5000)
+      .get();
+
+    // Bucketize
+    const buckets = makeBuckets(startPrev, addDays(startThis, 6)); // from prev range start → last day this week
+    const rows = snap.docs.map(d => d.data()).map(x => ({
+      at: x.at?.toDate ? x.at.toDate() : new Date(),
+      action: x.action || "",
+      actorEmail: x.actorEmail || x.actorUid || "",
+      targetVid: x.target?.vid || "",
+      targetEmail: x.target?.email || "",
+    }));
+
+    // Daily check-ins
+    const isCheckIn = (r) => r.action === 'vendor.checkin';
+    rows.forEach(r => {
+      const key = keyForDay(r.at);
+      if (buckets[key]) {
+        if (isCheckIn(r)) buckets[key].checkins++;
+        // You can extend buckets[key] with other daily metrics if you want
+      }
+    });
+
+    // Split ranges
+    const thisWeekKeys = keysBetween(startThis, addDays(startThis, 6));
+    const prevWeekKeys = keysBetween(startPrev, endPrev);
+
+    const seriesThis = thisWeekKeys.map(k => buckets[k]?.checkins || 0);
+    const seriesPrev = prevWeekKeys.map(k => buckets[k]?.checkins || 0);
+
+    // Totals by action (last 7d)
+    const last7 = rows.filter(r => r.at >= startThis);
+    const count = (act) => last7.filter(r => r.action === act).length;
+    const totals = {
+      checkins: count('vendor.checkin'),
+      checkouts: count('vendor.checkout'),
+      finalized: count('vendor.finalize'),
+      roleAssign: count('roles.assign'),
+      roleRevoke: count('roles.revoke'),
+      txnCreated: count('transaction.created'),
+    };
+
+    // Build chart
+    const labels = thisWeekKeys.map(k => k.slice(5)); // "MM-DD"
+    const chartCfg = {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          { label: 'This Week', data: seriesThis, borderWidth: 3, fill: false },
+          { label: 'Prev Week', data: seriesPrev, borderDash: [6,4], borderWidth: 2, fill: false }
+        ]
+      },
+      options: {
+        plugins: {
+          title: { display: true, text: 'Daily Check-ins (last 7 vs previous 7)' },
+          legend: { labels: { color: '#ffffff' } }
+        },
+        scales: {
+          x: { ticks: { color: '#ffa64d' }, grid: { color: '#333' } },
+          y: { ticks: { color: '#ffa64d' }, grid: { color: '#333' }, beginAtZero: true, precision: 0 }
+        }
+      }
+    };
+    const chartUrl = `https://quickchart.io/chart?c=${encodeURIComponent(JSON.stringify(chartCfg))}&backgroundColor=black&width=800&height=360&devicePixelRatio=2`;
+
+    // Prepare email
+    const toList = (process.env.WEEKLY_TO || process.env.DIGEST_TO || process.env.EMAIL_TO || "").split(",").map(s=>s.trim()).filter(Boolean);
+    if (!toList.length) return res.status(400).json({ ok:false, error:"No WEEKLY_TO/DIGEST_TO/EMAIL_TO configured" });
+
+    const rangeTxt = `${formatDate(startThis)} → ${formatDate(addDays(startThis, 6))}`;
+    const prevTxt = `${formatDate(startPrev)} → ${formatDate(endPrev)}`;
+
+    const html = `
+      <div style="background:#ff7a00;padding:12px 16px">
+        <img src="${process.env.SITE_URL || ""}/logo.png" style="height:32px;vertical-align:middle">
+        <span style="font-weight:800;margin-left:10px;color:#000">BSS 1815 — Weekly Audit Digest</span>
+      </div>
+      <div style="background:#0a0a0a;color:#f5f5f5;padding:12px 16px">
+        Period: <strong>${rangeTxt}</strong> (prev: ${prevTxt})
+      </div>
+      <div style="padding:12px;background:#111;color:#eee;border-top:1px solid #333">
+        <img src="${chartUrl}" alt="Check-ins chart" style="max-width:100%;border:1px solid #333;border-radius:10px">
+      </div>
+      <div style="padding:12px;background:#111;color:#eee;border-top:1px solid #333">
+        <h3 style="color:#ff7a00;margin:6px 0">This Week Totals</h3>
+        <table style="width:100%;border-collapse:collapse;color:#eee">
+          <tr><td style="padding:6px;border-bottom:1px solid #222">Check-ins</td><td style="padding:6px;border-bottom:1px solid #222"><strong>${totals.checkins}</strong></td></tr>
+          <tr><td style="padding:6px;border-bottom:1px solid #222">Check-outs</td><td style="padding:6px;border-bottom:1px solid #222"><strong>${totals.checkouts}</strong></td></tr>
+          <tr><td style="padding:6px;border-bottom:1px solid #222">Finalized Vendors</td><td style="padding:6px;border-bottom:1px solid #222"><strong>${totals.finalized}</strong></td></tr>
+          <tr><td style="padding:6px;border-bottom:1px solid #222">Role Assign</td><td style="padding:6px;border-bottom:1px solid #222"><strong>${totals.roleAssign}</strong></td></tr>
+          <tr><td style="padding:6px;border-bottom:1px solid #222">Role Revoke</td><td style="padding:6px;border-bottom:1px solid #222"><strong>${totals.roleRevoke}</strong></td></tr>
+          <tr><td style="padding:6px;border-bottom:1px solid #222">Transactions</td><td style="padding:6px;border-bottom:1px solid #222"><strong>${totals.txnCreated}</strong></td></tr>
+        </table>
+      </div>
+      <div style="padding:10px 16px;background:#0a0a0a;color:#999;font-size:12px">Automated weekly summary.</div>
+    `;
+
+    const text =
+`BSS 1815 — Weekly Audit Digest
+Period: ${rangeTxt} (prev: ${prevTxt})
+
+Totals:
+- Check-ins: ${totals.checkins}
+- Check-outs: ${totals.checkouts}
+- Finalized Vendors: ${totals.finalized}
+- Role Assign: ${totals.roleAssign}
+- Role Revoke: ${totals.roleRevoke}
+- Transactions: ${totals.txnCreated}
+
+Chart: ${chartUrl}
+`;
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: { user: process.env.GMAIL_USER, pass: process.env.GMAIL_APP_PASSWORD },
+    });
+
+    await transporter.sendMail({
+      from: `"BSS Audit" <${process.env.GMAIL_USER}>`,
+      to: toList.join(","),
+      subject: `BSS • Weekly Audit Digest (${rangeTxt})`,
+      html, text
+    });
+
+    res.status(200).json({ ok:true, sentTo: toList, chart: chartUrl });
+  } catch (e) {
+    res.status(500).json({ ok:false, error: e.message });
+  }
+}
+
+// ---- helpers ----
+function startOfDay(d){ const x = new Date(d); x.setHours(0,0,0,0); return x; }
+function endOfDay(d){ const x = new Date(d); x.setHours(23,59,59,999); return x; }
+function addDays(d, n){ const x = new Date(d); x.setDate(x.getDate()+n); return x; }
+function keyForDay(d){ const x = startOfDay(d); const mm = String(x.getMonth()+1).padStart(2,'0'); const dd = String(x.getDate()).padStart(2,'0'); return `${x.getFullYear()}-${mm}-${dd}`; }
+function makeBuckets(start, end){
+  const out = {}; let cur = new Date(start);
+  while (cur <= end) { out[keyForDay(cur)] = { checkins: 0 }; cur = addDays(cur, 1); }
+  return out;
+}
+function keysBetween(start, end){
+  const list = []; let cur = new Date(start); const last = new Date(end);
+  cur.setHours(0,0,0,0); last.setHours(0,0,0,0);
+  while (cur <= last) { list.push(keyForDay(cur)); cur = addDays(cur, 1); }
+  return list;
+}
+function formatDate(d){ const mm = String(d.getMonth()+1).padStart(2,'0'); const dd = String(d.getDate()).padStart(2,'0'); return `${d.getFullYear()}-${mm}-${dd}`; }// pages/api/audit-daily-digest.js  (Super-only or signed by secret)
 import { adminDb } from "../../lib/admin";
 import { requireRole } from "../../lib/admin";
 import nodemailer from "nodemailer";
