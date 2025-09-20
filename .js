@@ -1,4 +1,4 @@
-import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
+const pdfBytes = await buildContractPDF(req.body);import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 
 async function buildContractPDF(body) {
   const t = (s)=> (s??"").toString().trim();
