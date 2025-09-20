@@ -1,4 +1,44 @@
-body {
+/* Global orange/black theme */
+:root { --orange: #ff6600; --orange-2:#ff7a1a; --black:#000; }
+
+* { box-sizing: border-box; }
+
+html, body {
+  height:100%;
+  margin:0;
+  background: linear-gradient(-45deg, var(--black), var(--orange), var(--black), var(--orange));
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  color: var(--orange);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Links: orange always, lighten on hover */
+a { color: var(--orange); text-decoration: none; }
+a:hover, a:focus { color: var(--orange-2); text-decoration: underline; }
+
+/* Optional content wrapper so text isn’t edge-to-edge */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+/* Nav bar (orange text on black line) */
+.nav {
+  display:flex; gap:24px; align-items:center; flex-wrap:wrap;
+  border-bottom: 2px solid var(--orange);
+  padding: 12px 0 16px;
+}
+
+/* Headings */
+h1, h2, h3 { margin: 16px 0 8px; color: var(--orange); }body {
   margin: 0;
   height: 100vh;
   background: linear-gradient(to bottom, #000000, #ff6600);
