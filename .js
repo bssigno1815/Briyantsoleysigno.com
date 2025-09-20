@@ -1,4 +1,4 @@
-import twilio from "twilio";
+await notifyAdminsSMS({ amount, currency, name, email });import twilio from "twilio";
 
 async function notifyAdminsSMS({ amount, currency, name, email }) {
   const sid = process.env.TWILIO_SID;
