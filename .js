@@ -1,4 +1,44 @@
-await transporter.sendMail({
+import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
+
+async function buildReceiptPDF(payment) {
+  const pdfDoc = await PDFDocument.create();
+  const page = pdfDoc.addPage([612,792]);
+  const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+  const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+
+  // Logo + header
+  const logoUrl = `${process.env.SITE_URL || ""}/logo.png`;
+  try {
+    const logoBytes = await fetch(logoUrl).then(r => r.arrayBuffer());
+    const logoImg = await pdfDoc.embedPng(logoBytes);
+    const w=140, h=(logoImg.height/logoImg.width)*w;
+    page.drawImage(logoImg, { x:(612-w)/2, y:740, width:w, height:h });
+  } catch {}
+  page.drawRectangle({ x:0,y:710,width:612,height:25,color:rgb(1,0.4,0) });
+  page.drawText("BRIYANT SOLÈY SIGNO 1815 – RECEIPT", { x:50,y:718,size:12,font:fontBold,color:rgb(0,0,0) });
+
+  // Body
+  const write = (txt,y)=> page.drawText(txt,{x:50,y,size:11,font,color:rgb(1,1,1)});
+  let y = 680;
+  write(`Payment ID: ${payment.id}`, y); y-=16;
+  write(`Amount: $${payment.amount} ${payment.currency}`, y); y-=16;
+  write(`Buyer: ${payment.name} <${payment.email}>`, y); y-=16;
+  write(`When: ${new Date().toLocaleString()}`, y); y-=16;
+  write(`Notes: ${payment.notes || "-"}`, y); y-=24;
+  write(`Thank you for your support.`, y);
+
+  // Footer logo small
+  try {
+    const logoBytes = await fetch(logoUrl).then(r => r.arrayBuffer());
+    const logoImg = await pdfDoc.embedPng(logoBytes);
+    page.drawImage(logoImg, { x:50, y:28, width:40, height:40 });
+  } catch {}
+  page.drawText("Briyant Solèy se yon mountain, yon vision, yon limyè ki pap janm ka etenn.", {
+    x:100,y:40,size:9,font:font,color:rgb(1,0.4,0)
+  });
+
+  return await pdfDoc.save();
+}await transporter.sendMail({
   from: `"BSS Contracts" <${process.env.GMAIL_USER}>`,
   to: adminTo,
   subject,
