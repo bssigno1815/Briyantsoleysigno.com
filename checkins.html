@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Live Check-Ins • Admin • BSS 1815</title>
+<link rel="stylesheet" href="/css/base.css">
+<style>
+  :root { --orange:#ff7a00; --bg:#0a0a0a; --card:#111; }
+  body{background:var(--bg);color:#f5f5f5;font-family:system-ui,Segoe UI,Roboto}
+  header{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#111;
+         border-bottom:1px solid rgba(255,122,0,.25)}
+  header img{height:32px}
+  .wrap{max-width:1200px;margin:16px auto;padding:0 12px}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0}
+  .input{background:#000;border:1px solid #333;color:#fff;padding:10px;border-radius:10px}
+  .btn{background:var(--orange);color:#000;border:0;border-radius:10px;padding:8px 12px;font-weight:800;cursor:pointer}
+  .btn.secondary{background:#222;color:#fff;border:1px solid #333}
+  table{width:100%;border-collapse:collapse}
+  th,td{border-bottom:1px solid #222;padding:10px;text-align:left}
+  th{color:var(--orange)}
+  .tag{padding:2px 8px;border-radius:8px;font-size:12px;background:#1b1b1b;border:1px solid #333;color:#ddd}
+  .muted{color:#9a9a9a}
+  @media print {
+    header, .row .btn, .row .input { display:none !important; }
+    body { background:#fff; color:#000 }
+    table th { color:#000 }
+  }
+</style>
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+<header>
+  <div style="display:flex;align-items:center;gap:10px">
+    <img src="/logo.png" alt="BSS">
+    <strong>Live Check-Ins • BSS 1815</strong>
+  </div>
+  <div class="muted" id="clock"></div>
+</header>
