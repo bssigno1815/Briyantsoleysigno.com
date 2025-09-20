@@ -1,4 +1,24 @@
-const pdfBytes = await buildContractPDF(req.body);import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
+const htmlHeader = `
+  <div style="background:#ff7a00;padding:12px 16px;">
+    <img src="${process.env.SITE_URL || ""}/logo.png" alt="BSS" style="height:36px;vertical-align:middle;">
+    <span style="font-weight:800;margin-left:10px;color:#000">BRIYANT SOLÈY SIGNO 1815</span>
+  </div>
+`;
+
+const htmlFooter = `
+  <div style="padding:12px 16px;border-top:1px solid #333;background:#0a0a0a;color:#bbb;font-size:12px;">
+    Briyant Solèy se yon mountain, yon vision, yon limyè ki pap janm ka etenn.
+  </div>
+`;
+
+const htmlBody = (title, lines) => `
+  ${htmlHeader}
+  <div style="background:#0a0a0a;color:#f5f5f5;padding:16px;font-family:system-ui,Segoe UI,Roboto">
+    <h2 style="color:#ff7a00;margin:0 0 12px">${title}</h2>
+    <pre style="white-space:pre-wrap;font-size:14px;line-height:1.5">${lines}</pre>
+  </div>
+  ${htmlFooter}
+`;const pdfBytes = await buildContractPDF(req.body);import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 
 async function buildContractPDF(body) {
   const t = (s)=> (s??"").toString().trim();
