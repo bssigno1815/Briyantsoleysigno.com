@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vendor Badge • Admin</title>
+<link rel="stylesheet" href="/css/base.css">
+<style>
+  body{background:#0a0a0a;color:#f5f5f5}
+  .wrap{max-width:720px;margin:24px auto}
+  label{color:#ff7a00;font-weight:700;margin-top:8px;display:block}
+  .input{width:100%;background:#111;border:1px solid rgba(255,122,0,.3);color:#fff;padding:12px;border-radius:10px}
+  .btn{background:#ff7a00;color:#000;border:0;border-radius:10px;padding:10px 14px;font-weight:800;margin-top:12px}
+  .row{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+  small.muted{color:#9a9a9a}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <h2>Generate Vendor Badge</h2>
+  <div class="row">
+    <div><label>Vendor Name</label><input id="name" class="input" required></div>
+    <div><label>Company</label><input id="company" class="input"></div>
+  </div>
+  <div class="row">
+    <div><label>Phone (for QR)</label><input id="phone" class="input" placeholder="+1 555 123 4567"></div>
+    <div><label>Vendor ID</label><input id="vid" class="input" placeholder="VM-0001"></div>
+  </div>
+  <div><label>Notes (optional)</label><input id="notes" class="input"></div>
+  <button class="btn" onclick="makeBadge()">Download Badge PDF</button>
+  <small class="muted">Badge includes logo, orange header, QR (ID/phone), and black theme.</small>
+</div>
+
+<script>
+async function makeBadge(){
+  const { PDFDocument, StandardFonts, rgb } = PDFLib;
+  const name = document.getElementById('name').value.trim();
+  if(!name){ alert("Enter vendor name"); return; }
+  const company = document.getElementById('company').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const vid = document.getElementById('vid').value.trim() || ('VM-' + Math.floor(Math.random()*9999).toString().padStart(4,'0'));
+  const notes = document.getElementById('notes').value.trim();
+
+  const pdf = await PDFDocument.create();
+  // Badge size: 3.5in x 5.5in => 252 x 396 pts (@72dpi)
+  const page = pdf.addPage([252,396]);
+  const font = await pdf.embedFont(StandardFonts.Helvetica);
+  const bold = await pdf.embedFont(StandardFonts.HelveticaBold);
+
+  // background
+  page.drawRectangle({ x:0,y:0,width:252,height:396,color:rgb(0.05,0.05,0.05) });
+
+  // logo
+  try {
+    const logoBytes = await fetch('/logo.png').then(r=>r.arrayBuffer());
+    const logoImg = await pdf.embedPng(logoBytes);
+    const w = 120, h = (logoImg.height/logoImg.width)*w;
+    page.drawImage(logoImg,{ x:(252-w)/2,y:330,width:w,height:h });
+  } catch {}
+
+  // orange bar
+  page.drawRectangle({ x:0,y:310,width:252,height:14,color:rgb(1,0.4,0) });
+
+  // title
+  page.drawText("TI MACHANN • BSS 1815", { x:16,y:315,size:9,font:bold,color:rgb(0,0,0) });
+
+  // name/company
+  page.drawText(name.toUpperCase(), { x:16,y:280,size:16,font:bold,color:rgb(1,1,1) });
+  if(company) page.drawText(company, { x:16,y:260,size:10,font,color:rgb(1,1,1) });
+
+  // id/phone
+  page.drawText(`ID: ${vid}`, { x:16,y:235,size:10,font:bold,color:rgb(1,0.4,0) });
+  if(phone) page.drawText(`Tel: ${phone}`, { x:16,y:220,size:10,font,color:rgb(1,1,1) });
+  if(notes) page.drawText(notes.slice(0,40), { x:16,y:205,size:9,font,color:rgb(0.85,0.85,0.85) });
+
+  // QR code (encode small JSON)
+  const payload = JSON.stringify({ vid, name, phone });
+  const qrCanvas = document.createElement('canvas');
+  await QRCode.toCanvas(qrCanvas, payload, { margin:0, width:96 });
+  const qrBytes = qrCanvas.toDataURL('image/png').split(',')[1];
+  const qrImg = await pdf.embedPng(Uint8Array.from(atob(qrBytes), c=>c.charCodeAt(0)));
+  page.drawImage(qrImg,{ x:252-16-96, y:16, width:96, height:96 });
+
+  // footer
+  page.drawText("Briyant Solèy • Orange/Black", { x:16,y:28,size:8,font,color:rgb(1,0.4,0) });
+
+  const bytes = await pdf.save();
+  const blob = new Blob([bytes], {type:"application/pdf"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `BSS_Vendor_Badge_${vid}.pdf`; a.click();
+  setTimeout(()=>URL.revokeObjectURL(url), 600);
+}
+</script>
+</body>
+</html>
