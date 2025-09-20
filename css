@@ -1,4 +1,23 @@
-footer a { color: var(--orange); text-decoration: none; }
+:root{
+  --bss-orange: #ff7a00; /* brand orange */
+  --bss-black: #000000;
+}
+
+/* BSS badge */
+.bss-badge{
+  color: var(--bss-orange);
+  background: var(--bss-black);
+  border: 1px solid var(--bss-orange);
+  box-shadow: none;
+}
+
+/* remove hover color shifts */
+.bss-badge:hover,
+.bss-badge:focus{
+  color: var(--bss-orange);
+  background: var(--bss-black);
+  border-color: var(--bss-orange);
+}footer a { color: var(--orange); text-decoration: none; }
 footer a:hover { text-decoration: underline; }/* Global – Black background fading into orange */
 :root{
   --orange: #ff7a00;          /* main orange */
