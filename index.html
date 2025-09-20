@@ -1,17 +1,32 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Not Found — BSS 1815</title>
-  <link rel="stylesheet" href="/css/base.css">
-</head>
-<body>
-  <main class="container">
-    <h1 style="color:var(--orange)">404</h1>
-    <p class="footer-note">That page isn’t here yet. Try the links below.</p>
-    <p><a class="btn" href="/index.html">Go Home</a></p>
-  </main>
-  <footer class="site-footer">…footer…</footer>
-</body>
-</html>
+<!-- HEADER (include in each page) -->
+<header class="header">
+  <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:16px;">
+    <a class="brand" href="index.html" aria-label="Briyant Soley Signo 1815">
+      <span class="dot"></span><span>BRIYANT SOLEY SIGNO 1815</span>
+    </a>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="leaders.html">Leaders</a>
+      <a href="videos.html">Video&nbsp;Gallery</a>
+      <a href="store.html">Store</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- FOOTER (include in each page) -->
+<footer class="footer">
+  <div class="container" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+    <small class="muted">© 2025 Briyant Soley Signo 1815. All rights reserved.</small>
+    <small class="muted">Email: <a href="mailto:briyantsoleysigno1815@gmail.com">briyantsoleysigno1815@gmail.com</a></small>
+  </div>
+</footer>
+
+<script>
+  // highlight active nav
+  const path = location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav a').forEach(a=>{
+    if(a.getAttribute('href')===path){a.classList.add('active')}
+  });
+</script>
