@@ -1,4 +1,9 @@
 await adminDb.collection('audit').add({
+  actorUid: 'system', actorRole: 'system',
+  action: 'transaction.created',
+  target: { email, amount, currency },
+  at: new Date()
+});await adminDb.collection('audit').add({
   actorUid: auth.uid, actorRole: auth.role, actorEmail: auth.email,
   action: 'vendor.checkin', // or vendor.checkout
   target: { vid, name },
