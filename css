@@ -135,3 +135,20 @@ body {
   color: #fff;
   min-height: 100vh;
 }
+/* Links default */
+a {
+  color: orange; /* 🍊 Orange links */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Hover effect */
+a:hover {
+  color: #ff9900; /* brighter orange on hover */
+  text-decoration: underline;
+}
+
+/* Active / clicked link */
+a:active {
+  color: #ff6600; /* deep orange when clicked */
+}
