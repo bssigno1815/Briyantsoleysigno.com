@@ -1,4 +1,18 @@
-// /api/roles-assign.js (super only)
+// /api/roles-revoke.js (super only) — removes admin access
+import { adminDb } from "../lib/admin";
+import { requireRole } from "../lib/admin";
+
+export default async function handler(req, res) {
+  if (req.method !== "POST") return res.status(405).end();
+  const auth = await requireRole(req, res, ['super']);
+  if (!auth?.uid) return;
+
+  const { uid } = req.body || {};
+  if (!uid) return res.status(400).json({ ok:false, error:'uid required' });
+
+  await adminDb.doc(`roles/${uid}`).delete();
+  return res.status(200).json({ ok:true });
+}// /api/roles-assign.js (super only)
 import { adminDb } from "../lib/admin";
 import { requireRole } from "../lib/admin";
 
