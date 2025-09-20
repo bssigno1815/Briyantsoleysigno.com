@@ -1,4 +1,52 @@
-<a class="btn" id="rolesBtn" style="display:none" href="/admin/roles.html">Manage Roles</a>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Admin • BSS 1815</title>
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/brand.css">
+</head>
+<body>
+<header class="nav">
+  <img class="logo" src="/img/logo-bss.svg" alt="BSS">
+  <div class="brand">Admin • BSS 1815</div>
+  <nav>
+    <a href="/index.html">Home</a>
+    <a href="#" id="signOutLink">Sign out</a>
+  </nav>
+</header>
+
+<main style="padding:1.25rem">
+  <div class="grid three">
+    <section class="card">
+      <h3>Contracts</h3>
+      <div class="grid">
+        <a class="btn outline" href="#" id="uploadContractBtn">Upload PDF</a>
+        <small>Musicians/Performers contracts are stored in Firestore Storage. Admins only.</small>
+      </div>
+      <div id="contractsList" style="margin-top:1rem"></div>
+    </section>
+
+    <section class="card">
+      <h3>Musicians</h3>
+      <a class="btn outline" href="/vendor.html">Add musician/vendor</a>
+      <div id="musiciansList" style="margin-top:1rem"></div>
+    </section>
+
+    <section class="card">
+      <h3>Ti Machann</h3>
+      <p>Badges, registrations, transactions.</p>
+      <a class="btn" href="/vendor.html">Open Vendor Form</a>
+    </section>
+  </div>
+</main>
+
+<script src="/js/firebase.js"></script>
+<script src="/js/auth-guard.js"></script>
+<script src="/js/app.js"></script>
+</body>
+</html><a class="btn" id="rolesBtn" style="display:none" href="/admin/roles.html">Manage Roles</a>
 <script>
   // reveal button only for super
   fetch('/api/whoami', { headers: { Authorization: 'Bearer ' + (await firebase.auth().currentUser.getIdToken()) }})
