@@ -1,4 +1,91 @@
-body {
+/* === BRIYANT SOLEY SIGNO 1815 — Global Brand Theme === */
+:root{
+  --black:#0a0a0a;
+  --black-2:#121212;
+  --orange:#ff7a00;
+  --orange-2:#ff8c1a;
+  --text:#ffb36b;   /* readable orange for body text on black */
+  --ring: 1px solid rgba(255,122,0,.3);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+
+body{
+  margin:0;
+  background:
+    radial-gradient(1200px 600px at 50% -20%, rgba(255,122,0,.08), transparent 60%),
+    linear-gradient(180deg, var(--black) 0%, var(--black-2) 70%, #1a0a00 90%, var(--orange) 110%);
+  color:var(--text);
+  font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* Headings */
+h1,h2,h3,h4,h5,h6{
+  color:var(--orange-2);
+  letter-spacing:.02em;
+  margin:0 0 .6rem;
+}
+
+/* Links */
+a{
+  color:var(--orange);
+  text-decoration:none;
+  border-bottom:1px solid rgba(255,122,0,.6);
+  transition:all .15s ease-in-out;
+}
+a:hover,a:focus{
+  color:var(--black);
+  background:var(--orange);
+  border-color:transparent;
+  outline:0;
+}
+
+/* Navigation bar (shared across pages) */
+.nav{
+  display:flex; gap:1.25rem; align-items:center; padding:12px 18px;
+  border-bottom:1px solid rgba(255,122,0,.25);
+  background:linear-gradient(180deg, rgba(10,10,10,.9), rgba(10,10,10,.6));
+  position:sticky; top:0; backdrop-filter:saturate(140%) blur(6px);
+}
+.nav a{font-weight:600; text-transform:uppercase;}
+
+/* Sections / cards */
+.section{
+  margin:28px auto; padding:20px;
+  border:1px solid rgba(255,122,0,.25);
+  border-radius:12px; max-width:1100px;
+  background:linear-gradient(180deg, rgba(255,122,0,.03), rgba(10,10,10,.2));
+  box-shadow:0 0 0 1px rgba(255,122,0,.08), 0 6px 22px rgba(0,0,0,.55);
+}
+
+/* Buttons */
+.btn{
+  display:inline-block; padding:10px 16px; border-radius:10px; font-weight:700;
+  background:var(--orange); color:var(--black); border:0; cursor:pointer;
+  box-shadow:0 0 0 1px rgba(255,122,0,.35), inset 0 -2px 0 rgba(0,0,0,.35);
+  transition:transform .08s ease, filter .15s ease;
+}
+.btn:hover{filter:brightness(1.05)}
+.btn:active{transform:translateY(1px)}
+
+/* Tables, lists, hr */
+hr{border:0; height:1px; background:rgba(255,122,0,.25)}
+ul,ol{padding-left:1.25rem}
+table{width:100%; border-collapse:collapse; border:var(--ring)}
+td,th{border:var(--ring); padding:.6rem .75rem; color:var(--text)}
+th{background:rgba(255,122,0,.08); color:var(--orange-2)}
+
+/* Footer */
+footer{
+  margin-top:40px; padding:24px 18px; text-align:center;
+  color:var(--text);
+  border-top:1px solid rgba(255,122,0,.25);
+  background:linear-gradient(180deg, rgba(10,10,10,.6), rgba(10,10,10,.95));
+}
+
+/* Images/videos never add white bars */
+img,video{max-width:100%; height:auto; display:block; border-radius:10px; border:1px solid rgba(255,122,0,.2)}body {
   margin: 0;
   padding: 0;
   height: 100vh;
