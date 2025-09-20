@@ -1,4 +1,10 @@
 await adminDb.collection('audit').add({
+  actorUid: auth.uid, actorRole: auth.role, actorEmail: auth.email,
+  action: 'vendor.finalize',
+  target: { vid, email, name },
+  at: new Date(),
+  details: { ref }
+});await adminDb.collection('audit').add({
   actorUid: auth.uid,
   actorRole: auth.role,
   action: 'roles.assign', // or 'vendor.checkin', 'vendor.checkout'
