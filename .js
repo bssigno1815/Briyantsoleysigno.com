@@ -5,6 +5,13 @@ await transporter.sendMail({
   text: linesTxt,
   html: htmlBody("New Contract", linesTxt),
   attachments: [{ filename, content: Buffer.from(pdfBytes) }]
+});await transporter.sendMail({
+  from: `"BSS Contracts" <${process.env.GMAIL_USER}>`,
+  to: adminTo,
+  subject,
+  text: linesTxt,
+  html: htmlBody("New Contract", linesTxt),
+  attachments: [{ filename, content: Buffer.from(pdfBytes) }]
 });const htmlHeader = `
   <div style="background:#ff7a00;padding:12px 16px;">
     <img src="${process.env.SITE_URL || ""}/logo.png" alt="BSS" style="height:36px;vertical-align:middle;">
