@@ -1,4 +1,5 @@
-/* Global – Black background fading into orange */
+footer a { color: var(--orange); text-decoration: none; }
+footer a:hover { text-decoration: underline; }/* Global – Black background fading into orange */
 :root{
   --orange: #ff7a00;          /* main orange */
   --orange-soft: #ffa24c;     /* hover / accents */
