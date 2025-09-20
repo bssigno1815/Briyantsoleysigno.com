@@ -1,0 +1,8 @@
+SENDGRID_API_KEY=...        # or MAILGUN_API_KEY if you prefer
+EMAIL_FROM="BSS 1815 <no-reply@briyantsoleysigno.com>"
+EMAIL_TO="briyantsoleysigno1815@gmail.com"   # comma-separated allowed
+
+TWILIO_ACCOUNT_SID=...
+TWILIO_AUTH_TOKEN=...
+TWILIO_FROM=+15551230000
+ADMIN_SMS=+15551234567      # comma-separated allowed
