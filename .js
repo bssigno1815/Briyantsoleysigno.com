@@ -1,4 +1,31 @@
-// /api/contract.js
+// Embed logo + orange header
+const logoUrl = "/logo.png";
+const logoImageBytes = await fetch(logoUrl).then(r => r.arrayBuffer());
+const logoImage = await pdfDoc.embedPng(logoImageBytes);
+
+const pageWidth = 612;
+const logoDims = logoImage.scale(0.3);
+page.drawImage(logoImage, {
+  x: pageWidth/2 - logoDims.width/2,
+  y: 740,
+  width: logoDims.width,
+  height: logoDims.height
+});
+
+// Orange header bar
+page.drawRectangle({
+  x: 0, y: 710, width: pageWidth, height: 25,
+  color: rgb(1, 0.4, 0)  // orange
+});
+page.drawText("BRIYANT SOLÈY SIGNO 1815 – MUSICIAN AGREEMENT", {
+  x: 50, y: 718, size: 12, font: fontBold, color: rgb(0,0,0)
+});
+
+// Footer logo + slogan
+page.drawImage(logoImage, { x: 50, y: 30, width: 40, height: 40 });
+page.drawText("Briyant Solèy se yon mountain, yon vision, yon limyè ki pap janm ka etenn.", {
+  x: 100, y: 40, size: 9, font: font, color: rgb(1,0.4,0)
+});// /api/contract.js
 import nodemailer from "nodemailer";
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 
