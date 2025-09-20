@@ -1,4 +1,102 @@
-<script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script><a href="/contracts/Musician_Performance_Agreement_BSS1815.pdf" target="_blank">Musician Contract (PDF)</a><script>
+<script>
+  // Build a simple PDF locally (client-side) for instant download
+  async function downloadContractPDF(formData) {
+    const { PDFDocument, StandardFonts, rgb } = PDFLib;
+    const pdfDoc = await PDFDocument.create();
+    const page = pdfDoc.addPage([612, 792]); // Letter
+    const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+
+    // helpers
+    let y = 752, left = 50, maxWidth = 512, lh = 14;
+    const write = (txt, bold=false) => {
+      const f = bold ? fontBold : font;
+      const words = (txt || "").toString().split(" ");
+      let line = "";
+      for (const w of words) {
+        const test = line ? line + " " + w : w;
+        if (f.widthOfTextAtSize(test, 10) > maxWidth) {
+          page.drawText(line, { x:left, y, size:10, font:f, color:rgb(1,1,1) }); y -= lh;
+          line = w;
+        } else { line = test; }
+      }
+      if (line) { page.drawText(line, { x:left, y, size:10, font:f, color:rgb(1,1,1) }); y -= lh; }
+    };
+    const section = (h, v) => { write(h, true); if (v) write(v); y -= 6; }
+
+    // title
+    page.drawText("MUSICIAN PERFORMANCE AGREEMENT — BSS 1815", {
+      x:left, y, size:14, font:fontBold, color:rgb(1, 0.48, 0)
+    }); y -= 22;
+
+    const t = s => (s ?? "").toString().trim();
+
+    section("Parties",
+      `Presenter: ${t(formData.presenter_name)} | ${t(formData.presenter_email)} | ${t(formData.presenter_phone)}\n` +
+      `Artist: ${t(formData.artist_name)} | ${t(formData.artist_email)} | ${t(formData.artist_phone)}`
+    );
+    section("Engagement",
+      `Event: ${t(formData.event_name)}  Date: ${t(formData.event_date)}  Venue: ${t(formData.venue)}  Capacity: ${t(formData.capacity) || "-"}`);
+    section("Schedule",
+      `Load-in: ${t(formData.loadin) || "-"}  Soundcheck: ${t(formData.soundcheck) || "-"}  Performance: ${t(formData.performance_window) || "-"}`);
+    section("Sets/Breaks",
+      `Sets: ${t(formData.sets) || "-"}  Breaks: ${t(formData.breaks) || "-"}`);
+    section("Compensation",
+      `Fee: $${t(formData.fee)}  Deposit: $${t(formData.deposit) || "0"} (due: ${t(formData.deposit_due) || "-"})  ` +
+      `Balance: ${t(formData.balance_due) || "-"}  Method: ${t(formData.payment_method)}`);
+    section("Tech/Hospitality",
+      `Gear: ${t(formData.gear) || "-"}\nSound/Light: ${t(formData.sound_light) || "-"}\nStage Plot: ${t(formData.stage_plot) || "-"}\nHospitality: ${t(formData.hospitality) || "-"}`);
+    section("Legal",
+      `Law: ${t(formData.law) || "-"}  Jurisdiction: ${t(formData.jurisdiction) || "-"}`);
+    section("Signatories",
+      `Presenter: ${t(formData.presenter_sign_name)}  |  Artist: ${t(formData.artist_sign_name)}`);
+
+    const pdfBytes = await pdfDoc.save();
+    const blob = new Blob([pdfBytes], { type: "application/pdf" });
+    const url = URL.createObjectURL(blob);
+    const cleanArtist = t(formData.artist_name).replace(/\s+/g,'_') || "Artist";
+    const cleanDate = t(formData.event_date).replace(/[^\d]/g,'') || "date";
+    const filename = `BSS_Musician_Agreement_${cleanArtist}_${cleanDate}.pdf`;
+
+    const a = document.createElement("a");
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click();
+    setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 750);
+  }
+
+  // Submit to serverless + download PDF
+  const form = document.getElementById('bssContract');
+  const statusEl = document.getElementById('contractStatus');
+
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    statusEl.textContent = "Submitting…";
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    if(!data.presenter_phone || !data.artist_phone){
+      statusEl.textContent = "Phone numbers are required for both parties.";
+      return;
+    }
+
+    try {
+      // 1) Send to your Vercel API (emails + server-generated PDF)
+      const res = await fetch('/api/contract', {
+        method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data)
+      });
+      const out = await res.json();
+      if(!out.ok) throw new Error(out.error || 'Error');
+
+      // 2) Download a local copy immediately for the submitter
+      await downloadContractPDF(data);
+
+      statusEl.textContent = "Sent! Emails delivered and PDF downloaded.";
+      form.reset();
+    } catch (err) {
+      console.error(err);
+      statusEl.textContent = "There was a problem. Please try again.";
+    }
+  });
+</script><script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script><a href="/contracts/Musician_Performance_Agreement_BSS1815.pdf" target="_blank">Musician Contract (PDF)</a><script>
   const form = document.getElementById('bssForm');
   const statusEl = document.getElementById('bssStatus');
 
