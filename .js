@@ -1,4 +1,179 @@
-await notifyAdminsSMS({ amount, currency, name, email });import twilio from "twilio";
+// /api/vendor-finalize.js
+import nodemailer from "nodemailer";
+import twilio from "twilio";
+import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
+
+// (Optional) write back to Firestore from server
+import { initializeApp } from "firebase/app";
+import { getFirestore, doc, setDoc, addDoc, collection, serverTimestamp } from "firebase/firestore";
+
+const fbApp = initializeApp({
+  apiKey: process.env.FB_API_KEY,
+  authDomain: process.env.FB_AUTH_DOMAIN,
+  projectId: process.env.FB_PROJECT_ID,
+});
+const db = getFirestore(fbApp);
+
+export default async function handler(req, res) {
+  if (req.method !== "POST") return res.status(405).json({ ok:false, error:"Method not allowed" });
+  try {
+    const body = req.body || {};
+    const incoming = body.data || {};
+    const t = (s)=> (s ?? "").toString().trim();
+
+    // Required basics
+    const name = t(incoming.name);
+    const email = t(incoming.email);
+    const phone = t(incoming.phone);
+    if (!name || !email || !phone) {
+      return res.status(400).json({ ok:false, error:"Name, email, phone required" });
+    }
+
+    const vid = t(incoming.vid) || ("VM-" + Math.floor(Math.random()*9999).toString().padStart(4,"0"));
+    const ref = `${vid}-${Date.now().toString().slice(-6)}`;
+
+    // Build PDF with logo + orange header
+    const pdf = await PDFDocument.create();
+    const page = pdf.addPage([612,792]);
+    const font = await pdf.embedFont(StandardFonts.Helvetica);
+    const bold = await pdf.embedFont(StandardFonts.HelveticaBold);
+
+    // Logo
+    const site = process.env.SITE_URL || "";
+    try {
+      const logoBytes = await fetch(`${site}/logo.png`).then(r=>r.arrayBuffer());
+      const img = await pdf.embedPng(logoBytes);
+      const w=160,h=(img.height/img.width)*w;
+      page.drawImage(img,{x:(612-w)/2,y:740,width:w,height:h});
+    } catch {}
+
+    // Orange header
+    page.drawRectangle({ x:0,y:710,width:612,height:25,color:rgb(1,0.4,0) });
+    page.drawText("BRIYANT SOLÈY SIGNO 1815 – TI MACHANN REGISTRATION", {
+      x:50,y:718,size:12,font:bold,color:rgb(0,0,0)
+    });
+
+    // Body
+    let y=680, left=50, maxWidth=512, lh=16;
+    const write = (txt, size=11, f=font, color=rgb(1,1,1))=>{
+      page.drawText(txt, { x:left, y, size, font:f, color }); y -= lh;
+    };
+    const label = (txt)=> write(txt, 10, bold, rgb(1,0.4,0));
+    const line = (lbl,val)=>{ label(lbl); write(val || "-"); y -= 4; };
+
+    line("Reference", ref);
+    line("Vendor Name", name);
+    line("Company", t(incoming.company));
+    line("Email", email);
+    line("Phone", phone);
+    line("Alt Phone", t(incoming.phone2));
+    line("Category / Goods", t(incoming.category));
+    line("Vendor ID", vid);
+    line("Address", t(incoming.address));
+    line("Social / Website", t(incoming.social));
+    line("Emergency Contact", t(incoming.emergency));
+    line("Tax ID", t(incoming.taxid));
+    label("Notes"); 
+    write(t(incoming.notes));
+
+    // Footer
+    try {
+      const logoBytes2 = await fetch(`${site}/logo.png`).then(r=>r.arrayBuffer());
+      const img2 = await pdf.embedPng(logoBytes2);
+      page.drawImage(img2, { x:50,y:28,width:40,height:40 });
+    } catch {}
+    page.drawText("Briyant Solèy se yon mountain, yon vision, yon limyè ki pap janm ka etenn.", {
+      x:100,y:40,size:9,font,color:rgb(1,0.4,0)
+    });
+
+    const pdfBytes = await pdf.save();
+    const filename = `BSS_TiMachann_${vid}.pdf`;
+
+    // Email (HTML with logo header)
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: { user: process.env.GMAIL_USER, pass: process.env.GMAIL_APP_PASSWORD },
+    });
+    const adminTo = process.env.EMAIL_TO || process.env.GMAIL_USER;
+    const header = `
+      <div style="background:#ff7a00;padding:12px 16px">
+        <img src="${site}/logo.png" style="height:36px;vertical-align:middle">
+        <span style="font-weight:800;margin-left:10px;color:#000">BRIYANT SOLÈY SIGNO 1815</span>
+      </div>`;
+    const footer = `
+      <div style="padding:12px 16px;border-top:1px solid #333;background:#0a0a0a;color:#bbb;font-size:12px">
+        Briyant Solèy se yon mountain, yon vision, yon limyè ki pap janm ka etenn.
+      </div>`;
+    const infoHtml = `
+      ${header}
+      <div style="background:#0a0a0a;color:#f5f5f5;padding:16px;font-family:system-ui,Segoe UI,Roboto">
+        <h2 style="color:#ff7a00;margin:0 0 12px">Ti Machann Registration — ${name}</h2>
+        <pre style="white-space:pre-wrap;font-size:14px;line-height:1.5">
+Ref: ${ref}
+Vendor: ${name}
+Company: ${t(incoming.company) || "-"}
+Phone: ${phone}  Alt: ${t(incoming.phone2) || "-"}
+Email: ${email}
+Category: ${t(incoming.category) || "-"}
+Vendor ID: ${vid}
+Address: ${t(incoming.address) || "-"}
+Social: ${t(incoming.social) || "-"}
+Emergency: ${t(incoming.emergency) || "-"}
+Tax ID: ${t(incoming.taxid) || "-"}
+Notes: ${t(incoming.notes) || "-"}
+        </pre>
+      </div>
+      ${footer}
+    `;
+
+    // Send to admins + vendor
+    await transporter.sendMail({
+      from: `"BSS Vendors" <${process.env.GMAIL_USER}>`,
+      to: adminTo,
+      subject: `🟠 Ti Machann • ${name} (${vid})`,
+      html: infoHtml,
+      text: `Vendor: ${name} (${vid})`,
+      attachments: [{ filename, content: Buffer.from(pdfBytes) }]
+    });
+    await transporter.sendMail({
+      from: `"BSS Vendors" <${process.env.GMAIL_USER}>`,
+      to: email,
+      subject: `Registration Copy — ${vid}`,
+      html: infoHtml,
+      text: `Vendor: ${name} (${vid})`,
+      attachments: [{ filename, content: Buffer.from(pdfBytes) }]
+    });
+
+    // Optional: SMS admins when a vendor is finalized (reuses your Twilio env)
+    if (process.env.TWILIO_SID && process.env.TWILIO_TOKEN && process.env.TWILIO_FROM && process.env.ADMINS_PHONES){
+      const client = twilio(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
+      const list = process.env.ADMINS_PHONES.split(",").map(s=>s.trim()).filter(Boolean);
+      const msg = `BSS: Vendor finalized — ${name} (${vid}) ${phone}`;
+      await Promise.all(list.map(to => client.messages.create({ from:process.env.TWILIO_FROM, to, body: msg })));
+    }
+
+    // Write/update Firestore
+    const dataToSave = {
+      ...incoming,
+      vid, ref,
+      status: "Finalized",
+      finalizedAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+    };
+    let finalId = body.id;
+    if (finalId) {
+      await setDoc(doc(db, "vendors", finalId), dataToSave, { merge:true });
+    } else {
+      const docRef = await addDoc(collection(db, "vendors"), dataToSave);
+      finalId = docRef.id;
+    }
+
+    return res.status(200).json({ ok:true, id: finalId, ref });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ ok:false, error: e.message });
+  }
+}await notifyAdminsSMS({ amount, currency, name, email });import twilio from "twilio";
 
 async function notifyAdminsSMS({ amount, currency, name, email }) {
   const sid = process.env.TWILIO_SID;
