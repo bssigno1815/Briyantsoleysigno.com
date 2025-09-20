@@ -1,4 +1,10 @@
-fetch('/api/whoami', { headers: { 'Authorization': 'Bearer ' + (await firebase.auth().currentUser.getIdToken()) }})
+await adminDb.collection('audit').add({
+  actorUid: auth.uid,
+  actorRole: auth.role,
+  action: 'roles.assign', // or 'vendor.checkin', 'vendor.checkout'
+  target: { uid, email },
+  at: new Date()
+});fetch('/api/whoami', { headers: { 'Authorization': 'Bearer ' + (await firebase.auth().currentUser.getIdToken()) }})
   .then(r=>r.json()).then(me=>{
     if (me.role === 'super') {
       // reveal “Manage Roles” button
