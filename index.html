@@ -1,4 +1,4 @@
-<a class="btn" id="weeklyBtn" style="display:none" href="/api/audit-weekly-digest">Send Weekly Digest</a>
+<span class="bss-badge">BSS</span><a class="btn" id="weeklyBtn" style="display:none" href="/api/audit-weekly-digest">Send Weekly Digest</a>
 <script>
   (async ()=>{
     const user = await new Promise(r=>firebase.auth().onAuthStateChanged(u=>r(u)));
