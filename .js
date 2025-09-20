@@ -1,4 +1,16 @@
-const amount = (session.amount_total || session.amount || 0) / 100;
+import twilio from "twilio";
+
+async function notifyAdminsSMS({ amount, currency, name, email }) {
+  const sid = process.env.TWILIO_SID;
+  const token = process.env.TWILIO_TOKEN;
+  const from = process.env.TWILIO_FROM;
+  const list = (process.env.ADMINS_PHONES || "").split(",").map(s=>s.trim()).filter(Boolean);
+  if (!sid || !token || !from || !list.length) return;
+
+  const client = twilio(sid, token);
+  const msg = `BSS 1815: $${amount} ${currency} received — ${name} <${email}>`;
+  await Promise.all(list.map(to => client.messages.create({ from, to, body: msg })));
+}const amount = (session.amount_total || session.amount || 0) / 100;
 const currency = (session.currency || "usd").toUpperCase();
 const email = session.customer_details?.email || session.charges?.data?.[0]?.billing_details?.email || "unknown";
 const name = session.customer_details?.name || session.charges?.data?.[0]?.billing_details?.name || "unknown";
