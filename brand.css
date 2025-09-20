@@ -1,0 +1,74 @@
+:root{
+  --bss-black:#0b0b0c;
+  --bss-orange:#ff7a00;
+  --bss-orange-500:#ff7a00;
+  --bss-orange-600:#e86f00;
+  --bss-text:#fafafa;
+  --bss-muted:#8a8a8a;
+  --radius:14px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, Segoe UI, Roboto, Helvetica, Arial, Noto Sans, "Apple Color Emoji","Segoe UI Emoji";
+  background: radial-gradient(1200px 800px at 20% -10%, rgba(255,122,0,.18), transparent 60%) ,
+              radial-gradient(1200px 800px at 120% 110%, rgba(255,122,0,.14), transparent 60%) ,
+              var(--bss-black);
+  color:var(--bss-text);
+}
+
+a{color:var(--bss-orange); text-decoration:none}
+a:hover{text-decoration:underline}
+
+.btn{
+  background:var(--bss-orange);
+  color:#000;
+  border:none;
+  padding:.8rem 1.1rem;
+  border-radius:var(--radius);
+  font-weight:700;
+  cursor:pointer;
+}
+.btn.outline{
+  background:transparent;
+  color:var(--bss-orange);
+  border:2px solid var(--bss-orange);
+}
+.card{
+  background: #111;
+  border:1px solid rgba(255,122,0,.25);
+  border-radius:var(--radius);
+  padding:1rem;
+}
+
+header.nav{
+  display:flex;align-items:center;gap:1rem;
+  padding:1rem 1.25rem;border-bottom:1px solid rgba(255,122,0,.25);
+  position:sticky;top:0;background:rgba(11,11,12,.9);backdrop-filter:saturate(150%) blur(8px);
+}
+header.nav img.logo{height:36px}
+header.nav .brand{font-weight:900; letter-spacing:.6px}
+header.nav nav a{margin-left:1rem}
+
+input,select,textarea{
+  width:100%;background:#0f0f10;color:var(--bss-text);
+  border:1px solid rgba(255,122,0,.35);
+  border-radius:10px;padding:.75rem;
+}
+label{display:block;margin:.6rem 0 .25rem;color:var(--bss-muted);font-size:.9rem}
+.grid{display:grid;gap:1rem}
+.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+
+.badge-preview{
+  width:300px;height:180px;border-radius:14px;overflow:hidden;
+  border:2px solid var(--bss-orange);
+  background:
+    linear-gradient(135deg, rgba(255,122,0,.25), transparent 40%),
+    #0c0c0d;
+  display:grid;grid-template-rows:auto 1fr;align-items:center;justify-items:center;
+}
+.badge-preview .title{font-weight:800;color:var(--bss-orange)}
+footer{padding:2rem;color:var(--bss-muted);text-align:center}
