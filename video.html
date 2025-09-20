@@ -1,45 +1,22 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Briyant Soley Signo 1815 — Videyo</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <header class="nav">
-    <div class="bar">
-      <a class="brand" href="index.html">Briyant Soley Signo 1815</a>
-      <nav class="menu">
-        <a href="index.html">Home</a>
-        <a href="leaders.html">Leaders</a>
-        <a class="active" href="videyo.html">Videyo</a>
-        <a href="store.html">Store</a>
-      </nav>
-    </div>
-  </header>
 
-  <main class="wrapper">
-    <h1>Videyo Gallery</h1>
-    <div class="grid" style="margin-top:10px">
-      <!-- Replace # with real links or embeds -->
-      <article class="card">
-        <h2>Highlight 01</h2>
-        <p><a href="#" class="btn">Gade →</a></p>
-      </article>
-      <article class="card">
-        <h2>Highlight 02</h2>
-        <p><a href="#" class="btn">Gade →</a></p>
-      </article>
-      <article class="card">
-        <h2>Promo 03</h2>
-        <p><a href="#" class="btn">Gade →</a></p>
-      </article>
-    </div>
-  </main>
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Video Gallery • BRIYANT SOLEY SIGNO 1815</title>
+<link rel="stylesheet" href="css/base.css">
+</head><body>
+<header class="header"><div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:16px;">
+  <a class="brand" href="index.html"><span class="dot"></span><span>BRIYANT SOLEY SIGNO 1815</span></a>
+  <nav class="nav"><a href="index.html">Home</a><a href="leaders.html">Leaders</a><a href="videos.html">Video&nbsp;Gallery</a><a href="store.html">Store</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+</div></header>
 
-  <footer class="wrapper">
-    © 2025 Briyant Soley Signo 1815.
-  </footer>
-</body>
-</html>
+<section class="section"><div class="container">
+  <h1>Video Gallery</h1>
+  <div class="grid cols-2">
+    <div class="card"><h3>Feature Clip</h3><div style="aspect-ratio:16/9;background:#111;border:1px solid rgba(255,122,0,.25);border-radius:12px;display:grid;place-items:center;">Embed YouTube/Vimeo</div></div>
+    <div class="card"><h3>Highlight</h3><div style="aspect-ratio:16/9;background:#111;border:1px solid rgba(255,122,0,.25);border-radius:12px;display:grid;place-items:center;">Embed</div></div>
+  </div>
+</div></section>
+
+<footer class="footer"><div class="container"><small class="muted">© 2025 Briyant Soley Signo 1815.</small></div></footer>
+<script>const p=location.pathname.split('/').pop();document.querySelectorAll('.nav a').forEach(a=>a.href.endsWith(p)&&a.classList.add('active'))</script>
+</body></html>
