@@ -1,4 +1,28 @@
-<section class="section">
+<script>
+  const form = document.getElementById('bssForm');
+  const statusEl = document.getElementById('bssStatus');
+
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    statusEl.textContent = "Voye mesaj la…";
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(data)
+      });
+      const out = await res.json();
+      if (!out.ok) throw new Error(out.error || 'Error');
+      statusEl.textContent = "Mèsi! Mesaj la rive. Nou ap reponn ou byento.";
+      form.reset();
+    } catch (err) {
+      console.error(err);
+      statusEl.textContent = "Gen yon pwoblèm. Eseye ankò s’il vous plaît.";
+    }
+  });
+</script><section class="section">
   <div class="container">
     <h2 style="color:#ff7a00;margin:0 0 8px">Voye Mesaj la</h2>
     <p class="muted">Nou reponn vit. (BSS 🟠⚫)</p>
