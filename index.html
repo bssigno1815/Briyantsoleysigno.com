@@ -2,17 +2,78 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Briyant Soley Signo</title>
-  <link rel="stylesheet" href="style.css" />
-  <meta name="description" content="Briyant Soley Signo — official site" />
+  <meta name="description" content="Official site of Briyant Soley Signo." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style/style.css" />
 </head>
 <body>
-  <div class="wrap">
-    <main class="card">
-      <h1>BRIYANT SOLEY SIGNO</h1>
-      <p>Site is live. Orange + Black theme.</p>
-    </main>
-  </div>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/">BRIYANT SOLEY SIGNO</a>
+      <nav class="nav">
+        <a href="/">Home</a>
+        <a href="pages/about.html">About</a>
+        <a href="pages/store.html">Store</a>
+        <a href="pages/videos.html">Videos</a>
+        <a href="pages/leaders.html">Leaders</a>
+        <a class="btn" href="pages/contact.html">Contact</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Open menu">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <h1>Bold. Orange + Black.</h1>
+        <p>Site is live — now featuring a clean, fast static setup on Vercel.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="pages/store.html">Visit Store</a>
+          <a class="btn btn-outline" href="pages/videos.html">Watch Videos</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid container">
+      <article class="card">
+        <h3>Merch & Apparel</h3>
+        <p>Quality pieces in the signature orange + black palette.</p>
+        <a href="pages/store.html" class="link">Shop now →</a>
+      </article>
+      <article class="card">
+        <h3>Video Gallery</h3>
+        <p>Clips, highlights, and promos—all in one place.</p>
+        <a href="pages/videos.html" class="link">Watch →</a>
+      </article>
+      <article class="card">
+        <h3>Leaders</h3>
+        <p>Profiles and shout-outs to the team behind the brand.</p>
+        <a href="pages/leaders.html" class="link">Meet the leaders →</a>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="y"></span> Briyant Soley Signo · All rights reserved.</p>
+      <nav class="footer-nav">
+        <a href="pages/about.html">About</a>
+        <a href="pages/contact.html">Contact</a>
+        <a href="pages/store.html">Store</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    // mobile menu + year
+    document.getElementById('y').textContent = new Date().getFullYear();
+    const t = document.querySelector('.nav-toggle');
+    const n = document.querySelector('.nav');
+    t.addEventListener('click', () => n.classList.toggle('open'));
+  </script>
 </body>
 </html>
