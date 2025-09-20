@@ -1,4 +1,19 @@
-/* Global background */
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background: linear-gradient(-45deg, #000000, #ff6600, #000000, #ff6600);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  color: #ff6600; /* orange text */
+  font-family: Arial, sans-serif;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}/* Global background */
 body {
   margin: 0;
   padding: 0;
