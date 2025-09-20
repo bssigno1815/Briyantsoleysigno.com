@@ -1,5 +1,10 @@
 {
   "crons": [
+    { "path": "/api/audit-daily-digest?cron=1",   "schedule": "0 12 * * *" },   // daily 12:00 UTC
+    { "path": "/api/audit-weekly-digest?cron=1",  "schedule": "0 13 * * 1" }    // weekly Mondays 13:00 UTC
+  ]
+}{
+  "crons": [
     {
       "path": "/api/audit-daily-digest?cron=1",
       "schedule": "0 12 * * *"
