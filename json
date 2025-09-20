@@ -1,4 +1,11 @@
 {
+  "crons": [
+    {
+      "path": "/api/audit-daily-digest?cron=1",
+      "schedule": "0 12 * * *"
+    }
+  ]
+}{
   "private": true,
   "type": "module",
   "dependencies": {
