@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vendors • Admin • BSS 1815</title>
+<link rel="stylesheet" href="/css/base.css">
+<style>
+  body{background:#0a0a0a;color:#f5f5f5}
+  .wrap{max-width:1100px;margin:24px auto}
+  table{width:100%;border-collapse:collapse}
+  th,td{border-bottom:1px solid #222;padding:10px;text-align:left}
+  th{color:#ff7a00}
+  .btn{background:#ff7a00;color:#000;border:0;border-radius:10px;padding:8px 12px;font-weight:800}
+  .tag{padding:2px 8px;border-radius:8px;font-size:12px}
+  .tag.draft{background:#333;color:#fff;border:1px solid #555}
+  .tag.done{background:#ff7a00;color:#000}
+</style>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <div style="display:flex;justify-content:space-between;align-items:center">
+    <h2>Vendors</h2>
+    <div style="display:flex;gap:8px">
+      <a class="btn" href="/admin/vendors-new.html">+ New Vendor</a>
+    </div>
+  </div>
+  <table id="tbl">
+    <thead><tr>
+      <th>Status</th><th>Vendor</th><th>Category</th><th>Phone</th><th>Email</th><th>Ref</th><th>Updated</th>
+    </tr></thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+<script>
+  const firebaseConfig = { apiKey:"YOUR_API_KEY", authDomain:"YOUR_PROJECT.firebaseapp.com", projectId:"YOUR_PROJECT_ID" };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  const tbody = document.querySelector("#tbl tbody");
+  async function load(){
+    const snap = await db.collection("vendors").orderBy("updatedAt","desc").limit(500).get();
+    tbody.innerHTML = "";
+    snap.forEach(doc=>{
+      const d = doc.data(); const id = doc.id;
+      const tr = document.createElement("tr");
+      const tag = d.status === "Finalized" ? `<span class="tag done">Finalized</span>` : `<span class="tag draft">Draft</span>`;
+      tr.innerHTML = `
+        <td>${tag}</td>
+        <td><strong>${d.name || ""}</strong>${d.company ? " — " + d.company : ""}</td>
+        <td>${d.category || ""}</td>
+        <td>${d.phone || ""}</td>
+        <td>${d.email || ""}</td>
+        <td>${d.ref || ""}</td>
+        <td>${d.updatedAt ? new Date(d.updatedAt).toLocaleString() : ""}</td>
+      `;
+      tr.style.cursor = "pointer";
+      tr.onclick = ()=> location.href = "/admin/vendors-new.html#"+id;
+      tbody.appendChild(tr);
+    });
+
+    // support opening an existing doc by hash
+    if (location.hash) {
+      const openId = location.hash.slice(1);
+      location.href = `/admin/vendors-new.html#${openId}`;
+    }
+  }
+  load();
+</script>
+</body>
+</html>
