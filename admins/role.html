@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Manage Roles • Super Admin • BSS 1815</title>
+<link rel="stylesheet" href="/css/base.css">
+<style>
+  :root { --orange:#ff7a00; --bg:#0a0a0a; --card:#111; }
+  body{background:var(--bg);color:#f5f5f5;font-family:system-ui,Segoe UI,Roboto}
+  header{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#111;border-bottom:1px solid rgba(255,122,0,.25)}
+  header img{height:32px}
+  .wrap{max-width:1100px;margin:16px auto;padding:0 12px}
+  .card{background:var(--card);border:1px solid rgba(255,122,0,.35);border-radius:12px;padding:14px}
+  .row{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+  label{color:var(--orange);font-weight:800}
+  .input,.sel{background:#000;border:1px solid #333;color:#fff;padding:10px;border-radius:10px;width:100%}
+  .btn{background:var(--orange);color:#000;border:0;border-radius:10px;padding:8px 12px;font-weight:800;cursor:pointer}
+  .btn.secondary{background:#222;color:#fff;border:1px solid #333}
+  table{width:100%;border-collapse:collapse;margin-top:12px}
+  th,td{border-bottom:1px solid #222;padding:10px;text-align:left}
+  th{color:var(--orange)}
+  .muted{color:#9a9a9a}
+  .tag{padding:2px 8px;border-radius:8px;background:#1b1b1b;border:1px solid #333;color:#ddd;font-size:12px}
+</style>
+<!-- Firebase client (only to get ID token for the API header) -->
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+</head>
+<body>
+<header>
+  <div style="display:flex;align-items:center;gap:10px">
+    <img src="/logo.png" alt="BSS">
+    <strong>Manage Roles • Super Admin</strong>
+  </div>
+  <div id="me" class="muted"></div>
+</header>
+
+<div class="wrap">
+  <div class="card">
+    <h3 style="margin-top:0">Assign / Update Role</h3>
+    <div class="row">
+      <div>
+        <label>User UID *</label>
+        <input id="uid" class="input" placeholder="Firebase UID">
+      </div>
+      <div>
+        <label>User Email *</label>
+        <input id="email" class="input" placeholder="user@example.com">
+      </div>
+      <div>
+        <label>Role *</label>
+        <select id="role" class="sel">
+          <option value="admin">admin</option>
+          <option value="super">super</option>
+        </select>
+      </div>
+    </div>
+    <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn" id="assign">Save Role</button>
+      <button class="btn secondary" id="revoke">Revoke Role</button>
+      <span id="status" class="muted" style="align-self:center"></span>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3 style="margin-top:0">Current Admins</h3>
+    <table id="tbl">
+      <thead>
+        <tr><th>Role</th><th>Email</th><th>UID</th><th>Since</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <div class="muted" id="hint"></div>
+  </div>
+</div>
+
+<script>
+  // Minimal Firebase init (for ID token)
+  const firebaseConfig = { apiKey:"YOUR_API_KEY", authDomain:"YOUR_PROJECT.firebaseapp.com", projectId:"YOUR_PROJECT_ID" };
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+
+  const $ = (id)=>document.getElementById(id);
+  let idToken = null;
+
+  async function authz(){
+    const user = auth.currentUser || (await new Promise(resolve=>{
+      const off = auth.onAuthStateChanged(u=>{ off(); resolve(u); });
+    }));
+    if (!user){ location.href = "/admin/login.html"; return; }
+    idToken = await user.getIdToken();
+    const who = await fetch("/api/whoami", { headers: { Authorization: "Bearer " + idToken } }).then(r=>r.json());
+    if (!who.ok || who.role !== "super") {
+      $("me").textContent = "Not super admin — access denied.";
+      document.body.innerHTML = "<div style='padding:24px;color:#ff7a00'>Super Admin only.</div>";
+      return;
+    }
+    $("me").textContent = who.email + " • role: " + who.role;
+    await load();
+  }
+
+  async function load(){
+    $("hint").textContent = "Loading…";
+    const out = await fetch("/api/roles-list", { headers: { Authorization: "Bearer " + idToken } }).then(r=>r.json());
+    const tbody = document.querySelector("#tbl tbody");
+    tbody.innerHTML = "";
+    (out.items || []).forEach(r=>{
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td><span class="tag">${r.role}</span></td>
+        <td>${r.email || ""}</td>
+        <td>${r.uid}</td>
+        <td>${r.createdAt || ""}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+    $("hint").textContent = `${(out.items||[]).length} admins found`;
+  }
+
+  $("assign").onclick = async ()=>{
+    $("status").textContent = "Saving…";
+    const body = {
+      uid: $("uid").value.trim(),
+      email: $("email").value.trim(),
+      role: $("role").value
+    };
+    const r = await fetch("/api/roles-assign", {
+      method:"POST",
+      headers: { "Content-Type":"application/json", Authorization: "Bearer " + idToken },
+      body: JSON.stringify(body)
+    }).then(r=>r.json());
+    $("status").textContent = r.ok ? "Saved." : ("Failed: " + (r.error||""));
+    if (r.ok) load();
+  };
+
+  $("revoke").onclick = async ()=>{
+    $("status").textContent = "Revoking…";
+    const body = { uid: $("uid").value.trim() };
+    const r = await fetch("/api/roles-revoke", {
+      method:"POST",
+      headers: { "Content-Type":"application/json", Authorization: "Bearer " + idToken },
+      body: JSON.stringify(body)
+    }).then(r=>r.json());
+    $("status").textContent = r.ok ? "Revoked." : ("Failed: " + (r.error||""));
+    if (r.ok) load();
+  };
+
+  authz();
+</script>
+</body>
+</html>
