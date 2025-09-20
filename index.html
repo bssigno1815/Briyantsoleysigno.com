@@ -1,4 +1,45 @@
-<section class="section">
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+
+<script>
+  // 1) Firebase init
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT.firebaseapp.com",
+    projectId: "YOUR_PROJECT",
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  // 2) Form submit → Firestore + call email function endpoint
+  const form = document.getElementById('bssForm');
+  const statusEl = document.getElementById('bssStatus');
+
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(form).entries());
+    data.createdAt = new Date().toISOString();
+
+    statusEl.textContent = "Voye mesaj la…";
+    try {
+      // Save to Firestore
+      await db.collection('fan_messages').add(data);
+
+      // Call serverless email sender
+      await fetch("https://YOUR_REGION-YOUR_PROJECT.cloudfunctions.net/bssSendMail", {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify(data)
+      });
+
+      statusEl.textContent = "Mèsi! Mesaj la rive. Nou ap reponn ou byento.";
+      form.reset();
+    } catch (err) {
+      console.error(err);
+      statusEl.textContent = "Gen yon pwoblèm. Eseye ankò s’il vous plaît.";
+    }
+  });
+</script><section class="section">
   <div class="container">
     <h2 style="color:#ff7a00;margin:0 0 8px">Voye Mesaj la</h2>
     <p class="muted">Nou reponn vit. (BSS 🟠⚫)</p>
