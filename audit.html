@@ -1,0 +1,168 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Audit Log • Super Admin • BSS 1815</title>
+<link rel="stylesheet" href="/css/base.css">
+<style>
+  :root { --orange:#ff7a00; --bg:#0a0a0a; --card:#111; }
+  body{background:var(--bg);color:#f5f5f5;font-family:system-ui,Segoe UI,Roboto}
+  header{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#111;border-bottom:1px solid rgba(255,122,0,.25)}
+  header img{height:32px}
+  .wrap{max-width:1200px;margin:16px auto;padding:0 12px}
+  .card{background:var(--card);border:1px solid rgba(255,122,0,.35);border-radius:12px;padding:14px}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .input,.sel{background:#000;border:1px solid #333;color:#fff;padding:10px;border-radius:10px}
+  .btn{background:var(--orange);color:#000;border:0;border-radius:10px;padding:8px 12px;font-weight:800;cursor:pointer}
+  .btn.secondary{background:#222;color:#fff;border:1px solid #333}
+  table{width:100%;border-collapse:collapse;margin-top:12px}
+  th,td{border-bottom:1px solid #222;padding:10px;text-align:left}
+  th{color:var(--orange)}
+  .muted{color:#9a9a9a}
+  .tag{padding:2px 8px;border-radius:8px;background:#1b1b1b;border:1px solid #333;color:#ddd;font-size:12px}
+  @media print { header, .tools { display:none !important; } body{background:#fff;color:#000} th{color:#000} }
+</style>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+</head>
+<body>
+<header>
+  <div style="display:flex;align-items:center;gap:10px">
+    <img src="/logo.png" alt="BSS"><strong>Audit Log • Super Admin</strong>
+  </div>
+  <div id="me" class="muted"></div>
+</header>
+
+<div class="wrap">
+  <div class="card tools">
+    <div class="row">
+      <input id="q" class="input" placeholder="Search text… (email, uid, action)">
+      <select id="action" class="sel">
+        <option value="">Any action</option>
+        <option value="roles.assign">roles.assign</option>
+        <option value="roles.revoke">roles.revoke</option>
+        <option value="vendor.checkin">vendor.checkin</option>
+        <option value="vendor.checkout">vendor.checkout</option>
+        <option value="vendor.finalize">vendor.finalize</option>
+        <option value="transaction.created">transaction.created</option>
+      </select>
+      <input id="start" class="input" type="date">
+      <input id="end" class="input" type="date">
+      <button id="run" class="btn">Run</button>
+      <button id="clear" class="btn secondary">Clear</button>
+      <button id="csv" class="btn">Export CSV</button>
+      <button class="btn secondary" onclick="window.print()">Print</button>
+      <span id="status" class="muted"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <table id="tbl">
+      <thead>
+        <tr><th>Time</th><th>Action</th><th>Actor</th><th>Target</th><th>Details</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <div class="row" style="margin-top:10px">
+      <span class="tag">Rows: <strong id="count">0</strong></span>
+      <button id="more" class="btn secondary" style="margin-left:auto">Load more</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Firebase auth (for ID token to call API)
+  const firebaseConfig = { apiKey:"YOUR_API_KEY", authDomain:"YOUR_PROJECT.firebaseapp.com", projectId:"YOUR_PROJECT_ID" };
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+
+  const $ = (id)=>document.getElementById(id);
+  let idToken=null, nextCursor=null, rows=[];
+
+  async function ensureSuper(){
+    const user = auth.currentUser || await new Promise(r=>firebase.auth().onAuthStateChanged(u=>r(u)));
+    if(!user){ location.href="/admin/login.html"; return; }
+    idToken = await user.getIdToken();
+    const who = await fetch("/api/whoami",{ headers:{ Authorization:"Bearer "+idToken } }).then(r=>r.json());
+    if(!who.ok || who.role!=="super"){
+      document.body.innerHTML = "<div style='padding:24px;color:#ff7a00'>Super Admin only.</div>";
+      return false;
+    }
+    $("me").textContent = who.email + " • role: " + who.role;
+    return true;
+  }
+
+  function params(resetCursor=false){
+    if(resetCursor) nextCursor=null;
+    const q = ($("#q").value||"").trim();
+    const action = $("#action").value;
+    const start = $("#start").value;
+    const end = $("#end").value;
+    const p = { q, action, start, end, limit: 200 };
+    if(nextCursor) p.cursor = nextCursor;
+    return p;
+  }
+
+  async function run(reset=true){
+    if(reset){ rows=[]; $("#tbl tbody").innerHTML=""; nextCursor=null; }
+    $("#status").textContent = "Loading…";
+    const body = params(!reset).cursor ? params(!reset) : params(true);
+    const res = await fetch("/api/audit-list", {
+      method:"POST",
+      headers:{ "Content-Type":"application/json", Authorization:"Bearer "+idToken },
+      body: JSON.stringify(body)
+    }).then(r=>r.json());
+    $("#status").textContent = res.ok ? "" : ("Error: " + (res.error||""));
+    if(!res.ok) return;
+    nextCursor = res.nextCursor || null;
+    rows = rows.concat(res.items || []);
+    render(res.items || []);
+  }
+
+  function render(batch){
+    const tbody = $("#tbl tbody");
+    const frag = document.createDocumentFragment();
+    batch.forEach(x=>{
+      const tr = document.createElement("tr");
+      const t = x.at || "";
+      const actor = `${x.actorEmail||x.actorUid||""}${x.actorRole?" • "+x.actorRole:""}`;
+      const target = x.targetEmail || x.targetUid || x.targetVid || "";
+      const details = x.details || "";
+      tr.innerHTML = `
+        <td>${t}</td>
+        <td>${x.action}</td>
+        <td>${actor}</td>
+        <td>${target}</td>
+        <td>${details}</td>
+      `;
+      frag.appendChild(tr);
+    });
+    tbody.appendChild(frag);
+    $("#count").textContent = rows.length;
+    $("#more").style.display = nextCursor ? "inline-flex" : "none";
+  }
+
+  $("#run").onclick = ()=> run(true);
+  $("#clear").onclick = ()=>{
+    $("#q").value=""; $("#action").value=""; $("#start").value=""; $("#end").value="";
+    run(true);
+  };
+  $("#more").onclick = ()=> run(false);
+  $("#csv").onclick = ()=>{
+    const headers = ["Time","Action","Actor","Target","Details"];
+    const csv = [headers.join(",")].concat(rows.map(r=>{
+      const actor = `${r.actorEmail||r.actorUid||""}${r.actorRole?" • "+r.actorRole:""}`;
+      const target = r.targetEmail || r.targetUid || r.targetVid || "";
+      const cols = [r.at||"", r.action||"", actor, target, (r.details||"")];
+      return cols.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(",");
+    })).join("\n");
+    const blob = new Blob([csv],{type:"text/csv"});
+    const url = URL.createObjectURL(blob); const a=document.createElement("a");
+    a.href=url; a.download=`BSS_Audit_${new Date().toISOString().slice(0,19)}.csv`; a.click();
+    setTimeout(()=>URL.revokeObjectURL(url),600);
+  };
+
+  (async ()=>{ if(await ensureSuper()) run(true); })();
+</script>
+</body>
+</html>
