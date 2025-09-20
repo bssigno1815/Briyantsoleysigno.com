@@ -1,4 +1,89 @@
+/* Global background */
 body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom right, #000000, #ff6600); /* Black → Orange */
+  color: #ff6600; /* Orange text everywhere */
+}
+
+/* Header */
+header {
+  background-color: #000000;
+  color: #ff6600;
+  text-align: center;
+  padding: 20px 0;
+  border-bottom: 2px solid #ff6600;
+  box-shadow: 0 0 15px #ff6600;
+}
+
+/* Navigation */
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  background-color: #000000;
+}
+
+nav ul li {
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+nav ul li a:hover {
+  color: #000000;
+  background: #ff6600;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+/* Main Content */
+main {
+  text-align: center;
+  padding: 50px 20px;
+  color: #ff6600;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #ff6600;
+  text-shadow: 0 0 10px #ff6600;
+}
+
+/* Footer */
+footer {
+  background-color: #000000;
+  color: #ff6600;
+  text-align: center;
+  padding: 20px;
+  border-top: 2px solid #ff6600;
+  box-shadow: 0 -2px 15px #ff6600;
+}
+
+/* Buttons */
+button, .btn {
+  background-color: #ff6600;
+  color: #000000;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 5px;
+}
+
+button:hover, .btn:hover {
+  background-color: #000000;
+  color: #ff6600;
+  border: 2px solid #ff6600;
+}body {
   background: linear-gradient(180deg, black, #ff6600);
   color: #ff6600; /* Default text color is orange */
   font-family: Arial, sans-serif;
