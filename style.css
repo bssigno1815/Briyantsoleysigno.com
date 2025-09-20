@@ -1,4 +1,89 @@
-/* Global orange/black theme */
+/* Global – Black background fading into orange */
+:root{
+  --orange: #ff7a00;          /* main orange */
+  --orange-soft: #ffa24c;     /* hover / accents */
+  --orange-dim: #cc6400;      /* borders/shadows */
+  --ink: #000000;             /* pure black */
+  --ink-2: #0b0b0b;           /* near-black */
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+
+body{
+  margin:0;
+  color:var(--orange-soft);
+  background:
+    radial-gradient(1200px 600px at 70% -10%, rgba(255,122,0,.18), transparent 60%),
+    linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 55%, rgba(255,122,0,.15) 100%);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
+  line-height:1.6;
+  letter-spacing:.2px;
+}
+
+/* Layout */
+.wrapper{max-width:1100px; margin:0 auto; padding:92px 20px 60px}
+
+/* Header / Nav */
+.nav{
+  position:sticky; top:0; z-index:1000;
+  backdrop-filter: blur(6px);
+  background: linear-gradient(180deg, rgba(0,0,0,.85), rgba(0,0,0,.55));
+  border-bottom:1px solid var(--orange-dim);
+}
+.nav .bar{
+  max-width:1100px; margin:0 auto; padding:14px 20px;
+  display:flex; align-items:center; gap:18px; justify-content:space-between;
+}
+.brand{
+  font-weight:800; letter-spacing:.8px; color:var(--orange);
+  text-transform:uppercase; font-size: clamp(18px, 3.4vw, 26px);
+  text-decoration:none;
+}
+.menu{display:flex; gap:18px; align-items:center; flex-wrap:wrap}
+.menu a{
+  color:var(--orange-soft); text-decoration:none; font-weight:650;
+  padding:8px 10px; border-radius:10px; border:1px solid transparent;
+}
+.menu a:hover{ color:var(--orange); border-color:var(--orange-dim) }
+.menu a.active{ color:var(--orange); border-color:var(--orange) }
+
+/* Typography */
+h1,h2,h3{ color:var(--orange); margin:0 0 .4em; line-height:1.15 }
+h1{ font-size: clamp(28px, 5vw, 46px); text-transform:uppercase; letter-spacing:1px }
+h2{ font-size: clamp(22px, 3.6vw, 32px) }
+p{ margin:.45em 0 }
+
+/* Cards / sections */
+.card{
+  background: linear-gradient(180deg, rgba(255,122,0,.06), rgba(0,0,0,.22));
+  border:1px solid var(--orange-dim);
+  border-radius:16px; padding:18px; box-shadow: 0 0 0 1px rgba(255,122,0,.04) inset;
+}
+.grid{ display:grid; gap:16px; grid-template-columns: repeat(auto-fit, minmax(260px,1fr));}
+
+/* Links & buttons */
+a{ color:var(--orange); }
+a:visited{ color:var(--orange) }
+a:hover{ color:var(--orange-soft) }
+.btn{
+  display:inline-block; padding:10px 14px; border-radius:12px;
+  border:1px solid var(--orange-dim); color:var(--orange);
+  text-decoration:none; font-weight:700;
+  background: linear-gradient(180deg, rgba(255,122,0,.10), rgba(0,0,0,.10));
+}
+.btn:hover{ border-color:var(--orange); color:var(--orange-soft) }
+
+/* Footer */
+footer{
+  border-top:1px solid var(--orange-dim); margin-top:34px; padding:18px 0;
+  color:var(--orange-dim);
+}
+
+/* Media tweaks */
+@media (max-width:520px){
+  .menu{gap:12px}
+}/* Global orange/black theme */
 :root { --orange: #ff6600; --orange-2:#ff7a1a; --black:#000; }
 
 * { box-sizing: border-box; }
