@@ -1,4 +1,28 @@
 body {
+  background: linear-gradient(180deg, black, #ff6600);
+  color: #ff6600; /* Default text color is orange */
+  font-family: Arial, sans-serif;
+}
+
+/* Navigation */
+nav a {
+  color: #ff6600; /* Orange links */
+  text-decoration: none;
+  padding: 10px 20px;
+  transition: 0.3s ease;
+}
+
+nav a:hover {
+  color: black; /* Flip to black on hover */
+  background: #ff6600; /* With orange background */
+  border-radius: 5px;
+}
+
+/* Header Title */
+h1, h2, h3 {
+  color: #ff6600;
+  text-shadow: 0 0 10px #ff6600, 0 0 20px #ff944d;
+}body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: linear-gradient(to bottom, #000000, #ff8c00);
