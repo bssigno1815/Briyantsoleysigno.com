@@ -1,4 +1,23 @@
+// /api/roles-assign.js (super only)
+import { adminDb } from "../lib/admin";
 import { requireRole } from "../lib/admin";
+
+export default async function handler(req, res) {
+  if (req.method !== "POST") return res.status(405).end();
+  const auth = await requireRole(req, res, ['super']);
+  if (!auth?.uid) return;
+
+  const { uid, email, role } = req.body || {};
+  if (!uid || !email || !['admin','super'].includes(role)) {
+    return res.status(400).json({ ok:false, error:'uid, email, role=admin|super required' });
+  }
+
+  await adminDb.doc(`roles/${uid}`).set({
+    email, role, updatedAt: new Date()
+  }, { merge:true });
+
+  return res.status(200).json({ ok:true });
+}import { requireRole } from "../lib/admin";
 
 export default async function handler(req, res) {
   const auth = await requireRole(req, res, ['admin','super']);
