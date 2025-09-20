@@ -1,4 +1,124 @@
-// pages/api/audit-role-history.js  (Super only)
+// pages/api/audit-daily-digest.js  (Super-only or signed by secret)
+import { adminDb } from "../../lib/admin";
+import { requireRole } from "../../lib/admin";
+import nodemailer from "nodemailer";
+
+export default async function handler(req,res){
+  const useSecret = !!process.env.DIGEST_SECRET; // optional
+  const viaCron = req.headers['x-vercel-cron'] === '1' || req.query.cron === '1';
+
+  // Auth: either Super via token, or a shared secret for the cron call
+  if (useSecret && viaCron) {
+    const ok = (req.headers['x-digest-secret'] === process.env.DIGEST_SECRET);
+    if (!ok) return res.status(401).json({ ok:false, error:'bad secret' });
+  } else {
+    const auth = await requireRole(req,res,['super']);
+    if (!auth?.uid) return;
+  }
+
+  try{
+    // Time window: last 24 hours (UTC or your tz offset)
+    const now = new Date();
+    const since = new Date(now.getTime() - 24*60*60*1000);
+
+    const snap = await adminDb.collection('audit')
+      .where('at','>=', since)
+      .orderBy('at','desc')
+      .limit(2000)
+      .get();
+
+    const rows = snap.docs.map(d=>{
+      const x = d.data();
+      const at = x.at?.toDate ? x.at.toDate() : new Date();
+      const det = x.details ? safeJson(x.details) : "";
+      return {
+        at, action:x.action||"",
+        actor: x.actorEmail || x.actorUid || "",
+        target: x.target?.email || x.target?.uid || x.target?.vid || "",
+        details: det
+      };
+    });
+
+    const groups = groupBy(rows, r=>r.action);
+    const html = renderHtml(now, since, groups);
+    const text = renderText(now, since, rows);
+
+    // Send
+    const toList = (process.env.DIGEST_TO || process.env.EMAIL_TO || process.env.GMAIL_USER || "").split(",").map(s=>s.trim()).filter(Boolean);
+    if (!toList.length) return res.status(400).json({ ok:false, error:"No DIGEST_TO/EMAIL_TO configured" });
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: { user: process.env.GMAIL_USER, pass: process.env.GMAIL_APP_PASSWORD },
+    });
+
+    await transporter.sendMail({
+      from: `"BSS Audit" <${process.env.GMAIL_USER}>`,
+      to: toList.join(","),
+      subject: `BSS • Audit Digest (${since.toISOString().slice(0,10)} → ${now.toISOString().slice(0,10)})`,
+      html, text
+    });
+
+    res.status(200).json({ ok:true, count: rows.length });
+  }catch(e){
+    res.status(500).json({ ok:false, error: e.message });
+  }
+}
+
+function groupBy(arr, fn){
+  const m = new Map();
+  arr.forEach(x=>{
+    const k = fn(x);
+    if (!m.has(k)) m.set(k, []);
+    m.get(k).push(x);
+  });
+  return m;
+}
+function safeJson(x){ try { return JSON.stringify(x); } catch { return ""; } }
+
+function renderHtml(now, since, groups){
+  const header = `
+    <div style="background:#ff7a00;padding:12px 16px">
+      <img src="${process.env.SITE_URL || ""}/logo.png" style="height:32px;vertical-align:middle">
+      <span style="font-weight:800;margin-left:10px;color:#000">BRIYANT SOLÈY SIGNO 1815 — Audit Digest</span>
+    </div>`;
+  const period = `<div style="background:#0a0a0a;color:#f5f5f5;padding:12px 16px">Period: ${since.toLocaleString()} → ${now.toLocaleString()}</div>`;
+  const blocks = [...groups.entries()].map(([action, items])=>{
+    const lis = items.map(r=>`
+      <tr>
+        <td style="padding:6px 8px;border-bottom:1px solid #222">${r.at.toLocaleString()}</td>
+        <td style="padding:6px 8px;border-bottom:1px solid #222">${r.actor}</td>
+        <td style="padding:6px 8px;border-bottom:1px solid #222">${r.target || ""}</td>
+        <td style="padding:6px 8px;border-bottom:1px solid #222"><pre style="white-space:pre-wrap;margin:0;color:#bbb">${r.details || ""}</pre></td>
+      </tr>`).join("");
+    return `
+      <div style="background:#111;border:1px solid #333;border-radius:10px;margin:12px;padding:10px">
+        <h3 style="margin:0 0 6px;color:#ff7a00">${action} • ${items.length}</h3>
+        <table style="width:100%;border-collapse:collapse">
+          <thead><tr>
+            <th style="text-align:left;color:#ff7a00;padding:6px 8px;border-bottom:1px solid #222">Time</th>
+            <th style="text-align:left;color:#ff7a00;padding:6px 8px;border-bottom:1px solid #222">Actor</th>
+            <th style="text-align:left;color:#ff7a00;padding:6px 8px;border-bottom:1px solid #222">Target</th>
+            <th style="text-align:left;color:#ff7a00;padding:6px 8px;border-bottom:1px solid #222">Details</th>
+          </tr></thead>
+          <tbody>${lis || "<tr><td colspan='4' style='padding:6px 8px;color:#bbb'>None</td></tr>"}</tbody>
+        </table>
+      </div>`;
+  }).join("");
+
+  const footer = `<div style="padding:10px 16px;background:#0a0a0a;color:#999;font-size:12px">This is an automated daily summary.</div>`;
+  return header + period + blocks + footer;
+}
+
+function renderText(now, since, rows){
+  const lines = [
+    `BSS Audit Digest`,
+    `Period: ${since.toLocaleString()} -> ${now.toLocaleString()}`,
+    ``,
+    ...rows.map(r => `${r.at.toLocaleString()} | ${r.action} | ${r.actor} | ${r.target} | ${r.details}`)
+  ];
+  return lines.join("\n");
+}// pages/api/audit-role-history.js  (Super only)
 import { adminDb } from "../../lib/admin";
 import { requireRole } from "../../lib/admin";
 
