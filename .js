@@ -1,4 +1,77 @@
-// Embed logo + orange header
+import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
+
+async function buildContractPDF(body) {
+  const t = (s)=> (s??"").toString().trim();
+
+  const pdfDoc = await PDFDocument.create();
+  const page = pdfDoc.addPage([612, 792]);
+  const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+  const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+
+  // Load logo from your live site
+  const logoUrl = `${process.env.SITE_URL || ""}/logo.png`;
+  try {
+    const logoBytes = await fetch(logoUrl).then(r => r.arrayBuffer());
+    const logoImg = await pdfDoc.embedPng(logoBytes);
+    const w = 160, h = (logoImg.height / logoImg.width) * w;
+    page.drawImage(logoImg, { x: (612 - w)/2, y: 740, width: w, height: h });
+  } catch { /* if logo missing, continue */ }
+
+  // Orange header
+  page.drawRectangle({ x:0, y:710, width:612, height:25, color: rgb(1,0.4,0) });
+  page.drawText("BRIYANT SOLÈY SIGNO 1815 – MUSICIAN AGREEMENT", {
+    x:50, y:718, size:12, font:fontBold, color: rgb(0,0,0)
+  });
+
+  // writers
+  let y = 690, left = 50, maxWidth = 512, lh = 14;
+  const write = (txt, bold=false) => {
+    const f = bold ? fontBold : font;
+    const words = (txt || "").split(" ");
+    let line = "";
+    for (const w of words) {
+      const test = line ? line + " " + w : w;
+      if (f.widthOfTextAtSize(test, 10) > maxWidth) {
+        page.drawText(line, { x:left, y, size:10, font:f, color: rgb(1,1,1) }); y -= lh; line = w;
+      } else { line = test; }
+    }
+    if (line) { page.drawText(line, { x:left, y, size:10, font:f, color: rgb(1,1,1) }); y -= lh; }
+  };
+  const section = (h, v) => { write(h, true); if (v) write(v); y -= 6; };
+  const b = body;
+
+  section("Parties",
+    `Presenter: ${t(b.presenter_name)} | ${t(b.presenter_email)} | ${t(b.presenter_phone)}\n` +
+    `Artist: ${t(b.artist_name)} | ${t(b.artist_email)} | ${t(b.artist_phone)}`
+  );
+  section("Engagement",
+    `Event: ${t(b.event_name)}  Date: ${t(b.event_date)}  Venue: ${t(b.venue)}  Capacity: ${t(b.capacity) || "-"}`);
+  section("Schedule",
+    `Load-in: ${t(b.loadin) || "-"}  Soundcheck: ${t(b.soundcheck) || "-"}  Performance: ${t(b.performance_window) || "-"}`);
+  section("Sets/Breaks",
+    `Sets: ${t(b.sets) || "-"}  Breaks: ${t(b.breaks) || "-"}`);
+  section("Compensation",
+    `Fee: $${t(b.fee)}  Deposit: $${t(b.deposit) || "0"} (due: ${t(b.deposit_due) || "-"})  ` +
+    `Balance: ${t(b.balance_due) || "-"}  Method: ${t(b.payment_method)}`);
+  section("Tech/Hospitality",
+    `Gear: ${t(b.gear) || "-"}\nSound/Light: ${t(b.sound_light) || "-"}\nStage Plot: ${t(b.stage_plot) || "-"}\nHospitality: ${t(b.hospitality) || "-"}`);
+  section("Legal",
+    `Law: ${t(b.law) || "-"}  Jurisdiction: ${t(b.jurisdiction) || "-"}`);
+  section("Signatories",
+    `Presenter: ${t(b.presenter_sign_name)}  |  Artist: ${t(b.artist_sign_name)}`);
+
+  // Footer logo + slogan
+  try {
+    const logoBytes = await fetch(logoUrl).then(r => r.arrayBuffer());
+    const logoImg = await pdfDoc.embedPng(logoBytes);
+    page.drawImage(logoImg, { x: 50, y: 28, width: 40, height: 40 });
+  } catch {}
+  page.drawText("Briyant Solèy se yon mountain, yon vision, yon limyè ki pap janm ka etenn.", {
+    x: 100, y: 40, size: 9, font, color: rgb(1,0.4,0)
+  });
+
+  return await pdfDoc.save();
+}// Embed logo + orange header
 const logoUrl = "/logo.png";
 const logoImageBytes = await fetch(logoUrl).then(r => r.arrayBuffer());
 const logoImage = await pdfDoc.embedPng(logoImageBytes);
