@@ -1,4 +1,17 @@
-// /api/contact.js  (Vercel Serverless Function)
+const session = await stripe.checkout.sessions.create({
+  payment_method_types: ["card"],
+  line_items: [
+    {
+      price: "{{PRICE_ID}}",
+      quantity: 1,
+    },
+  ],
+  mode: "payment",
+  phone_number_collection: { enabled: true },  // ✅ Require phone
+  customer_creation: "always",                 // ✅ Store phone with customer
+  success_url: "https://briyantsoleysigno1815.com/success",
+  cancel_url: "https://briyantsoleysigno1815.com/cancel",
+});// /api/contact.js  (Vercel Serverless Function)
 import nodemailer from "nodemailer";
 
 export default async function handler(req, res) {
