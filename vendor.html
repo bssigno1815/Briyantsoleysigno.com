@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Ti Machann • Register</title>
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/brand.css">
+</head>
+<body>
+<header class="nav">
+  <img class="logo" src="/img/logo-bss.svg" alt="BSS">
+  <div class="brand">Ti Machann • New</div>
+  <nav>
+    <a href="/index.html">Home</a>
+    <a href="/admin.html">Admin</a>
+  </nav>
+</header>
+
+<main style="padding:1.25rem">
+  <form id="vendorForm" class="card">
+    <div class="grid two">
+      <div>
+        <label>Vendor Name*</label>
+        <input name="name" required/>
+      </div>
+      <div>
+        <label>Email*</label>
+        <input type="email" name="email" required/>
+      </div>
+      <div>
+        <label>Primary Phone*</label>
+        <input name="phone" placeholder="+1 555 123 4567" required/>
+      </div>
+      <div>
+        <label>Alt Phone</label>
+        <input name="phone2"/>
+      </div>
+      <div>
+        <label>Category / Goods</label>
+        <input name="category" placeholder="Food, Apparel, Drinks…"/>
+      </div>
+      <div>
+        <label>Company</label>
+        <input name="company"/>
+      </div>
+      <div>
+        <label>Address</label>
+        <input name="address"/>
+      </div>
+      <div>
+        <label>Social / Website</label>
+        <input name="social"/>
+      </div>
+      <div>
+        <label>Emergency Contact (name/phone)</label>
+        <input name="emergency"/>
+      </div>
+      <div>
+        <label>Notes</label>
+        <textarea name="notes" rows="3"></textarea>
+      </div>
+    </div>
+
+    <div class="grid two" style="margin-top:1rem">
+      <button type="button" class="btn outline" id="saveDraftBtn">Save Draft</button>
+      <button type="submit" class="btn">Finalize & Generate PDF</button>
+    </div>
+  </form>
+
+  <section class="card" style="margin-top:1rem">
+    <h3>Badge Preview</h3>
+    <div class="badge-preview" id="badge">
+      <div class="title">BSS • VENDOR</div>
+      <div id="badgeName">Your Name</div>
+    </div>
+    <div style="margin-top:1rem">
+      <button class="btn" id="downloadBadgeBtn">Download Badge</button>
+    </div>
+  </section>
+</main>
+
+<footer>© BSS 1815</footer>
+
+<script src="/js/firebase.js"></script>
+<script src="/js/vendor-form.js"></script>
+<script src="/js/pdf-badge.js"></script>
+<script src="/js/notify.js"></script>
+</body>
+</html>
