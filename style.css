@@ -1,4 +1,10 @@
-/* Global – Black background fading into orange */
+.bss-logo-wrap{
+  background:#000;
+  border:1px solid #ff7a00;
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:2px 6px; border-radius:4px;
+}
+.bss-logo-wrap img{ display:block; max-height:18px; filter:grayscale(1); }/* Global – Black background fading into orange */
 :root{
   --orange: #ff7a00;          /* main orange */
   --orange-soft: #ffa24c;     /* hover / accents */
