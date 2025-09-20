@@ -1,4 +1,11 @@
-const htmlHeader = `
+await transporter.sendMail({
+  from: `"BSS Contracts" <${process.env.GMAIL_USER}>`,
+  to: adminTo,
+  subject,
+  text: linesTxt,
+  html: htmlBody("New Contract", linesTxt),
+  attachments: [{ filename, content: Buffer.from(pdfBytes) }]
+});const htmlHeader = `
   <div style="background:#ff7a00;padding:12px 16px;">
     <img src="${process.env.SITE_URL || ""}/logo.png" alt="BSS" style="height:36px;vertical-align:middle;">
     <span style="font-weight:800;margin-left:10px;color:#000">BRIYANT SOLÈY SIGNO 1815</span>
