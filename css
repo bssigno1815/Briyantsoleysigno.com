@@ -1,4 +1,6 @@
-/* styles/globals.css */
+border-color: var(--border) !important;
+background: var(--bg-soft) !important;
+color: var(--ink) !important;/* styles/globals.css */
 :root{
   --bss-bg:#000000;
   --bss-fg:#ffa500; /* orange */
