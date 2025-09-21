@@ -1,0 +1,131 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BSS • Ti Machann</title>
+<style>
+:root{--o:#ffa500;--b:#000}
+html,body{margin:0;height:100%;background:var(--b);color:var(--o);font:16px/1.4 system-ui}
+header{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:2px solid var(--o)}
+.badge{background:var(--o);color:#000;font-weight:900;padding:4px 8px;border-radius:8px}
+button{border:2px solid var(--o);background:var(--o);color:#000;border-radius:10px;padding:8px 12px;font-weight:700;cursor:pointer}
+a, .link{color:var(--o)}
+main{padding:20px;max-width:980px;margin:auto}
+.card{border:2px solid var(--o);border-radius:16px;padding:16px;margin:12px 0}
+label{display:block;margin-top:8px}
+input,textarea{width:100%;padding:10px;background:#000;color:#ffa500;border:2px solid var(--o);border-radius:10px}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+</style>
+
+<header>
+  <div><span class="badge">BSS</span> <strong id="t_title">Ti Machann</strong></div>
+  <div>
+    <select id="langSel">
+      <option value="en">EN</option><option value="ht">Kreyòl</option><option value="fr">FR</option>
+    </select>
+    <a href="/admin" class="link">← Back</a>
+  </div>
+</header>
+
+<main>
+  <div class="card">
+    <div class="row">
+      <div><label id="l_vendor">Vendor Name *</label><input id="v_name"></div>
+      <div><label id="l_email">Email *</label><input id="v_email"></div>
+      <div><label id="l_phone">Phone *</label><input id="v_phone" placeholder="+1 555 123 4567"></div>
+      <div><label id="l_altphone">Alt Phone</label><input id="v_alt"></div>
+      <div><label id="l_cat">Category / Goods</label><input id="v_cat" placeholder="Food, Apparel, Drinks..."></div>
+      <div><label id="l_addr">Address</label><input id="v_addr"></div>
+      <div><label id="l_emg">Emergency Contact (name/phone)</label><input id="v_emg"></div>
+      <div><label id="l_tax">Tax ID (if any)</label><input id="v_tax"></div>
+      <div><label id="l_social">Social / Website</label><input id="v_web"></div>
+      <div><label id="l_notes">Notes</label><textarea id="v_notes"></textarea></div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:12px">
+      <button id="saveDraft">Save Draft</button>
+      <button id="finalPdf">Finalize PDF</button>
+      <span id="msg" style="align-self:center"></span>
+    </div>
+  </div>
+</main>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+import { getFirestore, setDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+import jsPDF from "https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.es.min.js";
+
+const firebaseConfig = { /* YOUR CONFIG */ };
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// Gate: must be signed-in admin
+onAuthStateChanged(auth, (user)=>{ if(!user) location.replace("/login"); });
+
+// i18n
+const S={
+  en:{title:"Ti Machann",vendor:"Vendor Name *",email:"Email *",phone:"Phone *",alt:"Alt Phone",cat:"Category / Goods",addr:"Address",emg:"Emergency Contact (name/phone)",tax:"Tax ID (if any)",social:"Social / Website",notes:"Notes",save:"Save Draft",pdf:"Finalize PDF",saved:"Saved"},
+  ht:{title:"Ti Machann",vendor:"Non Machann *",email:"Imèl *",phone:"Telefòn *",alt:"Lòt Telefòn",cat:"Kategori / Machandiz",addr:"Adrès",emg:"Kontak Ijans (non/telefòn)",tax:"Nimewo Taks (si genyen)",social:"Rezo sosyal / Sitwèb",notes:"Nòt",save:"Sere Bouyon",pdf:"Finalize PDF",saved:"Sove"},
+  fr:{title:"Ti Machann",vendor:"Nom du vendeur *",email:"Email *",phone:"Téléphone *",alt:"Téléphone alt.",cat:"Catégorie / Produits",addr:"Adresse",emg:"Contact d’urgence (nom/tél.)",tax:"N° fiscal (si applicable)",social:"Réseaux / Site web",notes:"Notes",save:"Enregistrer le brouillon",pdf:"Finaliser PDF",saved:"Enregistré"}
+};
+const $=id=>document.getElementById(id);
+function setLang(l){
+  const t=S[l]||S.en;
+  $("t_title").textContent=t.title;
+  $("l_vendor").textContent=t.vendor;
+  $("l_email").textContent=t.email;
+  $("l_phone").textContent=t.phone;
+  $("l_altphone").textContent=t.alt;
+  $("l_cat").textContent=t.cat;
+  $("l_addr").textContent=t.addr;
+  $("l_emg").textContent=t.emg;
+  $("l_tax").textContent=t.tax;
+  $("l_social").textContent=t.social;
+  $("l_notes").textContent=t.notes;
+  $("saveDraft").textContent=t.save;
+  $("finalPdf").textContent=t.pdf;
+}
+const sel=$("langSel"); sel.onchange=()=>{ localStorage.setItem("bss_lang",sel.value); setLang(sel.value); };
+sel.value=localStorage.getItem("bss_lang")||"en"; setLang(sel.value);
+
+const formData = ()=>({
+  name:$("v_name").value.trim(), email:$("v_email").value.trim(),
+  phone:$("v_phone").value.trim(), alt:$("v_alt").value.trim(),
+  category:$("v_cat").value.trim(), address:$("v_addr").value.trim(),
+  emergency:$("v_emg").value.trim(), tax:$("v_tax").value.trim(),
+  web:$("v_web").value.trim(), notes:$("v_notes").value.trim()
+});
+
+$("saveDraft").onclick=async()=>{
+  const data=formData(); data.updatedAt=serverTimestamp();
+  const id = data.phone || ("draft-"+Date.now()); // simple key
+  await setDoc(doc(db,"ti_machann_drafts",id), data, {merge:true});
+  $("msg").textContent = (S[sel.value]||S.en).saved + " ✓";
+  setTimeout(()=>$("msg").textContent="",1800);
+};
+
+$("finalPdf").onclick=()=>{
+  const data=formData();
+  const pdf=new jsPDF({unit:"pt",format:"a4"});
+  pdf.setFillColor(0,0,0); pdf.rect(0,0,595,842,"F");
+  pdf.setTextColor(255,165,0); pdf.setFont(undefined,"bold"); pdf.setFontSize(18);
+  pdf.text("BSS • TI MACHANN REGISTRATION",40,50);
+  pdf.setFontSize(12); pdf.setFont(undefined,"normal");
+  const lines = [
+    ["Vendor Name", data.name],
+    ["Email", data.email],
+    ["Phone", data.phone],
+    ["Alt Phone", data.alt],
+    ["Category / Goods", data.category],
+    ["Address", data.address],
+    ["Emergency Contact", data.emergency],
+    ["Tax ID", data.tax],
+    ["Social / Website", data.web],
+    ["Notes", data.notes]
+  ];
+  let y=90;
+  lines.forEach(([k,v])=>{
+    pdf.text(`${k}:`,40,y); pdf.text(String(v||""),200,y); y+=24;
+  });
+  pdf.setFont(undefined,"bold"); pdf.text("Signature: ________________________________",40,y+24);
+  pdf.save(`ti-machann-${(data.name||"vendor").replace(/\s+/g,"-")}.pdf`);
+};
+</script>
