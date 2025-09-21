@@ -4,4 +4,39 @@
 </head><body class="bg-black text-[#F59E0B]">
   <h1 class="text-2xl">Assign Roles</h1>
 
+  <label>Target UID <input id="uid" /></label>
+  <label>Role
+    <select id="role">
+      <option value="admin">admin</option>
+      <option value="superadmin">superadmin</option>
+      <option value="">remove role</option>
+    </select>
+  </label>
+  <button id="go">Update</button>
+
+  <script type="module" src="/assets/js/firebase.js"></script>
+  <script type="module">
+    import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-functions.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+    const auth = getAuth(); const fn = httpsCallable(getFunctions(), "setRole");
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) location.replace("/admin/login.html");
+      // (optional) fetch token and verify caller is superadmin client-side too
+      const t = await user.getIdTokenResult(true);
+      if (t.claims.role !== "superadmin") { alert("Superadmin only"); location.replace("/admin/login.html"); }
+    });
+
+    document.getElementById("go").onclick = async () => {
+      const uid = document.getElementById("uid").value.trim();
+      const role = document.getElementById("role").value || null;
+      try { await fn({ uid, role }); alert("Updated"); } catch(e){ alert(e.message); }
+    };
+  </script>
+</body></html><!doctype html><html><head>
+<meta charset="utf-8" /><title>Assign Roles</title>
+<link rel="stylesheet" href="/assets/css/admin.css" />
+</head><body class="bg-black text-[#F59E0B]">
+  <h1 class="text-2xl">Assign Roles</h1>
+
   <label>Target UID <input id="uid
