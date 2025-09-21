@@ -1,4 +1,6 @@
-git add api/notify-email.js api/notify-sms.js js/notify.js
+git add api/notify-test.js admin.html js/auth-guard.js
+git commit -m "feat: one-click admin notifications test (email+sms)"
+git push origin maingit add api/notify-email.js api/notify-sms.js js/notify.js
 git commit -m "feat: admin notifications (email+sms)"
 git push origin maingit add .
 git commit -m "BSS1815: admin area, vendor form, badge, brand 404"
