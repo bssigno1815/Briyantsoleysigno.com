@@ -1,4 +1,51 @@
-<!-- assets/js/firebase-init.js -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>BSS • Admin • SECTION TITLE</title>
+<style>
+  :root{ --orange:#f97316; --black:#000 }
+  html,body{height:100%} body{margin:0;display:grid;place-items:center;background:linear-gradient(135deg,var(--black) 70%,var(--orange) 100%);color:var(--orange);font-family:system-ui,Segoe UI,Roboto,Arial}
+  .wrap{width:min(980px,92vw);background:rgba(0,0,0,.9);border:2px solid var(--orange);border-radius:16px;padding:20px 22px;box-shadow:0 0 24px var(--orange)}
+  h1{margin:0 0 12px}
+  a{color:var(--orange);text-decoration:none;border-bottom:1px dashed var(--orange)}
+  .row{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+  button{background:var(--orange);color:#000;border:0;border-radius:10px;padding:10px 14px;font-weight:800;cursor:pointer}
+  button.outline{background:#000;color:var(--orange);border:2px solid var(--orange)}
+</style>
+</head>
+<body>
+  <!-- Guard includes (must stay at top of body) -->
+  <script src="/assets/js/firebase-init.js" type="module"></script>
+  <script src="/assets/js/admin-guard.js" type="module"></script>
+  <script src="/assets/js/admin-auth.js" type="module"></script>
+
+  <main class="wrap" id="app" style="visibility:hidden">
+    <h1>SECTION TITLE</h1>
+    <div class="row">
+      <a href="/admin/">← Admin Home</a>
+      <a href="/admin/contracts/">Contracts</a>
+      <a href="/admin/musicians/">Musicians</a>
+      <a href="/admin/ti-machann/">Ti Machann</a>
+      <a href="/admin/transactions/">Transactions</a>
+      <button id="signout" class="outline" style="margin-left:auto">Sign out</button>
+    </div>
+
+    <!-- Your section content goes here -->
+    <p>Admins only. Content for <strong>SECTION TITLE</strong> will live here.</p>
+  </main>
+
+  <script type="module">
+    import { onUser, isAdmin, isSuperAdmin, doSignOut } from "/assets/js/admin-auth.js";
+    // Show the UI after admin check (admin-guard also protects via redirect)
+    onUser(user => {
+      if (isAdmin(user)) document.getElementById('app').style.visibility = 'visible';
+    });
+    document.getElementById('signout').onclick = () => doSignOut().then(()=>location.href="/admin/login.html");
+  </script>
+</body>
+</html><!-- assets/js/firebase-init.js -->
 <script type="module">
   // Firebase (modular) CDN
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
