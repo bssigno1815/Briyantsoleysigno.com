@@ -1,0 +1,10 @@
+// Only allow reads (optional) and block direct client writes.
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /contributions/{docId} {
+      allow read: if true;     // or restrict if needed
+      allow write: if false;    // all writes go through API route
+    }
+  }
+}
