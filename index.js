@@ -1,4 +1,10 @@
-// functions/index.js
+/ (root)
+  index.html
+  /admins
+  /timachann
+  /api
+  /asset (or /assets)
+  style.css (or /assets/style.css)// functions/index.js
 const functions = require("firebase-functions/v2/https");
 const admin = require("firebase-admin");
 admin.initializeApp();
