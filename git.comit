@@ -1,2 +1,2 @@
-git commit --allow-empty -m "trigger vercel build"
-git push origin main
+git commit --allow-empty -m "trigger vercel"
+git push
