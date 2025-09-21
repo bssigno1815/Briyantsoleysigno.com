@@ -1,4 +1,5 @@
-fetch('/api/notify-email', {
+fetch('/api/notify-email',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({subject:'BSS test',text:'Email OK?'})}).then(r=>r.json()).then(console.log);
+fetch('/api/notify-sms',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:'SMS OK?'})}).then(r=>r.json()).then(console.log);fetch('/api/notify-email', {
   method:'POST',
   headers:{'Content-Type':'application/json'},
   body: JSON.stringify({ subject:'Test', text:'Email OK?' })
