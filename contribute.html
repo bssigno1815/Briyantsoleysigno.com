@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BSS • Contribute</title>
+  <link rel="stylesheet" href="/assets/css/theme.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="brand"><span class="dot"></span> BSS • Contributions</div>
+
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/admin/">Admin</a>
+    </nav>
+
+    <form id="contribForm" class="card" style="max-width:620px;margin:auto;">
+      <h2 style="margin:0 0 6px;">Contribute to a Project</h2>
+      <p class="badge">SMS notice to admins for every contribution</p>
+
+      <div class="row">
+        <div>
+          <label>Project</label>
+          <input name="projectName" placeholder="e.g. School Renovation" required />
+        </div>
+        <div>
+          <label>Amount (USD)</label>
+          <input type="number" name="amount" step="0.01" min="1" required />
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label>Your Name</label>
+          <input name="contributorName" required />
+        </div>
+        <div>
+          <label>Phone (optional)</label>
+          <input name="phone" />
+        </div>
+      </div>
+
+      <label>Note (optional)</label>
+      <textarea name="note" rows="3" style="resize:vertical;"></textarea>
+
+      <div style="margin-top:16px; display:flex; justify-content:flex-end; gap:10px;">
+        <button type="reset" class="btn" style="background:transparent;color:var(--text);border-color:rgba(255,122,0,.55)">Clear</button>
+        <button type="submit" class="btn">Contribute</button>
+      </div>
+    </form>
+
+    <p class="footer">© BSS • All rights reserved.</p>
+  </div>
+
+  <script>
+    // POST to your API. That API writes to Firestore and sends SMS to admins.
+    document.getElementById('contribForm').addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(e.target).entries());
+      const r = await fetch('/api/contributions/create', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(data)
+      });
+      if(r.ok){
+        alert('Thank you! Contribution recorded. Admins notified.');
+        e.target.reset();
+      } else {
+        const t = await r.text().catch(()=> '');
+        alert('Error saving contribution. Please try again.\n' + t);
+      }
+    });
+  </script>
+</body>
+</html>
