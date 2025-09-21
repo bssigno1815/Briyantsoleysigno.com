@@ -1,4 +1,11 @@
+/* styles/globals.css */
 :root{
+  --bss-bg:#000000;
+  --bss-fg:#ffa500; /* orange */
+  --bss-border: rgba(255,165,0,.6);
+}
+html,body{ background:var(--bss-bg); color:var(--bss-fg); }
+button, input, textarea{ color:var(--bss-fg); border-color:var(--bss-border); }:root{
   --bss-orange: #ff7a00; /* brand orange */
   --bss-black: #000000;
 }
