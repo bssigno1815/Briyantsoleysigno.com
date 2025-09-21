@@ -1,4 +1,31 @@
-/index.html                 ← home
+<!-- assets/js/firebase-init.js -->
+<script type="module">
+  // Firebase (modular) CDN
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+  // 🔧 PASTE YOUR CONFIG FROM FIREBASE:
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+    projectId: "YOUR_PROJECT_ID",
+    appId: "YOUR_APP_ID",
+    // measurementId: "G-XXXX" (optional)
+  };
+
+  // Init
+  const app  = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // ✅ Admin allow-list (edit anytime)
+  window.BSS_ADMINS = [
+    "briyantsoleysigno1815@gmail.com"
+    // add more emails here
+  ];
+
+  // expose for other scripts
+  window.firebaseAuth = auth;
+</script>/index.html                 ← home
 /login.html                 ← admin login (or /admin/index.html)
  /admin/
    index.html               ← if you want /admin route
