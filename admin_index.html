@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BSS • Admin Portal</title>
+  <meta name="theme-color" content="#000000" />
+  <link rel="icon" href="/assets/bss-logo.png" />
+  <style>
+    :root{
+      --bss-orange:#ffa500;
+      --bss-black:#000000;
+      --bss-grey:#1a1a1a;
+      --bss-white:#ffffff;
+      --bss-focus:#ffd280;
+      --radius:14px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:var(--bss-black); color:var(--bss-white);
+      display:flex; align-items:center; justify-content:center; padding:32px;
+    }
+    .wrap{width:100%; max-width:980px}
+    .card{
+      background:linear-gradient(180deg,#0d0d0d 0%, #111 100%);
+      border:1px solid #222; border-radius:var(--radius); overflow:hidden;
+      box-shadow:0 10px 40px rgba(0,0,0,.5);
+    }
+    header{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:16px 18px; border-bottom:1px solid #222; background:#0b0b0b;
+    }
+    .brand{display:flex; align-items:center; gap:12px}
+    .logo{
+      width:42px; height:42px; border-radius:10px; background:var(--bss-orange);
+      display:inline-grid; place-items:center; color:#000; font-weight:800;
+      box-shadow: inset 0 0 0 3px #000;
+    }
+    .brand h1{margin:0; font-size:18px; line-height:1.1; letter-spacing:.2px}
+    .brand small{display:block; color:#bbb; font-weight:500}
+
+    .lang{
+      display:flex; gap:8px;
+    }
+    .lang button{
+      background:#111; color:#fff; border:1px solid #2a2a2a; border-radius:10px;
+      padding:8px 10px; cursor:pointer; font-weight:600; letter-spacing:.2px;
+    }
+    .lang button.active, .lang button:hover{border-color:var(--bss-orange); color:var(--bss-orange)}
+
+    main{padding:22px 18px 8px 18px}
+    .grid{
+      display:grid; grid-template-columns: repeat(12, 1fr); gap:14px;
+    }
+    .panel{
+      grid-column: span 12;
+      background:#0e0e0e; border:1px solid #232323; border-radius:12px; padding:16px;
+    }
+    @media (min-width:860px){
+      .panel--half{grid-column: span 6;}
+      .panel--third{grid-column: span 4;}
+    }
+    h2{margin:0 0 10px 0; font-size:18px; color:var(--bss-orange)}
+    p{margin:6px 0 0 0; color:#d9d9d9}
+    .actions{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px}
+    .btn{
+      background:var(--bss-orange); color:#000; border:0; border-radius:10px; padding:10px 14px;
+      font-weight:800; cursor:pointer; box-shadow:0 2px 0 #ffb733; text-decoration:none;
+    }
+    .btn--ghost{background:#0f0f0f; color:var(--bss-orange); border:1px solid var(--bss-orange)}
+    .note{
+      font-size:13px; color:#bfbfbf; border-left:3px solid var(--bss-orange);
+      padding-left:10px; margin-top:10px
+    }
+    footer{padding:14px 18px 18px 18px; color:#a7a7a7; font-size:12px}
+    a{color:var(--bss-orange)}
+
+    /* Visible JS error catcher */
+    #errorBox{
+      position:fixed; inset:auto 16px 16px 16px; background:#1a0f00; color:#ffd8a6;
+      border:1px solid var(--bss-orange); border-radius:12px; padding:12px 14px; display:none; z-index:9999;
+    }
+    #errorBox h3{margin:0 0 6px 0; color:var(--bss-orange)}
+    #errorBox pre{white-space:pre-wrap; margin:0; max-height:160px; overflow:auto; font-size:12px}
+    #errorBox button{margin-top:8px} 
+    /* No-JS fallback block styles */
+    .noscript{
+      max-width:720px; margin:auto; border:2px dashed var(--bss-orange); border-radius:12px; padding:16px;
+      background:#0f0a00; color:#ffd8a6; text-align:center;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card" role="region" aria-label="Admin Portal">
+      <header>
+        <div class="brand">
+          <div class="logo" aria-label="BSS Logo">BSS</div>
+          <div>
+            <h1 id="t_title">BSS • Admin</h1>
+            <small id="t_subtitle">Secure portal • Admin only</small>
+          </div>
+        </div>
+        <div class="lang" role="group" aria-label="Choose language">
+          <button type="button" data-lang="ht" aria-label="Kreyòl Ayisyen">Kreyòl</button>
+          <button type="button" data-lang="fr" aria-label="Français">Français</button>
+          <button type="button" data-lang="en" aria-label="English" class="active">English</button>
+        </div>
+      </header>
+
+      <main>
+        <div class="grid">
+          <section class="panel panel--half">
+            <h2 id="t_section_access">Access</h2>
+            <p id="t_access_desc">
+              Admin access only. Super Admin can add/remove admins. 2-factor required (email + phone).
+            </p>
+            <div class="actions">
+              <a class="btn" href="/admin/login/index.html" id="t_login_btn">Admin Sign In</a>
+              <a class="btn btn--ghost" href="/admin/request-access.html" id="t_request_btn">Request Access</a>
+            </div>
+            <p class="note" id="t_access_note">
+              Transactions are blocked unless a verified phone number is on file.
+            </p>
+          </section>
+
+          <section class="panel panel--half">
+            <h2 id="t_section_tools">Tools</h2>
+            <div class="actions">
+              <a class="btn btn--ghost" href="/admin/contracts/index.html" id="t_contracts">Contracts</a>
+              <a class="btn btn--ghost" href="/admin/vendors/index.html" id="t_vendors">Ti Machann</a>
+              <a class="btn btn--ghost" href="/admin/badges/index.html" id="t_badges">Badges</a>
+              <a class="btn btn--ghost" href="/admin/reports/index.html" id="t_reports">Reports</a>
+            </div>
+            <p class="note" id="t_tools_note">
+              Sensitive data here is visible to admins only. All actions are logged and SMS/Email alerts are sent to admins.
+            </p>
+          </section>
+
+          <section class="panel panel--third">
+            <h2 id="t_section_status">Status</h2>
+            <p id="t_status_desc">All systems operational. Last deploy shows here once connected.</p>
+          </section>
+
+          <section class="panel panel--third">
+            <h2 id="t_section_badge">Vendor Badge</h2>
+            <p id="t_badge_desc">Auto-fill & generate printable vendor badges after form is finalized (PDF export).</p>
+            <div class="actions">
+              <a class="btn" href="/admin/vendors/new.html" id="t_new_vendor">New Vendor Form</a>
+            </div>
+          </section>
+
+          <section class="panel panel--third">
+            <h2 id="t_section_support">Support</h2>
+            <p id="t_support_desc">
+              Need help? Email <a href="mailto:briyantsoleysigno1815@gmail.com">briyantsoleysigno1815@gmail.com</a>.
+            </p>
+          </section>
+        </div>
+      </main>
+
+      <footer id="t_footer">
+        © <span id="t_year"></span> BRIYANT SOLEY SIGNO 1815 • All rights reserved.
+      </footer>
+    </div>
+  </div>
+
+  <!-- No-JS fallback -->
+  <noscript>
+    <div class="noscript">
+      <h3 style="color:#ffa500;margin-top:0">JavaScript obligatwa / JavaScript requis / JavaScript required</h3>
+      <p>Tanpri aktive JavaScript pou w antre nan pòtal Admin nan.</p>
+      <p>Veuillez activer JavaScript pour accéder au portail Admin.</p>
+      <p>Please enable JavaScript to access the Admin portal.</p>
+    </div>
+  </noscript>
+
+  <!-- Visible error catcher -->
+  <div id="errorBox" role="alert" aria-live="assertive">
+    <h3>⚠ Error</h3>
+    <pre id="errorText"></pre>
+    <button class="btn btn--ghost" onclick="this.parentElement.style.display='none'">Dismiss</button>
+  </div>
+
+  <script>
+    // --- Simple i18n (editable) ---
+    const translations = {
+      en:{
+        title:"BSS • Admin",
+        subtitle:"Secure portal • Admin only",
+        access:"Access",
+        access_desc:"Admin access only. Super Admin can add/remove admins. 2-factor required (email + phone).",
+        login_btn:"Admin Sign In",
+        request_btn:"Request Access",
+        access_note:"Transactions are blocked unless a verified phone number is on file.",
+        tools:"Tools",
+        contracts:"Contracts",
+        vendors:"Ti Machann",
+        badges:"Badges",
+        reports:"Reports",
+        tools_note:"Sensitive data here is visible to admins only. All actions are logged and SMS/Email alerts are sent to admins.",
+        status:"Status",
+        status_desc:"All systems operational. Last deploy shows here once connected.",
+        badge:"Vendor Badge",
+        badge_desc:"Auto-fill & generate printable vendor badges after form is finalized (PDF export).",
+        new_vendor:"New Vendor Form",
+        support:"Support",
+        support_desc:'Need help? Email <a href="mailto:briyantsoleysigno1815@gmail.com">briyantsoleysigno1815@gmail.com</a>.',
+        footer:"© {year} BRIYANT SOLEY SIGNO 1815 • All rights reserved."
+      },
+      fr:{
+        title:"BSS • Admin",
+        subtitle:"Portail sécurisé • Réservé aux administrateurs",
+        access:"Accès",
+        access_desc:"Accès réservé aux admins. Seul le Super Admin peut ajouter/supprimer des admins. 2FA requis (email + téléphone).",
+        login_btn:"Connexion Admin",
+        request_btn:"Demander l’accès",
+        access_note:"Les transactions sont bloquées sans numéro de téléphone vérifié au dossier.",
+        tools:"Outils",
+        contracts:"Contrats",
+        vendors:"Ti Machann",
+        badges:"Badges",
+        reports:"Rapports",
+        tools_note:"Données sensibles visibles uniquement par les admins. Toutes les actions sont journalisées et des alertes SMS/Email sont envoyées.",
+        status:"Statut",
+        status_desc:"Tous les systèmes sont opérationnels. Le dernier déploiement s’affichera ici une fois connecté.",
+        badge:"Badge Vendeur",
+        badge_desc:"Auto-remplir et générer des badges imprimables après finalisation (export PDF).",
+        new_vendor:"Nouveau Vendeur",
+        support:"Support",
+        support_desc:'Besoin d’aide ? Écrivez à <a href="mailto:briyantsoleysigno1815@gmail.com">briyantsoleysigno1815@gmail.com</a>.',
+        footer:"© {year} BRIYANT SOLEY SIGNO 1815 • Tous droits réservés."
+      },
+      ht:{
+        title:"BSS • Admin",
+        subtitle:"Pòtal sekirize • Pou Admin sèlman",
+        access:"Antre",
+        access_desc:"Antre rezève pou admin. Sèlman Super Admin ka ajoute/retire admin. 2FA obligatwa (imèl + telefòn).",
+        login_btn:"Antre Admin",
+        request_btn:"Mande Aksè",
+        access_note:"Pa gen tranzaksyon san yon nimewo telefòn verifye sou dosye a.",
+        tools:"Zouti",
+        contracts:"Kontra",
+        vendors:"Ti Machann",
+        badges:"Badj",
+        reports:"Rapò",
+        tools_note:"Enfòmasyon sansib yo vizib sèlman pou admin. Tout aksyon anrejistre epi voye alèt pa SMS/Imèl bay admin yo.",
+        status:"Estati",
+        status_desc:"Tout sistèm yo ap mache. Dènye deplwaman an ap parèt isit la apre koneksyon.",
+        badge:"Badj Machann",
+        badge_desc:"Ranpli otomatik epi jenere badj pou enprime lè fòm nan finalize (PDF).",
+        new_vendor:"Nouvo Fòm Machann",
+        support:"Sipò",
+        support_desc:'Bezwen èd? Ekri <a href="mailto:briyantsoleysigno1815@gmail.com">briyantsoleysigno1815@gmail.com</a>.',
+        footer:"© {year} BRIYANT SOLEY SIGNO 1815 • Tout dwa rezève."
+      }
+    };
+
+    const els = {
+      title:         document.getElementById('t_title'),
+      subtitle:      document.getElementById('t_subtitle'),
+      section_access:document.getElementById('t_section_access'),
+      access_desc:   document.getElementById('t_access_desc'),
+      login_btn:     document.getElementById('t_login_btn'),
+      request_btn:   document.getElementById('t_request_btn'),
+      access_note:   document.getElementById('t_access_note'),
+      section_tools: document.getElementById('t_section_tools'),
+      contracts:     document.getElementById('t_contracts'),
+      vendors:       document.getElementById('t_vendors'),
+      badges:        document.getElementById('t_badges'),
+      reports:       document.getElementById('t_reports'),
+      tools_note:    document.getElementById('t_tools_note'),
+      section_status:document.getElementById('t_section_status'),
+      status_desc:   document.getElementById('t_status_desc'),
+      section_badge: document.getElementById('t_section_badge'),
+      badge_desc:    document.getElementById('t_badge_desc'),
+      new_vendor:    document.getElementById('t_new_vendor'),
+      section_support:document.getElementById('t_section_support'),
+      support_desc:  document.getElementById('t_support_desc'),
+      footer:        document.getElementById('t_footer'),
+    };
+
+    function setLang(lang){
+      const t = translations[lang] || translations.en;
+      document.documentElement.lang = lang;
+      els.title.textContent = t.title;
+      els.subtitle.textContent = t.subtitle;
+      els.section_access.textContent = t.access;
+      els.access_desc.textContent = t.access_desc;
+      els.login_btn.textContent = t.login_btn;
+      els.request_btn.textContent = t.request_btn;
+      els.access_note.textContent = t.access_note;
+      els.section_tools.textContent = t.tools;
+      els.contracts.textContent = t.contracts;
+      els.vendors.textContent = t.vendors;
+      els.badges.textContent = t.badges;
+      els.reports.textContent = t.reports;
+      els.tools_note.textContent = t.tools_note;
+      els.section_status.textContent = t.status;
+      els.status_desc.textContent = t.status_desc;
+      els.section_badge.textContent = t.badge;
+      els.badge_desc.textContent = t.badge_desc;
+      els.new_vendor.textContent = t.new_vendor;
+      els.section_support.textContent = t.support;
+      els.support_desc.innerHTML = t.support_desc;
+      els.footer.textContent = t.footer.replace("{year}", new Date().getFullYear());
+      // UI active state
+      document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('active', b.dataset.lang===lang));
+      localStorage.setItem('bss_lang', lang);
+    }
+
+    // read ?lang=ht|fr|en or localStorage
+    const urlLang = new URLSearchParams(location.search).get('lang');
+    const saved = localStorage.getItem('bss_lang');
+    const initial = (urlLang && translations[urlLang]) ? urlLang : (saved && translations[saved] ? saved : 'en');
+    setLang(initial);
+
+    // clicks
+    document.querySelectorAll('.lang button').forEach(btn=>{
+      btn.addEventListener('click', ()=> setLang(btn.dataset.lang));
+    });
+
+    // year
+    document.getElementById('t_year').textContent = new Date().getFullYear();
+
+    // visible runtime error catcher
+    window.addEventListener('error', (e)=>{
+      const box = document.getElementById('errorBox');
+      document.getElementById('errorText').textContent = e.message + "\n" + (e.error && e.error.stack ? e.error.stack : "");
+      box.style.display = 'block';
+    });
+  </script>
+</body>
+</html>
