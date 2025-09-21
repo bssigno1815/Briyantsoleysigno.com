@@ -1,4 +1,6 @@
-git add api/notify-test.js admin.html js/auth-guard.js
+git add -A
+git commit -m "Configure static deploy (vercel.json + 404) and pages"
+git push origin maingit add api/notify-test.js admin.html js/auth-guard.js
 git commit -m "feat: one-click admin notifications test (email+sms)"
 git push origin maingit add api/notify-email.js api/notify-sms.js js/notify.js
 git commit -m "feat: admin notifications (email+sms)"
