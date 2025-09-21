@@ -1,3 +1,2 @@
-git add .
-git commit -m "BSS1815: vendor form, admin section, badge, uniform branding"
+git commit --allow-empty -m "trigger vercel build"
 git push origin main
