@@ -56,4 +56,27 @@
     .then(r=>r.json()).then(me=>{
       if (me.ok && me.role === 'super') document.getElementById('rolesBtn').style.display = 'inline-flex';
     }).catch(()=>{});
-</script>
+</script><!doctype html><html><head>
+<meta charset="utf-8"><title>Admin Sign In</title>
+<link rel="stylesheet" href="/assets/css/admin.css">
+</head><body class="bg-black text-[#F59E0B]">
+  <h1 class="text-2xl mb-4">Admin Sign In</h1>
+  <label>Email <input id="email"></label>
+  <label>Password <input id="pass" type="password"></label>
+  <button id="go">Sign In</button>
+  <p id="err"></p>
+
+  <script type="module" src="/assets/js/firebase.js"></script>
+  <script type="module">
+    import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+    const { auth } = window.__firebase;
+
+    document.getElementById('go').onclick = async () => {
+      const e = email.value.trim(), p = pass.value;
+      try {
+        await signInWithEmailAndPassword(auth, e, p);
+        location.replace("/admin/"); // to admin home
+      } catch (err) { document.getElementById('err').textContent = err.message; }
+    };
+  </script>
+</body></html>
