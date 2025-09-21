@@ -1,4 +1,148 @@
-<a href="/admin/admin.html">Admin</a><section class="card">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Sign In</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #000000 70%, #f97316 100%);
+      color: #f97316;
+    }
+    .container {
+      background: rgba(0, 0, 0, 0.9);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #f97316;
+      width: 350px;
+      text-align: center;
+    }
+    .logo {
+      width: 80px;
+      margin-bottom: 1rem;
+    }
+    h2 {
+      margin-bottom: 1rem;
+      color: #f97316;
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+      text-align: left;
+      font-weight: bold;
+      color: #f97316;
+    }
+    input {
+      width: 100%;
+      padding: 0.6rem;
+      margin-top: 0.3rem;
+      border: 2px solid #f97316;
+      border-radius: 6px;
+      background: #000;
+      color: #f97316;
+    }
+    input:focus {
+      outline: none;
+      border-color: #f97316;
+      box-shadow: 0 0 8px #f97316;
+    }
+    button {
+      margin-top: 1.5rem;
+      width: 100%;
+      padding: 0.8rem;
+      background: #f97316;
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #000;
+      color: #f97316;
+      border: 2px solid #f97316;
+    }
+    .lang-switch {
+      margin-top: 1.5rem;
+    }
+    select {
+      padding: 0.4rem;
+      border-radius: 6px;
+      background: #000;
+      color: #f97316;
+      border: 2px solid #f97316;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Logo -->
+    <img src="/logo.png" alt="Logo" class="logo" />
+
+    <!-- Title -->
+    <h2 id="title">Admin Sign In</h2>
+
+    <!-- Sign In Form -->
+    <form>
+      <label for="email" id="emailLabel">Email</label>
+      <input type="email" id="email" required />
+
+      <label for="password" id="passwordLabel">Password</label>
+      <input type="password" id="password" required />
+
+      <button type="submit" id="signinButton">Sign In</button>
+    </form>
+
+    <!-- Language Switch -->
+    <div class="lang-switch">
+      <label for="lang">🌐</label>
+      <select id="lang" onchange="switchLang()">
+        <option value="en">English</option>
+        <option value="ht">Kreyòl</option>
+        <option value="fr">Français</option>
+      </select>
+    </div>
+  </div>
+
+  <script>
+    const translations = {
+      en: {
+        title: "Admin Sign In",
+        email: "Email",
+        password: "Password",
+        signin: "Sign In"
+      },
+      ht: {
+        title: "Konekte Admin",
+        email: "Imèl",
+        password: "Modpas",
+        signin: "Antre"
+      },
+      fr: {
+        title: "Connexion Admin",
+        email: "E-mail",
+        password: "Mot de passe",
+        signin: "Se connecter"
+      }
+    };
+
+    function switchLang() {
+      const lang = document.getElementById("lang").value;
+      document.getElementById("title").textContent = translations[lang].title;
+      document.getElementById("emailLabel").textContent = translations[lang].email;
+      document.getElementById("passwordLabel").textContent = translations[lang].password;
+      document.getElementById("signinButton").textContent = translations[lang].signin;
+    }
+  </script>
+</body>
+</html><a href="/admin/admin.html">Admin</a><section class="card">
   <h3>Notifications Test</h3>
   <p>Send a test email + SMS to the configured admins.</p>
   <button class="btn" id="notifyTestBtn">Send Test Now</button>
