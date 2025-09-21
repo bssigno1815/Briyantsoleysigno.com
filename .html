@@ -1,4 +1,25 @@
-<head>
+<form id="contribForm">
+  <input name="projectName" placeholder="Project" required />
+  <input name="contributorName" placeholder="Your name" required />
+  <input name="amount" type="number" min="1" step="0.01" placeholder="Amount" required />
+  <input name="contributorPhone" placeholder="Phone (optional)" />
+  <input name="note" placeholder="Note (optional)" />
+  <button type="submit">Contribute</button>
+</form>
+
+<script>
+document.getElementById('contribForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const payload = Object.fromEntries(fd.entries());
+  const res = await fetch('/api/contributions/create', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+  alert(res.ok ? 'Thank you! Admins notified.' : 'Error — please try again.');
+});
+</script><head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Admin • BSS</title>
