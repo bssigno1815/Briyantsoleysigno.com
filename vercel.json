@@ -1,4 +1,11 @@
 {
+  "version": 2,
+  "trailingSlash": false,
+  "cleanUrls": true,
+  "routes": [
+    { "src": "/admin/?", "dest": "/admin/index.html" }
+  ]
+}{
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
