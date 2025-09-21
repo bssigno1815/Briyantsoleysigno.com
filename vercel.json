@@ -2,6 +2,16 @@
   "version": 2,
   "cleanUrls": true,
   "routes": [
+    { "src": "^/admin/?$", "dest": "/admin/index.html" },
+    { "src": "^/admin/contracts/?$", "dest": "/admin/contracts/index.html" },
+    { "src": "^/admin/musicians/?$", "dest": "/admin/musicians/index.html" },
+    { "src": "^/admin/ti-machann/?$", "dest": "/admin/ti-machann/index.html" },
+    { "src": "^/admin/transactions/?$", "dest": "/admin/transactions/index.html" }
+  ]
+}{
+  "version": 2,
+  "cleanUrls": true,
+  "routes": [
     { "src": "^/admin/?$", "dest": "/admin/index.html" }
   ],
   "redirects": [
