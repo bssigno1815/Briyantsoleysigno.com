@@ -1,0 +1,3 @@
+curl -X POST "/api/contributions/create" \
+ -H "Content-Type: application/json" \
+ -d '{"projectName":"Studio Upgrade","contributorName":"Max","amount":50}'
