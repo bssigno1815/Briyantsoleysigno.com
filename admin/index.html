@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BSS • Admin</title>
+  <style>
+    :root { --bg:#0b0b0b; --fg:#f58c1f; --fg2:#ffb15a; --card:#121212; }
+    *{box-sizing:border-box;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
+    body{margin:0;background:var(--bg);color:var(--fg)}
+    .wrap{max-width:920px;margin:4rem auto;padding:1.5rem}
+    .card{background:var(--card);border:1px solid #2a2a2a;border-radius:14px;padding:24px}
+    h1{margin:0 0 8px;font-size:1.8rem;color:var(--fg)}
+    p{margin:.25rem 0;color:var(--fg2)}
+    a.btn{display:inline-block;margin-top:14px;padding:10px 14px;border:1px solid var(--fg);
+      border-radius:10px;text-decoration:none;color:var(--fg)}
+    a.btn:hover{background:var(--fg);color:#000}
+    .logo{display:flex;align-items:center;gap:.6rem;margin-bottom:.75rem}
+    .badge{background:var(--fg);color:#000;font-weight:700;border-radius:8px;padding:2px 8px;font-size:.8rem}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="logo">
+      <!-- Drop your BSS logo image if you have it -->
+      <span class="badge">BSS</span>
+      <strong>Admin</strong>
+    </div>
+    <div class="card">
+      <h1>Admin Dashboard</h1>
+      <p>This is the placeholder admin page. We’ll wire up auth + features next.</p>
+      <a class="btn" href="/">← Back to Home</a>
+    </div>
+  </div>
+</body>
+</html>
