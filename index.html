@@ -1,4 +1,53 @@
-<a href="/admins/">Admin</a>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BSS • Admin Sign In</title>
+  <link rel="stylesheet" href="/assets/css/theme.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="brand"><span class="dot"></span> BSS • Admin</div>
+
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/contribute/">Contribute</a>
+    </nav>
+
+    <form id="adminLogin" class="card" style="max-width:520px;margin:auto;">
+      <h2 style="margin:0 0 8px;">Admin Sign In</h2>
+      <p class="badge">Admins Only</p>
+
+      <label>Email</label>
+      <input type="email" name="email" required />
+
+      <label>Password</label>
+      <input type="password" name="password" required />
+
+      <div style="margin-top:16px; display:flex; justify-content:flex-end;">
+        <button class="btn" type="submit">Sign In</button>
+      </div>
+    </form>
+
+    <p class="footer">© BSS • All rights reserved.</p>
+  </div>
+
+  <script>
+    document.getElementById('adminLogin').addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(e.target).entries());
+      // TODO: replace with your real auth endpoint
+      const r = await fetch('/api/admin/login', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(data)
+      });
+      if(r.ok){ location.href = '/admin/dashboard/'; }
+      else { alert('Invalid credentials'); }
+    });
+  </script>
+</body>
+</html><a href="/admins/">Admin</a>
 <a href="/timachann/">Ti Machann</a><div class="row">
   <a href="/admin/contracts/">Contracts</a>
   <a href="/admin/musicians/">Musicians</a>
