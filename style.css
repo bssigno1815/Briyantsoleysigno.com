@@ -1,4 +1,15 @@
-a, a:visited { color:#ff7a00; }
+.lang-toggle {
+  display:flex; gap:.5rem; align-items:center;
+}
+.lang-toggle .pill{
+  background:#000; color:#ffa500; border:1px solid #ffa500;
+  padding:.35rem .6rem; border-radius:999px; cursor:pointer;
+  font-weight:600; letter-spacing:.5px;
+}
+.lang-toggle .pill.active,
+.lang-toggle .pill:hover{
+  background:#ffa500; color:#000;
+}a, a:visited { color:#ff7a00; }
 a:hover, a:focus { color:#ff7a00; text-decoration: underline; }
 button, .btn { background:#000; color:#ff7a00; border:1px solid #ff7a00; }
 input, select, textarea { background:#000; color:#ff7a00; border:1px solid #ff7a00; }
