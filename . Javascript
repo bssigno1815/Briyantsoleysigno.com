@@ -1,0 +1,17 @@
+// after computing role…
+const testBtn = document.getElementById('notifyTestBtn');
+if (testBtn) {
+  if (role === 'superadmin') {
+    testBtn.onclick = async () => {
+      const msg = document.getElementById('notifyTestMsg');
+      msg.textContent = 'Sending…';
+      try {
+        const r = await fetch('/api/notify-test', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({}) });
+        const j = await r.json();
+        msg.textContent = j.ok ? '✅ Sent. Check your inbox/SMS.' : `❌ ${j.error||'Failed'}`;
+      } catch (e) { msg.textContent = `❌ ${e.message}`; }
+    };
+  } else {
+    testBtn.parentElement.style.display = 'none';
+  }
+}
