@@ -1,4 +1,6 @@
-git add -A
+git add .
+git commit -m "Add BSS CommitteeSection with Archange as Prezidan"
+git pushgit add -A
 git commit -m "Configure static deploy (vercel.json + 404) and pages"
 git push origin maingit add api/notify-test.js admin.html js/auth-guard.js
 git commit -m "feat: one-click admin notifications test (email+sms)"
