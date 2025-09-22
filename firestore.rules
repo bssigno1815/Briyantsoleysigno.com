@@ -1,0 +1,22 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{db}/documents {
+    function isAdmin() {
+      return request.auth != null
+        && exists(/databases/$(db)/documents/admins/$(request.auth.uid));
+    }
+
+    // Kòmantè vizitè yo
+    match /bss_comments/{id} {
+      allow read: if true;
+      allow create: if true; // nenpòt moun ka poste
+      allow update, delete: if isAdmin(); // sèlman admin yo ka apwouve/efase
+    }
+
+    // Lis admin yo
+    match /admins/{uid} {
+      allow read: if isAdmin();  // admin yo ka wè lis la
+      allow write: if false;     // pa ekri soti nan klient
+    }
+  }
+}
