@@ -1,4 +1,18 @@
-import DirijanSection from "@/components/DirijanSection";
+import IstwaSection from "@/components/IstwaSection";
+
+export default function Page() {
+  return (
+    <main>
+      {/* Intro bann lan */}
+      <IntroSection />
+
+      {/* Istwa Bann lan */}
+      <IstwaSection />
+
+      {/* Dirijan, Mizisyen, Fanatik, elatriye */}
+    </main>
+  );
+}import DirijanSection from "@/components/DirijanSection";
 import CommentsBox from "@/components/CommentsBox";
 
 export default function Page() {
