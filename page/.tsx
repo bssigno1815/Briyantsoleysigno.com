@@ -1,4 +1,13 @@
-import "../globals.css";
+export default function Page() {
+  return (
+    <main className="min-h-screen bg-white dark:bg-neutral-950">
+      <section className="mx-auto max-w-6xl px-4 py-10">
+        <h1 className="text-3xl font-extrabold text-neutral-900 dark:text-white">Briyant Solèy Signo 1815</h1>
+        <p className="text-neutral-600 dark:text-neutral-400">Yon vizyon, yon limyè, yon tradisyon vivan.</p>
+      </section>
+    </main>
+  );
+}import "../globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
