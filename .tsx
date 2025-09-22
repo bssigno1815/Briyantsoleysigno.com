@@ -1,4 +1,17 @@
-// components/IstwaSection.tsx
+import CommentsBox from "@/components/CommentsBox";
+
+export default function Page() {
+  return (
+    <main className="min-h-screen bg-white dark:bg-neutral-950">
+      <section className="mx-auto max-w-6xl px-4 py-8">
+        <CommentsBox contextKey="fanatik" allowAnonymous autoReply
+          autoReplyFrom="BSS Team"
+          autoReplyMessage="Mèsi pou kòmantè a! N ap tounen bò ou nan 24 èdtan."
+        />
+      </section>
+    </main>
+  );
+}// components/IstwaSection.tsx
 import { motion } from "framer-motion";
 
 export default function IstwaSection() {
