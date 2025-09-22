@@ -1,4 +1,6 @@
 git add .
+git commit -m "Add Dirijan page and section"
+git pushgit add .
 git commit -m "Add Dirijan page with CommitteeSection"
 git pushgit add .
 git commit -m "Add BSS CommitteeSection with Archange as Prezidan"
