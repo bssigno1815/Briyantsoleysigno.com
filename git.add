@@ -1,4 +1,6 @@
 git add .
+git commit -m "Add Dirijan page with CommitteeSection"
+git pushgit add .
 git commit -m "Add BSS CommitteeSection with Archange as Prezidan"
 git pushgit add -A
 git commit -m "Configure static deploy (vercel.json + 404) and pages"
