@@ -10,7 +10,29 @@ service cloud.firestore {
     function myRole() {
       return get(/databases/$(db)/documents/roles/$(request.auth.uid)).data.role;
     }
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{db}/documents {
 
+    function isAdmin() {
+      return request.auth != null
+        && exists(/databases/$(db)/documents/admins/$(request.auth.uid));
+    }
+
+    // Kòmantè vizitè yo
+    match /bss_comments/{id} {
+      allow read: if true;          // tout moun ka li
+      allow create: if true;        // tout moun ka poste
+      allow update, delete: if isAdmin(); // SÈLMAN admin yo ka apwouve/efase
+    }
+
+    // Lis admin yo (pa ekri soti nan frontend)
+    match /admins/{uid} {
+      allow read: if isAdmin();  // admin yo ka wè lis la
+      allow write: if false;     // pa kite ekriti soti nan kliyan an
+    }
+  }
+}
     function isAdmin() {
       return isSignedIn() && (myRole() == 'admin' || myRole() == 'super');
     }
