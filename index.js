@@ -1,4 +1,34 @@
-/ (root)
+/export default function Home() {
+  return (
+    <main className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-orange-500 to-black text-white">
+      <h1 className="text-4xl font-extrabold mb-4 text-center">
+        BRIYANT SOLÈY SIGNO 1815
+      </h1>
+      <p className="text-lg mb-8 text-center max-w-xl">
+        Yon vizyon, yon mountain, yon limyè ki pap janm ka etenn.
+      </p>
+      <img
+        src="/logo-bss.png"
+        alt="BSS Logo"
+        className="w-48 h-48 mb-6"
+      />
+      <div className="flex gap-4">
+        <a
+          href="/fanbase"
+          className="bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-lg font-semibold"
+        >
+          Fanbase
+        </a>
+        <a
+          href="/dirijan"
+          className="bg-black hover:bg-gray-800 text-orange-400 px-6 py-3 rounded-lg font-semibold"
+        >
+          Dirijan
+        </a>
+      </div>
+    </main>
+  );
+          } (root)
   index.html
   /admins
   /timachann
