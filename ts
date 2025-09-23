@@ -1,4 +1,4 @@
-// components/CommentsBox.tsx
+"use client";// components/CommentsBox.tsx
 "use client";// components/CommentsBox.tsx
 "use client";const dirijanData = [
   { role: "Prezidan",     name: "Archange", photo: "/dirijan/archange.jpg" },
