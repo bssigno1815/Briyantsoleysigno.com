@@ -1,4 +1,29 @@
-"use client";
+// components/CommentsBox.tsx (only color lines to replace)
+<div className="mb-4 inline-flex items-center gap-2 text-xs bg-gradient-to-b from-[#0a0a0a] to-[#000] text-orange border border-orange rounded-lg px-3 py-2">...</div>
+
+<h3 className="text-xl font-bold text-orange">Kòmantè ...</h3>
+
+<form className="bg-gradient-to-b from-[#0a0a0a] to-[#000] border border-orange rounded-2xl p-4 mb-6">
+  ...
+  <input
+    className="w-full rounded-xl border border-orange bg-gradient-to-b from-[#0a0a0a] to-[#000] px-3 py-2 text-sm outline-none text-orange placeholder-orange/60"
+    ...
+  />
+  <select
+    className="w-full rounded-xl border border-orange bg-gradient-to-b from-[#0a0a0a] to-[#000] px-3 py-2 text-sm text-orange"
+    ...
+  >
+  ...
+  <textarea
+    className="w-full min-h-[90px] rounded-xl border border-orange bg-gradient-to-b from-[#0a0a0a] to-[#000] px-3 py-2 text-sm outline-none text-orange placeholder-orange/60"
+    ...
+  />
+  <div className="text-xs text-orange/80">...</div>
+  <button className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm bg-orange text-black disabled:opacity-60">Voye</button>
+</form>
+
+{/* List cards */}
+<div className="bg-gradient-to-b from-[#0a0a0a] to-[#000] border border-orange rounded-2xl p-4">...</div>"use client";
 
 import React, { useEffect, useMemo, useState } from "react";
 import {
