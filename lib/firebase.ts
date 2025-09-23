@@ -1,4 +1,11 @@
-// lib/firebase.ts
+// components/CommentsBox.tsx
+"use client";
+import React, { ... } from "react";
+import { db } from "@/lib/firebase";
+import { collection, addDoc, query, where, orderBy, onSnapshot, serverTimestamp, updateDoc, doc, deleteDoc } from "firebase/firestore";
+// ...
+const base = collection(db, "bss_comments");
+// (pa rele getFirestore() ankò)// lib/firebase.ts
 // lib/firebase.ts
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
