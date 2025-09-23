@@ -1,4 +1,15 @@
+/* app/globals.css */
 :root{
+  --bss-orange:#f97316;
+  --bss-apricot:#FDBA74;
+  --bss-black:#000;
+}
+html,body{
+  min-height:100%;
+  background: linear-gradient(180deg, var(--bss-apricot) 0%, var(--bss-orange) 40%, #0a0a0a 100%);
+  color: var(--bss-orange); /* default text in orange */
+}
+*{ border-color: var(--bss-orange); }:root{
   --orange:#ff7a00; --orange-2:#ff9a3c;
   --text:#f4f4f5; --muted:#9ca3af; --bg:#0b0b0b;
 }
