@@ -1,4 +1,8 @@
-https://briyantsoleysigno.com/assets/css/bss-admin.css
+:root{
+  --bss-orange:#f97316;
+  --bss-black:#000;
+}
+html,body{background:#000;color:#fff}https://briyantsoleysigno.com/assets/css/bss-admin.css
 https://briyantsoleysigno.com/admin/css/bss-admin.cssborder-color: var(--border) !important;
 background: var(--bg-soft) !important;
 color: var(--ink) !important;/* styles/globals.css */
