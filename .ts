@@ -1,4 +1,4 @@
-export const DIRIJAN = [
+{ role: "Prezidan", name: "Archange", photoPath: "bss-assets/dirijan/archange.jpg" }export const DIRIJAN = [
   { role: "Prezidan", name: "Archange", photo: "/dirijan/archange.jpg" },
   // …
 ];const imgs = [
