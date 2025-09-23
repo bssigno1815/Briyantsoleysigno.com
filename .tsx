@@ -1,4 +1,13 @@
-<div className="rounded-2xl p-4 border border-orange bg-black">
+<div className="mb-4 inline-flex items-center gap-2 text-xs bg-black text-orange border border-orange rounded-lg px-3 py-2">
+  <span>Repons otomatik: <strong>24 èdtan</strong></span>
+</div>
+
+<button
+  type="submit"
+  className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm bg-orange text-black disabled:opacity-60"
+>
+  Voye
+</button><div className="rounded-2xl p-4 border border-orange bg-black">
   <div className="flex items-center gap-4">
     {/* photo */}
     <div className="h-14 w-14 rounded-xl overflow-hidden border border-orange bg-black" />
