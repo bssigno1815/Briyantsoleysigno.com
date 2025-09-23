@@ -1,4 +1,4 @@
-"use client";
+"use client";"use client";
 import { useEffect, useState } from "react";
 import { getStorage, ref, uploadBytes, getDownloadURL, listAll } from "firebase/storage";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
