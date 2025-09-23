@@ -1,4 +1,6 @@
-"use client";"use client";
+export default function Page() {
+  return <div style={{color:"#f97316",background:"#000",padding:20}}>OK</div>;
+}"use client";"use client";
 import { useEffect, useState } from "react";
 import { getStorage, ref, uploadBytes, getDownloadURL, listAll } from "firebase/storage";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
