@@ -1,4 +1,8 @@
-const dirijanData = [
+const imgs = [
+  "/fanbase/2025-09-23_fan_001.jpg",
+  "/fanbase/2025-09-23_fan_002.jpg",
+  // …all your fan pics
+];const dirijanData = [
   { role: "Prezidan",     name: "Archange", photo: "/dirijan/archange.jpg" },
   { role: "Super Admin",  name: "MAXIMAX",  photo: "/dirijan/maximax.jpg" },
   { role: "Super Admin",  name: "Cangé",    photo: "/dirijan/cange.jpg" },
