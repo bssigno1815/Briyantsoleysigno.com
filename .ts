@@ -1,4 +1,9 @@
-{ role: "Prezidan", name: "Archange", photoPath: "bss-assets/dirijan/archange.jpg" }export const DIRIJAN = [
+const dirijanData = [
+  { role: "Prezidan",     name: "Archange", photo: "/dirijan/archange.jpg" },
+  { role: "Super Admin",  name: "MAXIMAX",  photo: "/dirijan/maximax.jpg" },
+  { role: "Super Admin",  name: "Cangé",    photo: "/dirijan/cange.jpg" },
+  // add the rest…
+];{ role: "Prezidan", name: "Archange", photoPath: "bss-assets/dirijan/archange.jpg" }export const DIRIJAN = [
   { role: "Prezidan", name: "Archange", photo: "/dirijan/archange.jpg" },
   // …
 ];const imgs = [
