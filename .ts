@@ -1,4 +1,5 @@
-const dirijanData = [
+// components/CommentsBox.tsx
+"use client";const dirijanData = [
   { role: "Prezidan",     name: "Archange", photo: "/dirijan/archange.jpg" },
   { role: "Super Admin",  name: "MAXIMAX",  photo: "/dirijan/maximax.jpg" },
   { role: "Super Admin",  name: "Cangé",    photo: "/dirijan/cange.jpg" },
