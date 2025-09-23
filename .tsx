@@ -1,4 +1,98 @@
-<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+"use client";
+import { useEffect, useState } from "react";
+import { getStorage, ref, uploadBytes, getDownloadURL, listAll } from "firebase/storage";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+import { useIsAdmin } from "@/lib/useIsAdmin";
+import "@/lib/firebase";
+
+export default function BackupsPage() {
+  const { loading, isAdmin } = useIsAdmin();
+  const [files, setFiles] = useState<{ name: string; url: string }[]>([]);
+  const [busy, setBusy] = useState(false);
+  const auth = getAuth();
+
+  async function refreshList() {
+    const storage = getStorage();
+    const root = ref(storage, "admin/backups");
+    const res = await listAll(root);
+    const rows: { name: string; url: string }[] = [];
+    for (const item of res.items) {
+      const url = await getDownloadURL(item);
+      rows.push({ name: item.name, url });
+    }
+    rows.sort((a,b)=> (a.name < b.name ? 1 : -1)); // newest first if timestamped
+    setFiles(rows);
+  }
+
+  async function ensureLogin() {
+    if (!auth.currentUser) await signInWithPopup(auth, new GoogleAuthProvider());
+  }
+
+  async function onUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const f = e.target.files?.[0];
+    if (!f) return;
+    try {
+      setBusy(true);
+      await ensureLogin();
+      const storage = getStorage();
+      const ts = new Date().toISOString().replace(/[:.]/g, "-");
+      const key = `admin/backups/${ts}__${f.name.replace(/\s+/g, "_")}`;
+      await uploadBytes(ref(storage, key), f, { contentType: f.type || "application/zip" });
+      await refreshList();
+      alert("Backup uploaded ✔");
+    } catch (err) {
+      console.error(err);
+      alert("Upload failed");
+    } finally {
+      setBusy(false);
+      e.target.value = "";
+    }
+  }
+
+  useEffect(() => { if (isAdmin) refreshList().catch(()=>{}); }, [isAdmin]);
+
+  if (loading) return <div className="mx-auto max-w-6xl px-4 py-10 text-white">Checking admin…</div>;
+  if (!isAdmin) return (
+    <div className="mx-auto max-w-3xl px-4 py-16 text-center">
+      <h1 className="text-2xl font-bold text-white mb-3">Access denied</h1>
+      <p className="text-orange mb-6">Only Super Admins can access backups.</p>
+      <button
+        className="px-4 py-2 rounded-lg bg-orange text-black border border-black"
+        onClick={() => signInWithPopup(auth, new GoogleAuthProvider())}
+      >Sign in with Google</button>
+    </div>
+  );
+
+  return (
+    <div className="mx-auto max-w-6xl px-4 py-10">
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-2xl font-extrabold text-white">Backups</h1>
+        <div className="flex items-center gap-2">
+          <button onClick={refreshList} className="px-3 py-2 rounded-xl bg-black text-orange border border-orange">Refresh</button>
+          <button onClick={() => signOut(auth)} className="px-3 py-2 rounded-xl bg-black text-orange border border-orange">Sign out</button>
+        </div>
+      </div>
+
+      <div className="rounded-2xl border border-orange p-4 bg-black mb-6">
+        <label className="block text-white text-sm mb-2">Upload ZIP backup</label>
+        <input type="file" accept=".zip,.tar,.gz,.7z" onChange={onUpload} disabled={busy}
+               className="block w-full text-white file:bg-orange file:text-black file:border-0 file:px-3 file:py-2 file:rounded-md" />
+        <p className="text-orange text-xs mt-2">Stored under <code>admin/backups/</code> in Firebase Storage (Super Admins only).</p>
+      </div>
+
+      <div className="grid gap-3">
+        {files.length === 0 ? (
+          <div className="text-white/80">No backups yet.</div>
+        ) : files.map(f => (
+          <div key={f.name} className="flex items-center justify-between rounded-2xl border border-orange p-3 bg-black">
+            <div className="text-white text-sm truncate">{f.name}</div>
+            <a href={f.url} target="_blank" className="px-3 py-1 rounded-lg bg-orange text-black border border-black">Download</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
   {images.map((src,i)=>(
     <div key={i} className="aspect-[4/3] overflow-hidden rounded-xl border border-orange bg-black">
       <Image src={src} alt={`Fan ${i+1}`} width={800} height={600} className="w-full h-full object-cover" />
