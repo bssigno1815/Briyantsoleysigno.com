@@ -1,4 +1,7 @@
-const imgs = [
+export const DIRIJAN = [
+  { role: "Prezidan", name: "Archange", photo: "/dirijan/archange.jpg" },
+  // …
+];const imgs = [
   "/fanbase/2025-09-23_fan_001.jpg",
   "/fanbase/2025-09-23_fan_002.jpg",
   // …all your fan pics
