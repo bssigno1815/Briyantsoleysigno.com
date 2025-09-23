@@ -1,4 +1,13 @@
-import CommentsBox from "@/components/CommentsBox";
+<div className="rounded-2xl p-4 border border-orange bg-black">
+  <div className="flex items-center gap-4">
+    {/* photo */}
+    <div className="h-14 w-14 rounded-xl overflow-hidden border border-orange bg-black" />
+    <div>
+      <div className="text-white font-semibold">{name}</div>
+      <div className="text-orange text-sm">{role}</div>
+    </div>
+  </div>
+</div>import CommentsBox from "@/components/CommentsBox";
 export default function Page() {
   return (
     <main className="min-h-screen bg-white dark:bg-neutral-950">
