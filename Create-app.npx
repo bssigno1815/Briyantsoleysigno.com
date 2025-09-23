@@ -1,0 +1,3 @@
+npx create-next-app@latest bss-1815 --ts --eslint --src-dir false --app --tailwind
+cd bss-1815
+npm i firebase
