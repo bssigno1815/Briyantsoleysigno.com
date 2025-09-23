@@ -2,3 +2,5 @@ npm install firebase-admin
 node seed_admins.js
 npm install firebase-admin
 node seed_admins.js
+npm install firebase-admin
+node seed_admins.js
