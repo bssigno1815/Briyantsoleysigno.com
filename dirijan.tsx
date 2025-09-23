@@ -1,4 +1,35 @@
-// components/DirijanSection.tsx (only the parts that changed)
+/// data/dirijan.ts
+export const DIRIJAN = [
+  { role: "Prezidan",    name: "Archange", photo: "/dirijan/archange.jpg" },
+  { role: "Super Admin", name: "MAXIMAX",  photo: "/dirijan/maximax.jpg" },
+  { role: "Super Admin", name: "Cangé",    photo: "/dirijan/cange.jpg" },
+  // ...
+];
+
+// data/ansyen-dirijan.ts
+export const FORMER_LEADERS = [
+  { role: "Ansyen Prezidan", name: "Jean-Baptiste", years: "2008–2013", photo: "/ansyen/jean-baptiste.jpg" },
+  { role: "Ansyen Sekretè",  name: "Mireille",      years: "2014–2018", photo: "/ansyen/mireille.jpg" },
+];
+
+// data/fanbase.ts
+export const FANBASE = [
+  "/fanbase/2025-09-23_fan_001.jpg",
+  "/fanbase/2025-09-23_fan_002.jpg",
+  // ...
+];
+
+// data/fans-zele.ts
+export const FANS_ZELE = [
+  { name: "Ti Joel", city: "Pòtoprens", since: 2020, photo: "/fanatik/zele/ti-joel.jpg" },
+  { name: "Sandra",  city: "Gwo Mòn",   since: 2018, photo: "/fanatik/zele/sandra.jpg" },
+];
+
+// data/pitit-kay.ts
+export const PITIT_KAY = [
+  { name: "Junior 1", section: "Tambou", since: 2024, photo: "/pitit-kay/junior-1.jpg" },
+  { name: "Junior 2", section: "Choray", since: 2023, photo: "/pitit-kay/junior-2.jpg" },
+];/ components/DirijanSection.tsx (only the parts that changed)
 function MemberCard({ name, role, photo }: { name: string; role: string; photo?: string }) {
   return (
     <div className="bg-gradient-to-b from-[#0a0a0a] to-[#000] border border-orange rounded-2xl p-4">
