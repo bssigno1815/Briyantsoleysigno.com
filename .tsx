@@ -1,4 +1,10 @@
-<div className="mb-4 inline-flex items-center gap-2 text-xs bg-black text-orange border border-orange rounded-lg px-3 py-2">
+<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+  {images.map((src,i)=>(
+    <div key={i} className="aspect-[4/3] overflow-hidden rounded-xl border border-orange bg-black">
+      <Image src={src} alt={`Fan ${i+1}`} width={800} height={600} className="w-full h-full object-cover" />
+    </div>
+  ))}
+</div><div className="mb-4 inline-flex items-center gap-2 text-xs bg-black text-orange border border-orange rounded-lg px-3 py-2">
   <span>Repons otomatik: <strong>24 èdtan</strong></span>
 </div>
 
