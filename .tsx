@@ -1,4 +1,18 @@
-export default function Page() {
+export default function Home() {
+  return (
+    <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-orange to-black text-white">
+      <h1 className="text-4xl font-extrabold mb-4 text-center">BRIYANT SOLÈY SIGNO 1815</h1>
+      <p className="text-lg mb-8 text-center max-w-xl">
+        Yon vizyon, yon limyè ki pap janm etenn.
+      </p>
+      <img src="/logo-bss.png" alt="BSS Logo" className="w-40 h-40 mb-6" />
+      <div className="flex gap-4">
+        <a href="/fanatik" className="bg-orange text-black px-6 py-3 rounded-lg font-semibold">Fanbase</a>
+        <a href="/dirijan" className="bg-black text-orange border border-orange px-6 py-3 rounded-lg font-semibold">Dirijan</a>
+      </div>
+    </main>
+  );
+}export default function Page() {
   return <div style={{color:"#f97316",background:"#000",padding:20}}>OK</div>;
 }"use client";"use client";
 import { useEffect, useState } from "react";
