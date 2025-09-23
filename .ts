@@ -1,4 +1,9 @@
-{ role: "Prezidan", name: "Archange", photo: "/images/dirijan/archange.jpg" }
+const dirijanData = [
+  { role: "Prezidan",     name: "Archange", photo: "/dirijan/archange.jpg" },
+  { role: "Super Admin",  name: "MAXIMAX",  photo: "/dirijan/maximax.jpg" },
+  { role: "Super Admin",  name: "Cangé",    photo: "/dirijan/cange.jpg" },
+  // add the rest…
+];{ role: "Prezidan", name: "Archange", photo: "/images/dirijan/archange.jpg" }
 async function submitComment(e: React.FormEvent) {
   e.preventDefault();
   setError(null);
