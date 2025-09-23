@@ -1,4 +1,4 @@
-"use client";// components/CommentsBox.tsx
+if (typeof window === "undefined") return null; // nan component ki 100% client"use client";// components/CommentsBox.tsx
 "use client";// components/CommentsBox.tsx
 "use client";const dirijanData = [
   { role: "Prezidan",     name: "Archange", photo: "/dirijan/archange.jpg" },
