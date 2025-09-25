@@ -1,4 +1,56 @@
-:root{
+/* Global reset */
+*{margin:0;padding:0;box-sizing:border-box}
+
+/* Uniform background for ALL pages */
+body{
+  min-height:100vh;
+  background: linear-gradient(to bottom right, #ff7f00, #000000);
+  color:#fff;
+  font-family: Arial, sans-serif;
+  display:flex; flex-direction:column;
+}
+
+/* Layout */
+.header, .footer{padding:18px 20px}
+.header{display:flex;align-items:center;gap:14px}
+.header img{width:64px;height:64px;border-radius:50%}
+.title{font-size:1.6rem;font-weight:700;color:#ff7f00;text-shadow:1px 1px 4px #000}
+
+/* Nav */
+.nav{margin-left:auto;display:flex;gap:14px;flex-wrap:wrap}
+.nav a{
+  color:#fff;text-decoration:none;font-weight:700;
+  padding:6px 10px;border-radius:8px;border:1px solid #ff7f00;
+}
+.nav a:hover{background:#000;color:#ff7f00}
+
+/* Page content */
+.main{flex:1;display:grid;place-items:center;padding:28px}
+.card{
+  max-width:900px;width:100%;
+  background:rgba(0,0,0,0.35);
+  border:1px solid #ff7f00;border-radius:16px;
+  padding:28px;text-align:center
+}
+.h1{font-size:2rem;margin-bottom:10px;color:#ff7f00}
+.p{opacity:.95;line-height:1.6}
+
+/* Simple grid (for galleries / lists) */
+.grid{display:grid;gap:14px}
+.grid.cols-2{grid-template-columns:repeat(2,1fr)}
+.grid.cols-3{grid-template-columns:repeat(3,1fr)}
+@media (max-width:700px){.grid.cols-2,.grid.cols-3{grid-template-columns:1fr}}
+
+.badge{display:inline-block;margin:6px 6px 0 0;padding:6px 10px;border:1px solid #ff7f00;border-radius:999px}
+.link-btn{
+  display:inline-block;margin-top:14px;padding:10px 16px;
+  background:#ff7f00;color:#000;border-radius:10px;font-weight:800;text-decoration:none
+}
+.link-btn:hover{background:#000;color:#ff7f00;border:1px solid #ff7f00}
+.footer{opacity:.8;font-size:.9rem;text-align:center}
+
+/* Images */
+.thumb{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;border:1px solid #ff7f00}:root{
   --bg:#0b0b0c;
   --bg-soft:#141416;
   --fg:#f8f8f8;
