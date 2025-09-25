@@ -1,4 +1,25 @@
-<!doctype html>
+<!-- assets/firebase.js -->
+<script type="module">
+  // Import SDKs
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+  import { getFirestore, doc, setDoc, getDoc, addDoc, collection, serverTimestamp, updateDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+  import { getStorage, ref, uploadString } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-storage.js";
+
+  // TODO: ranplase ak config ou
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT_ID.appspot.com",
+    appId: "YOUR_APP_ID"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  window.db = getFirestore(app);
+  window.storage = getStorage(app);
+  window.fdb = { doc, setDoc, getDoc, addDoc, collection, serverTimestamp, updateDoc };
+  window.fst = { ref, uploadString };
+</script><!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
