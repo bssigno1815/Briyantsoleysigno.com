@@ -1,0 +1,47 @@
+/* Reset */
+*{box-sizing:border-box;margin:0;padding:0}
+
+/* Background: orange → black */
+body{
+  min-height:100dvh;
+  background:
+    radial-gradient(1100px 700px at 50% -10%,
+      rgba(255,153,0,.40),
+      rgba(255,153,0,.16) 35%,
+      rgba(0,0,0,.88) 65%,
+      #000 100%),
+    linear-gradient(180deg,#0a0a0a,#000);
+  color:#f2f2f2;
+  font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+}
+
+/* Layout */
+.wrapper{max-width:1100px;margin:0 auto;padding:24px}
+
+/* Top nav */
+.nav{
+  display:flex;flex-wrap:wrap;gap:14px;justify-content:center;align-items:center;
+  padding:14px 0 24px;border-bottom:1px solid rgba(255,255,255,.08)
+}
+.nav a{
+  color:#e9e9e9;text-decoration:none;padding:8px 12px;border-radius:999px;
+  border:1px solid transparent;transition:.18s ease
+}
+.nav a:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.25)}
+.nav a.active{background:rgba(255,153,0,.20);border-color:rgba(255,153,0,.5);color:#fff}
+
+/* Header with logo */
+.hero{display:grid;place-items:center;text-align:center;padding:9vh 0 7vh}
+.logo{
+  width:92px;height:92px;object-fit:contain;border-radius:20px;
+  box-shadow:0 6px 24px rgba(255,153,0,.35);background:rgba(0,0,0,.25);padding:10px;
+  margin-bottom:18px;
+}
+h1{
+  font-size:clamp(32px,5vw,64px);font-weight:800;letter-spacing:.02em;
+  color:#ffd08a;text-shadow:0 2px 16px rgba(255,153,0,.25)
+}
+.lead{margin-top:10px;color:#d9d9d9}
+
+/* Content blocks */
+.section{max-width:900px;margin:48px auto;color
