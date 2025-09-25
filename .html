@@ -1,156 +1,73 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ht">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Badj Ti Machann — BSS</title>
-  <link rel="stylesheet" href="assets/style.css"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Briyant Solèy Signo 1815</title>
   <style>
-    .grid{display:grid;gap:18px;grid-template-columns:1fr;max-width:980px;margin:0 auto}
-    .card{padding:16px;border:1px solid rgba(255,255,255,.15);border-radius:16px;background:rgba(0,0,0,.35);backdrop-filter:blur(6px)}
-    label{display:block;margin:.5rem 0 .2rem;color:#ffe0ad}
-    input{width:100%;padding:.65rem;border-radius:10px;border:1px solid rgba(255,255,255,.2);background:#000;color:#fff}
-    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-    button{border:1px solid #ff8c00;background:#ff8c00;color:#000;padding:.6rem 1rem;border-radius:10px;font-weight:700}
-    button.secondary{background:#000;color:#ff8c00}
-    /* Badge preview */
-    .badge{
-      width:340px;height:480px;margin:auto;border-radius:22px;overflow:hidden;
-      border:2px solid #ff8c00;position:relative;background:
-        radial-gradient(800px 500px at 50% -20%, rgba(255,153,0,.35), rgba(0,0,0,.95) 60%),
-        #000;
-      color:#fff; display:flex; flex-direction:column; align-items:center; padding:18px;
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: white;
+      background: linear-gradient(to bottom, orange, black);
+      min-height: 100vh;
+      text-align: center;
     }
-    .badge .logo{width:88px;height:88px;border-radius:18px;background:rgba(0,0,0,.25);padding:10px;box-shadow:0 6px 24px rgba(255,153,0,.35);object-fit:contain}
-    .badge h3{margin:10px 0 2px;color:#ffd08a}
-    .badge .role{color:#ffb258;margin-bottom:10px}
-    .badge .row{width:100%;margin-top:auto}
-    .badge .row div{padding:.5rem .7rem;border-top:1px solid rgba(255,255,255,.15)}
-    .qr{position:absolute;bottom:14px;right:14px;font-size:10px;color:#ffb258;opacity:.85}
+    header {
+      padding: 20px;
+      background: rgba(0,0,0,0.6);
+    }
+    header img {
+      height: 80px;
+    }
+    nav {
+      margin: 20px 0;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    section {
+      padding: 40px 20px;
+    }
+    footer {
+      background: rgba(0,0,0,0.8);
+      padding: 15px;
+      font-size: 14px;
+    }
   </style>
 </head>
 <body>
-  <div class="wrapper">
-    <nav class="nav">
-      <a href="index.html">Akèy</a>
-      <a href="ti-machann.html" class="active">Ti Machann</a>
-      <a href="dirijan.html">Dirijan</a>
-      <a href="platfom.html">Platfòm</a>
-    </nav>
 
-    <header class="hero">
-      <img src="assets/bss-logo.png" class="logo" alt="BSS Logo">
-      <h1>Badj Ti Machann</h1>
-      <p class="lead">Editable • Telechaje sou telefòn • 🍊 & ⚫️</p>
-    </header>
+  <header>
+    <img src="logo-bss.png" alt="BSS Logo">
+    <h1>Briyant Solèy Signo 1815</h1>
+  </header>
 
-    <div class="grid">
-      <section class="card">
-        <label>Non Ti Machann</label>
-        <input id="vendorName" placeholder="Eg.: Marie Pierre">
-        <label>Non Biznis</label>
-        <input id="business" placeholder="Eg.: BSS Market">
-        <label>ID Badj</label>
-        <input id="badgeId" placeholder="Eg.: TM-2025-001">
-        <label>Ekspires le</label>
-        <input id="expires" type="date">
-        <div class="actions">
-          <button id="save">Sove / Mete ajou</button>
-          <button id="download" class="secondary">Telechaje Badj (PNG)</button>
-          <button id="newlink" class="secondary">Kreye/Copy Link Badj</button>
-        </div>
-        <p id="msg" class="small"></p>
-      </section>
+  <nav>
+    <a href="#">Dirijan</a>
+    <a href="#">Onè Onorifik</a>
+    <a href="#">Fanbase</a>
+    <a href="#">Fanatik Zèlé</a>
+    <a href="#">Pitit Kay</a>
+    <a href="#">Ti Machann</a>
+    <a href="#">Ansyen Dirijan</a>
+  </nav>
 
-      <section class="card" style="text-align:center">
-        <div id="badge" class="badge">
-          <img src="assets/bss-logo.png" class="logo" alt="BSS">
-          <h3 id="vName">NON TI MACHANN</h3>
-          <div class="role" id="vBiz">BIZNIS</div>
-          <div class="row" style="width:100%">
-            <div><strong>ID:</strong> <span id="vId">—</span></div>
-            <div><strong>Ekspire:</strong> <span id="vExp">—</span></div>
-          </div>
-          <div class="qr" id="qrHint">briyantsoleysigno.com</div>
-        </div>
-      </section>
-    </div>
+  <section>
+    <!-- Kontni ki te deja nan index.html ou a rete la -->
+    <h2>Byenveni sou sit ofisyèl BSS</h2>
+    <p>Platfòm nou an ini tout manm, mizisyen, ak fanatik nou yo anba menm koulè: 🍊 Abrikot & ⚫ Nwa.</p>
+  </section>
 
-    <footer>© <span id="y"></span> BSS 1815</footer>
-  </div>
+  <footer>
+    © 2025 Briyant Solèy Signo 1815 – Tout dwa rezève.
+  </footer>
 
-  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
-  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-  <script type="module" src="assets/firebase.js"></script>
-
-  <script type="module">
-    const $ = id => document.getElementById(id);
-    const params = new URLSearchParams(location.search);
-    let currentId = params.get('id') || null;
-
-    // Live preview
-    const syncPreview = () => {
-      $('vName').textContent = ($('vendorName').value || 'NON TI MACHANN').toUpperCase();
-      $('vBiz').textContent  = ($('business').value || 'BIZNIS').toUpperCase();
-      $('vId').textContent   = $('badgeId').value || '—';
-      $('vExp').textContent  = $('expires').value || '—';
-    };
-    ['vendorName','business','badgeId','expires'].forEach(id => $(id).addEventListener('input', syncPreview));
-    syncPreview();
-
-    async function loadIfLink(){
-      if(!currentId) return;
-      const dref = window.fdb.doc(window.db, "bss_vendor_badges", currentId);
-      const snap = await window.fdb.getDoc(dref);
-      if(snap.exists()){
-        const v = snap.data();
-        $('vendorName').value = v.vendorName || '';
-        $('business').value   = v.business || '';
-        $('badgeId').value    = v.badgeId || '';
-        $('expires').value    = v.expires || '';
-        syncPreview();
-        $('msg').textContent = `Chaje badj: ${currentId}`;
-      }
-    }
-    loadIfLink();
-
-    $('save').onclick = async () => {
-      const payload = {
-        vendorName: $('vendorName').value.trim(),
-        business: $('business').value.trim(),
-        badgeId: $('badgeId').value.trim(),
-        expires: $('expires').value,
-        updatedAt: window.fdb.serverTimestamp()
-      };
-      try{
-        if(!currentId){
-          const refCol = window.fdb.collection(window.db, "bss_vendor_badges");
-          const dref = await window.fdb.addDoc(refCol, { ...payload, createdAt: window.fdb.serverTimestamp() });
-          currentId = dref.id;
-          $('msg').textContent = `Sove ✅ ID: ${currentId}`;
-          history.replaceState({}, "", `?id=${currentId}`);
-        }else{
-          await window.fdb.updateDoc(window.fdb.doc(window.db, "bss_vendor_badges", currentId), payload);
-          $('msg').textContent = `Mete ajou ✅`;
-        }
-      }catch(e){ console.error(e); $('msg').textContent = 'Erè pandan sove.'; }
-    };
-
-    $('download').onclick = async () => {
-      const node = $('badge');
-      const canvas = await html2canvas(node, { backgroundColor: null, scale: 2 });
-      const a = document.createElement('a');
-      a.href = canvas.toDataURL('image/png');
-      a.download = `badj-${$('badgeId').value || 'ti-machann'}.png`;
-      a.click();
-    };
-
-    $('newlink').onclick = async () => {
-      if(!currentId){ $('msg').textContent = 'Sove badj la anvan pou jwenn lyen.'; return; }
-      const url = `${location.origin}${location.pathname}?id=${currentId}`;
-      await navigator.clipboard.writeText(url);
-      $('msg').textContent = 'Lyen badj la kopye 📋';
-    };
-  </script>
 </body>
-            </html>
+</html>
