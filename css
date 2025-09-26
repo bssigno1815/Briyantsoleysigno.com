@@ -1,4 +1,21 @@
-.logo{
+:root{
+  --bss-orange:#FFA033;  /* apricot/orange */
+  --bss-black:#0b0b0b;
+}
+html,body{
+  margin:0; padding:0;
+  background: radial-gradient(1200px 700px at 70% 50%, var(--bss-orange) 0%, #7a3f00 35%, var(--bss-black) 65%, var(--bss-black) 100%);
+  color:#FFD7A1;                 /* warm light text */
+}
+a,button{ color:#FFD7A1; }
+.btn{
+  background: var(--bss-black);
+  border:2px solid var(--bss-orange);
+  border-radius:16px;
+  padding:.75rem 1.1rem;
+  box-shadow:0 0 20px rgba(255,160,51,.18) inset, 0 6px 24px rgba(0,0,0,.45);
+}
+.btn:hover{ background:#1a1a1a; }.logo{
   position: fixed; top: 18px; left: 18px;
   padding: 8px 12px;
   background: rgba(0,0,0,.55);
