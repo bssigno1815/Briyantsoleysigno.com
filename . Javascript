@@ -1,4 +1,73 @@
-// after computing role…
+import { useState } from "react";
+
+export default function Home() {
+  const [lang, setLang] = useState("ht"); // ht = Kreyòl, fr = Français, en = English
+
+  const content = {
+    ht: {
+      title: "Briyant Solèy Signo 1815",
+      slogan: "Yon motè nèf, yon sèl kout klé san bri",
+      welcome: "Byenveni sou sit ofisyèl BSS la. Byenveni fanmi rara!",
+      fanbase: "Fanbase",
+      store: "Boutik",
+      videos: "Videyo",
+      contact: "Kontak",
+      footer: "© 2025 BSS. Tout dwa rezève."
+    },
+    fr: {
+      title: "Briyant Solèy Signo 1815",
+      slogan: "Un moteur neuf, un seul coup de clé sans bruit",
+      welcome: "Bienvenue sur le site officiel de BSS. Bienvenue à la famille rara !",
+      fanbase: "Fanbase",
+      store: "Boutique",
+      videos: "Vidéos",
+      contact: "Contact",
+      footer: "© 2025 BSS. Tous droits réservés."
+    },
+    en: {
+      title: "Briyant Solèy Signo 1815",
+      slogan: "A new engine, one key turn without noise",
+      welcome: "Welcome to the official BSS website. Welcome rara family!",
+      fanbase: "Fanbase",
+      store: "Store",
+      videos: "Videos",
+      contact: "Contact",
+      footer: "© 2025 BSS. All rights reserved."
+    }
+  };
+
+  return (
+    <div style={{
+      background: "linear-gradient(to bottom, #FFA500, #000000)",
+      color: "#FFA500",
+      minHeight: "100vh",
+      textAlign: "center",
+      padding: "20px"
+    }}>
+      {/* Language Switcher */}
+      <div style={{ position: "absolute", top: "20px", right: "20px" }}>
+        <button onClick={() => setLang("ht")}>Kreyòl</button>
+        <button onClick={() => setLang("fr")}>Français</button>
+        <button onClick={() => setLang("en")}>English</button>
+      </div>
+
+      <h1>{content[lang].title}</h1>
+      <h2>{content[lang].slogan}</h2>
+      <p>{content[lang].welcome}</p>
+
+      <nav style={{ marginTop: "30px" }}>
+        <a href="/fanbase" style={{ color: "#FFA500", margin: "0 15px" }}>{content[lang].fanbase}</a>
+        <a href="/store" style={{ color: "#FFA500", margin: "0 15px" }}>{content[lang].store}</a>
+        <a href="/videyo" style={{ color: "#FFA500", margin: "0 15px" }}>{content[lang].videos}</a>
+        <a href="/contact" style={{ color: "#FFA500", margin: "0 15px" }}>{content[lang].contact}</a>
+      </nav>
+
+      <footer style={{ marginTop: "50px" }}>
+        {content[lang].footer}
+      </footer>
+    </div>
+  );
+}// after computing role…
 const testBtn = document.getElementById('notifyTestBtn');
 if (testBtn) {
   if (role === 'superadmin') {
