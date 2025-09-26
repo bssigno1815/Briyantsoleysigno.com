@@ -1,49 +1,194 @@
+
 <!doctype html>
 <html lang="ht">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Briyant Soley Signo 1815 — BSS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Briyant Soley Signo 1815</title>
+  <meta name="description" content="BSS — Fanbase, Boutik, Ansyen Dirijan" />
+  <link rel="icon" href="/assets/favicon.ico">
+
   <style>
-    :root { --orange:#ff8c1a; --black:#0a0a0a; --text:#f5f5f5; }
-    html,body{height:100%; margin:0}
+    :root{
+      --orange:#ff8c00; /* strong orange */
+      --orange-soft:#f4a259; /* soft orange for glow */
+      --black:#000000;
+      --text:#eaeaea;
+      --text-dim:#b5b5b5;
+      --accent:#ffd38a;
+      --maxw:1100px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
     body{
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif;
       color:var(--text);
-      background: radial-gradient(circle at 40% 20%, rgba(255,140,26,.35), transparent 40%),
-                  linear-gradient(180deg, var(--orange) 0%, #a65a12 35%, #22150a 60%, var(--black) 100%);
+      background:
+        radial-gradient(1200px 600px at 50% -10%, var(--orange-soft) 0%, rgba(0,0,0,0) 45%),
+        linear-gradient(180deg, var(--orange) 0%, #4a2b06 35%, var(--black) 75%, #000 100%);
       min-height:100%;
-      display:flex; align-items:center; justify-content:center;
+      display:flex;
+      flex-direction:column;
     }
-    .wrap{max-width:980px; width:100%; padding:32px}
-    h1{margin:0 0 24px; font-size:42px; letter-spacing:.5px}
-    .grid{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
-    a{
-      display:block; text-decoration:none; color:var(--text);
-      border:1px solid rgba(255,255,255,.25);
-      background:rgba(0,0,0,.25); padding:14px 16px; border-radius:12px;
-      transition:.2s ease; text-align:center; font-weight:600;
+
+    /* top bar */
+    .top{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 20px; gap:12px; max-width:var(--maxw); width:100%; margin-inline:auto;
     }
-    a:hover{transform:translateY(-2px); border-color:rgba(255,255,255,.5)}
-    footer{margin-top:28px; opacity:.7; font-size:14px}
-    .logo{font-weight:800; letter-spacing:1px}
+    .lang{
+      appearance:none; background:rgba(255,255,255,.06); color:var(--text);
+      border:1px solid rgba(255,255,255,.15); padding:8px 12px; border-radius:10px;
+      backdrop-filter: blur(4px);
+    }
+
+    /* hero */
+    .hero{
+      flex:1; display:grid; place-items:center; padding:30px 16px;
+    }
+    .card{
+      text-align:center; max-width:var(--maxw); width:100%;
+      padding:48px 24px; border-radius:24px;
+      background:linear-gradient(180deg, rgba(255,140,0,.08), rgba(0,0,0,.25));
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow: 0 20px 60px rgba(0,0,0,.55), 0 0 80px rgba(255,140,0,.15) inset;
+      margin-inline:auto;
+    }
+    .logo{
+      width:min(220px, 60vw); height:auto; filter: drop-shadow(0 8px 24px rgba(0,0,0,.6));
+    }
+    h1{
+      font-size: clamp(28px, 5.5vw, 54px);
+      margin:18px 0 8px; letter-spacing:.6px; line-height:1.12;
+      text-transform:uppercase;
+    }
+    .slogan{
+      font-size: clamp(14px, 2.4vw, 18px);
+      color:var(--accent);
+      opacity:.95;
+    }
+
+    /* nav */
+    .nav{
+      display:flex; flex-wrap:wrap; gap:12px 18px;
+      justify-content:center; margin:28px auto 0;
+    }
+    .nav a{
+      padding:10px 14px; text-decoration:none; color:var(--text);
+      border:1px solid rgba(255,255,255,.14); border-radius:12px;
+      background:rgba(255,255,255,.04);
+    }
+    .nav a:hover{ border-color:rgba(255,211,138,.75) }
+
+    /* footer */
+    footer{
+      color:var(--text-dim); font-size:13px; text-align:center; padding:14px 10px 26px;
+    }
+
+    /* strictly no white anywhere */
+    ::selection{ background:rgba(255,140,0,.35); color:#fff }
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <div class="logo">BSS • Briyant Soley Signo 1815</div>
-    <h1>Byenvini</h1>
-    <div class="grid">
-      <a href="/pages/ansyen-dirijan.html">Ansyen Dirijan</a>
-      <a href="/pages/dirijan.html">Dirijan</a>
-      <a href="/pages/one-orifik.html">Onè Orifik</a>
-      <a href="/pages/fanatik-zele.html">Fanbaz / Fanatik Zèlé</a>
-      <a href="/pages/pitit-kay.html">Pitit Kay</a>
-      <a href="/pages/timachann.html">Ti Machann</a>
-      <a href="/pages/boutik.html">Boutik / Store</a>
-      <a href="/pages/kontak.html">Kontak</a>
-    </div>
-    <footer>© 2025 BSS — Tout dwa rezève.</footer>
+  <!-- Top bar: language switch -->
+  <div class="top">
+    <div></div>
+    <select id="lang" class="lang" aria-label="Chwazi lang / Choose language">
+      <option value="ht" selected>Kreyòl</option>
+      <option value="fr">Français</option>
+      <option value="en">English</option>
+    </select>
+  </div>
+
+  <!-- Hero / brand -->
+  <main class="hero">
+    <section class="card">
+      <!-- Replace the src with your actual logo path -->
+      <img src="/assets/logo-bss.png" alt="BSS Logo" class="logo" onerror="this.style.display='none'">
+      <h1 id="title">Briyant Solèy Signo 1815</h1>
+      <p id="tag" class="slogan">Pou pèp la—unité, travay, respè.</p>
+
+      <nav class="nav" aria-label="Prensipal / Primary">
+        <a href="/page/akèy.html" id="lnk-home">Akèy</a>
+        <a href="/page/dirijan.html" id="lnk-leaders">Dirijan</a>
+        <a href="/fanbase.html" id="lnk-fanbase">Fanbase</a>
+        <a href="/boutik.html" id="lnk-store">Boutik</a>
+        <a href="/timachann.html" id="lnk-merchants">Ti Machann</a>
+        <a href="/pititkay.html" id="lnk-youth">Pitit Kay</a>
+        <a href="/platform.html" id="lnk-platform">Platfòm</a>
+        <a href="/ansyen-dirijan.html" id="lnk-elders">Ansyen Dirijan</a>
+        <a href="/contact.html" id="lnk-contact">Kontak</a>
+      </nav>
+    </section>
   </main>
+
+  <footer>
+    <span id="foot">© <span id="yr"></span> BSS. Tout dwa rezève.</span>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // Simple i18n text map (front page only)
+    const t = {
+      ht:{
+        title:"Briyant Solèy Signo 1815",
+        tag:"Pou pèp la—unité, travay, respè.",
+        home:"Akèy", leaders:"Dirijan", fanbase:"Fanbase", store:"Boutik",
+        merchants:"Ti Machann", youth:"Pitit Kay", platform:"Platfòm",
+        elders:"Ansyen Dirijan", contact:"Kontak",
+        foot:"© "+new Date().getFullYear()+" BSS. Tout dwa rezève."
+      },
+      fr:{
+        title:"Briyant Solèy Signo 1815",
+        tag:"Pour le peuple — unité, travail, respect.",
+        home:"Accueil", leaders:"Dirigeants", fanbase:"Fanbase", store:"Boutique",
+        merchants:"Petits Commerçants", youth:"Jeunes", platform:"Plateforme",
+        elders:"Anciens Dirigeants", contact:"Contact",
+        foot:"© "+new Date().getFullYear()+" BSS. Tous droits réservés."
+      },
+      en:{
+        title:"Briyant Soley Signo 1815",
+        tag:"For the people — unity, work, respect.",
+        home:"Home", leaders:"Leaders", fanbase:"Fanbase", store:"Store",
+        merchants:"Vendors", youth:"Youth", platform:"Platform",
+        elders:"Elder Leaders", contact:"Contact",
+        foot:"© "+new Date().getFullYear()+" BSS. All rights reserved."
+      }
+    };
+
+    const ids = {
+      title:'title', tag:'tag', foot:'foot',
+      home:'lnk-home', leaders:'lnk-leaders', fanbase:'lnk-fanbase', store:'lnk-store',
+      merchants:'lnk-merchants', youth:'lnk-youth', platform:'lnk-platform',
+      elders:'lnk-elders', contact:'lnk-contact'
+    };
+
+    function applyLang(code){
+      const d = t[code] || t.ht;
+      for(const k in ids){
+        const el = document.getElementById(ids[k]);
+        if(el) el.textContent = d[k];
+      }
+      document.documentElement.lang = code;
+    }
+
+    // set from dropdown
+    const sel = document.getElementById('lang');
+    sel.addEventListener('change', e => applyLang(e.target.value));
+
+    // restore saved choice
+    try{
+      const saved = localStorage.getItem('bss-lang');
+      if(saved && t[saved]) sel.value = saved;
+    }catch{}
+    applyLang(sel.value);
+    sel.addEventListener('change', () => {
+      try{ localStorage.setItem('bss-lang', sel.value); }catch{}
+    });
+  </script>
 </body>
 </html>
