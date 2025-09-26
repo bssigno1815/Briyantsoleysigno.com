@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ht">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BSS — Telechaje Videyo Fanatik</title>
+  <style>
+    :root{--orange:#ffa500;--text:#ffa500;--bg:linear-gradient(to bottom,#ffa500 0%,#000 55%)}
+    html,body{height:100%;margin:0}
+    body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;display:flex;flex-direction:column;min-height:100vh}
+    header,footer{padding:16px}
+    header{display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand img{height:36px;width:36px;object-fit:contain}
+    nav a{color:var(--text);text-decoration:none;margin:0 12px}
+    nav a:hover{text-decoration:underline}
+    main{flex:1;display:grid;place-items:center;padding:20px}
+    .frame{width:min(1100px,95vw);height:80vh;border:0;border-radius:10px;box-shadow:0 0 0 1px rgba(255,165,0,.25)}
+    footer{text-align:center;opacity:.85;font-size:14px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <img src="/assets/bss-logo.png" alt="BSS logo"><strong>BSS</strong>
+    </div>
+    <nav>
+      <a href="/">Akèy</a>
+      <a href="/upload.html">Telechaje Videyo</a>
+      <a href="/contact.html">Kòmantè & Reklamasyon</a>
+      <a href="/fr/">FR</a> • <a href="/en/">EN</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Replace the src= with the Google Form EMBED url for the video upload form -->
+    <iframe class="frame" src="FORM_UPLOAD_EMBED_URL" loading="lazy"></iframe>
+  </main>
+
+  <footer>© 2025 BSS. Tout dwa rezève.</footer>
+</body>
+</html>
