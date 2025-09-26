@@ -1,51 +1,49 @@
 <!doctype html>
 <html lang="ht">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BSS • Byenveni</title>
-  <link rel="stylesheet" href="/styles.css">
-  <link rel="icon" href="/bss-logo.png">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Briyant Soley Signo 1815 — BSS</title>
+  <style>
+    :root { --orange:#ff8c1a; --black:#0a0a0a; --text:#f5f5f5; }
+    html,body{height:100%; margin:0}
+    body{
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color:var(--text);
+      background: radial-gradient(circle at 40% 20%, rgba(255,140,26,.35), transparent 40%),
+                  linear-gradient(180deg, var(--orange) 0%, #a65a12 35%, #22150a 60%, var(--black) 100%);
+      min-height:100%;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .wrap{max-width:980px; width:100%; padding:32px}
+    h1{margin:0 0 24px; font-size:42px; letter-spacing:.5px}
+    .grid{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+    a{
+      display:block; text-decoration:none; color:var(--text);
+      border:1px solid rgba(255,255,255,.25);
+      background:rgba(0,0,0,.25); padding:14px 16px; border-radius:12px;
+      transition:.2s ease; text-align:center; font-weight:600;
+    }
+    a:hover{transform:translateY(-2px); border-color:rgba(255,255,255,.5)}
+    footer{margin-top:28px; opacity:.7; font-size:14px}
+    .logo{font-weight:800; letter-spacing:1px}
+  </style>
 </head>
 <body>
-  <div class="wrapper">
-    <header class="header">
-      <div class="brand">
-        <img src="/bss-logo.png" alt="BSS logo">
-        <div>Briyant Soley Signo</div>
-      </div>
-      <nav class="nav">
-        <a href="/dirijan.html">Dirijan Onè</a>
-        <a href="/one.html">Orifik</a>
-        <a href="/fanbase.html">Fanbase</a>
-        <a href="/fanatik.html">Fanatik Zele</a>
-        <a href="/pititkay.html">Piti Kay</a>
-        <a href="/timachann.html">Ti Machann</a>
-        <a href="/platfom.html">Platfòm</a>
-        <a href="/ansyen-dirijan.html">Ansyen Dirijan</a>
-      </nav>
-    </header>
-
-    <main class="main">
-      <div>
-        <h1>Byenveni! Sit BSS la ap mache ✅</h1>
-        <div class="pill">Pa gen 404 ankò — tout paj yo ap rive pa yo</div>
-        <div class="grid" style="margin-top:22px">
-          <div class="card">
-            <a href="/timachann.html">Badj Ti Machann</a>
-            <small><br>Editable, pare pou telechaje sou telefòn.</small>
-          </div>
-          <div class="card">
-            <a href="/kontra.html">Kontra Mizisyen</a>
-            <small><br>Siyati sou telefòn (e-signature).</small>
-          </div>
-        </div>
-      </div>
-    </main>
-
-    <footer class="footer">
-      <small>© 2025 BSS. Tout dwa rezève.</small>
-    </footer>
-  </div>
+  <main class="wrap">
+    <div class="logo">BSS • Briyant Soley Signo 1815</div>
+    <h1>Byenvini</h1>
+    <div class="grid">
+      <a href="/pages/ansyen-dirijan.html">Ansyen Dirijan</a>
+      <a href="/pages/dirijan.html">Dirijan</a>
+      <a href="/pages/one-orifik.html">Onè Orifik</a>
+      <a href="/pages/fanatik-zele.html">Fanbaz / Fanatik Zèlé</a>
+      <a href="/pages/pitit-kay.html">Pitit Kay</a>
+      <a href="/pages/timachann.html">Ti Machann</a>
+      <a href="/pages/boutik.html">Boutik / Store</a>
+      <a href="/pages/kontak.html">Kontak</a>
+    </div>
+    <footer>© 2025 BSS — Tout dwa rezève.</footer>
+  </main>
 </body>
 </html>
