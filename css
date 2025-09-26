@@ -1,4 +1,40 @@
 :root{
+  --bss-black:#000000;
+  --bss-orange:#f18f01;   /* jòn abrikot/orange */
+  --bss-orange-strong:#ff9f1a;
+  --bss-text:#ffffff;
+}
+
+/* Base button (square) */
+.btn{
+  display:inline-flex; align-items:center; gap:.6rem;
+  padding:.85rem 1.15rem;
+  background: linear-gradient(90deg, var(--bss-black) 0%, var(--bss-orange) 100%);
+  color:var(--bss-text);
+  border:1px solid #222;          /* square edge */
+  border-radius:0;                /* << kare */
+  text-decoration:none; font-weight:700; letter-spacing:.3px;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.05) inset;
+  transition:filter .2s ease, transform .02s ease;
+}
+.btn:hover{ filter:brightness(1.1); }
+.btn:active{ transform:translateY(1px); }
+.btn:focus-visible{ outline:2px solid var(--bss-orange-strong); outline-offset:2px; }
+
+/* Turn any existing rounded styles square */
+button, .button, .badge, .chip, .nav-btn, .cta { border-radius:0 !important; }
+
+/* Optional: small and full-width variants */
+.btn.sm{ padding:.65rem .9rem; font-weight:600; }
+.btn.block{ display:flex; width:100%; justify-content:center; }
+
+/* Optional: put the logo square at left inside the button */
+.btn .logo{
+  width:20px; height:20px; object-fit:cover;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:0; /* square logo container */
+  background:#000;
+}:root{
   --bss-orange:#f97316;
   --bss-black:#000;
 }
