@@ -1,4 +1,14 @@
-:root{
+.logo{
+  position: fixed; top: 18px; left: 18px;
+  padding: 8px 12px;
+  background: rgba(0,0,0,.55);
+  border: 2px solid #FFA033;
+  border-radius: 14px;
+  box-shadow: 0 0 18px rgba(0,0,0,.45);
+  z-index: 1000;
+}
+.logo img{ height: 48px; width:auto; display:block; }
+@media (max-width:520px){ .logo img{ height:36px; } }:root{
   --bss-black:#000000;
   --bss-orange:#f18f01;   /* jòn abrikot/orange */
   --bss-orange-strong:#ff9f1a;
