@@ -1,4 +1,5 @@
-:root {
+/* Kenbe 1 sèl selektè lang; kache kopi yo */
+.lang-picker:not(:first-of-type) { display: none !important; }:root {
   --orange: #ff8a00;
   --orange-2: #ffa733;
   --black: #0b0b0b;
