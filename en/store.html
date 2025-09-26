@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BSS — Store</title>
+  <style>
+    :root{--orange:#ffa500;--text:#ffa500;--bg:linear-gradient(to bottom,#ffa500 0%,#000 55%)}
+    html,body{height:100%;margin:0}
+    body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;display:flex;flex-direction:column;min-height:100vh}
+    header,footer{padding:16px}
+    header{display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand img{height:36px;width:36px;object-fit:contain}
+    nav a{color:var(--text);text-decoration:none;margin:0 10px}
+    nav a:hover{text-decoration:underline}
+    main{flex:1;max-width:1100px;margin:0 auto;padding:24px}
+    h1{margin:8px 0 18px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+    .card{border:1px solid rgba(255,165,0,.25);border-radius:12px;padding:16px;background:rgba(0,0,0,.25)}
+    .price{font-weight:700;margin:10px 0}
+    .btn{display:inline-block;border:1px solid var(--text);padding:10px 14px;border-radius:10px;text-decoration:none;color:var(--text)}
+    .btn:hover{background:rgba(255,165,0,.09)}
+    footer{text-align:center;opacity:.85;font-size:14px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <img src="/assets/bss-logo.png" alt="BSS logo"><strong>BSS</strong>
+    </div>
+    <nav>
+      <a href="/en/">Home</a>
+      <a href="/en/fanbase.html">Fanbase</a>
+      <a href="/en/store.html">Store</a>
+      <a href="/boutik.html">HT</a>
+      <a href="/fr/boutique.html">FR</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Store</h1>
+    <div class="grid">
+      <div class="card">
+        <h3>BSS T-Shirt</h3>
+        <p>100% cotton, official logo.</p>
+        <div class="price">$25</div>
+        <a class="btn" href="#">Buy</a>
+      </div>
+      <div class="card">
+        <h3>BSS Cap</h3>
+        <p>Limited edition.</p>
+        <div class="price">$20</div>
+        <a class="btn" href="#">Buy</a>
+      </div>
+      <div class="card">
+        <h3>Signed Poster</h3>
+        <p>Fan collection.</p>
+        <div class="price">$15</div>
+        <a class="btn" href="#">Buy</a>
+      </div>
+    </div>
+    <p style="margin-top:18px;opacity:.9">*Payment & delivery: contact us via the <a href="/en/contact.html">contact form</a>.</p>
+  </main>
+
+  <footer>© 2025 BSS. All rights reserved.</footer>
+</body>
+</html>
