@@ -1,5 +1,66 @@
 :root{
-  --bss-orange:#FFA033;  /* apricot/orange */
+  :root { --bss-orange: #ff8c2a; --bss-black: #000; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background: linear-gradient(180deg, var(--bss-black) 0%, var(--bss-orange) 100%);
+  color: #fff;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.hero {
+  text-align: left;
+  padding: 32px 24px;
+}
+
+.logo {
+  height: 64px;
+  width: auto;
+  display: block;
+  margin-bottom: 12px;
+}
+
+h1 { 
+  margin: 0 0 4px 0; 
+  letter-spacing: 1px; 
+  font-weight: 800; 
+}
+
+.tagline { 
+  opacity: .9; 
+  margin: 0 0 24px 0; 
+}
+
+/* Single square dropdown */
+.lang-picker { position: absolute; top: 24px; right: 24px; }
+.lang details { display: inline-block; }
+.lang summary {
+  cursor: pointer;
+  padding: 10px 14px;
+  border: 2px solid #ffb066;
+  border-radius: 10px; /* square-ish as requested earlier */
+  background: rgba(0,0,0,.4);
+  color: #ffd6a6;
+  font-weight: 700;
+}
+.lang summary::-webkit-details-marker { display: none; }
+.lang-menu {
+  list-style: none;
+  margin: 8px 0 0 0;
+  padding: 8px 0;
+  background: rgba(0,0,0,.8);
+  border: 1px solid #ffb066;
+  border-radius: 10px;
+  min-width: 200px;
+}
+.lang-menu li a {
+  display: block;
+  padding: 8px 12px;
+  color: #ffd6a6;
+  text-decoration: none;
+}
+.lang-menu li a:hover { background: rgba(255, 140, 42, .25); }--bss-orange:#FFA033;  /* apricot/orange */
   --bss-black:#0b0b0b;
 }
 html,body{
