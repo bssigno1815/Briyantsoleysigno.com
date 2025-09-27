@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ht">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BSS Tranzaksyon</title>
+  <style>
+    :root {
+      --orange: #ff9a23;
+      --black: #0b0b0b;
+      --card: #1a1a1a;
+      --text: #f8f2e8;
+      --border: #ffb366;
+      --radius: 24px;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0; height: 100%;
+    }
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 600px at 60% -10%, var(--orange) 0%, rgba(255,154,35,0.6) 30%, rgba(255,154,35,0.12) 55%, transparent 60%),
+        radial-gradient(900px 500px at 20% 110%, rgba(255,154,35,0.8) 0%, rgba(255,154,35,0.18) 45%, transparent 55%),
+        linear-gradient(180deg, var(--black) 0%, #111 35%, #151515 60%, #0d0d0d 100%);
+      min-height: 100%;
+    }
+    .wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      object-fit: cover;
+      background: #000;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(24px, 5vw, 40px);
+      letter-spacing: 0.08em;
+    }
+    .card {
+      background: linear-gradient(180deg, #171717 0%, #141414 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.03);
+      padding: 16px;
+    }
+    .hint {
+      opacity: 0.85;
+      margin-bottom: 16px;
+      font-size: 14px;
+    }
+    .btn-row {
+      margin-bottom: 16px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+    iframe {
+      width: 100%;
+      min-height: 80vh;
+      border: 0;
+      border-radius: 16px;
+      background: transparent;
+    }
+    footer {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 12px;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <img class="logo" src="/assets/bss-logo.png" alt="BSS Logo" />
+      <h1>BSS Tranzaksyon</h1>
+    </header>
+
+    <div class="card">
+      <p class="hint">Ranpli fòm la pou anrejistre tranzaksyon ou. Ou pral resevwa resepsyon pa imel.</p>
+
+      <div class="btn-row">
+        <a class="btn" href="/index.html">Retounen lakay</a>
+      </div>
+
+      <iframe
+        src="https://docs.google.com/forms/d/e/REKunAFhkxcMhZa98/viewform?embedded=true"
+        allowfullscreen
+        loading="lazy">
+        Loading…
+      </iframe>
+    </div>
+
+    <footer>© 2025 BSS. Tout dwa rezève.</footer>
+  </div>
+</body>
+</html>
