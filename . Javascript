@@ -1,86 +1,56 @@
-import { useState } from "react";
+/****  BSS — SMS Admin sou Form Submit (Twilio)  ****/
 
-export default function Home() {
-  const [lang, setLang] = useState("ht"); // ht = Kreyòl, fr = Français, en = English
+const TWILIO_SID   = 'ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'; // Twilio Account SID
+const TWILIO_TOKEN = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'; // Twilio Auth Token
+const TWILIO_FROM  = '+1XXXXXXXXXX';                     // Twilio number (E.164)
+const ADMINS = [
+  '+509XXXXXXXX',   // Admin #1 (E.164)
+  '+1XXXXXXXXXX'    // Admin #2 (opsyonèl)
+];
 
-  const content = {
-    ht: {
-      title: "Briyant Solèy Signo 1815",
-      slogan: "Yon motè nèf, yon sèl kout klé san bri",
-      welcome: "Byenveni sou sit ofisyèl BSS la. Byenveni fanmi rara!",
-      fanbase: "Fanbase",
-      store: "Boutik",
-      videos: "Videyo",
-      contact: "Kontak",
-      footer: "© 2025 BSS. Tout dwa rezève."
-    },
-    fr: {
-      title: "Briyant Solèy Signo 1815",
-      slogan: "Un moteur neuf, un seul coup de clé sans bruit",
-      welcome: "Bienvenue sur le site officiel de BSS. Bienvenue à la famille rara !",
-      fanbase: "Fanbase",
-      store: "Boutique",
-      videos: "Vidéos",
-      contact: "Contact",
-      footer: "© 2025 BSS. Tous droits réservés."
-    },
-    en: {
-      title: "Briyant Solèy Signo 1815",
-      slogan: "A new engine, one key turn without noise",
-      welcome: "Welcome to the official BSS website. Welcome rara family!",
-      fanbase: "Fanbase",
-      store: "Store",
-      videos: "Videos",
-      contact: "Contact",
-      footer: "© 2025 BSS. All rights reserved."
-    }
+/** Voye SMS atravè Twilio */
+function sendSMS(to, message) {
+  const url = 'https://api.twilio.com/2010-04-01/Accounts/' + TWILIO_SID + '/Messages.json';
+  const payload = { To: to, From: TWILIO_FROM, Body: message };
+  const options = {
+    method: 'post',
+    payload,
+    headers: { Authorization: 'Basic ' + Utilities.base64Encode(TWILIO_SID + ':' + TWILIO_TOKEN) },
+    muteHttpExceptions: true
   };
+  const res = UrlFetchApp.fetch(url, options);
+  // Logger.log(res.getResponseCode() + ' ' + res.getContentText()); // (si w vle wè repons)
+}
 
-  return (
-    <div style={{
-      background: "linear-gradient(to bottom, #FFA500, #000000)",
-      color: "#FFA500",
-      minHeight: "100vh",
-      textAlign: "center",
-      padding: "20px"
-    }}>
-      {/* Language Switcher */}
-      <div style={{ position: "absolute", top: "20px", right: "20px" }}>
-        <button onClick={() => setLang("ht")}>Kreyòl</button>
-        <button onClick={() => setLang("fr")}>Français</button>
-        <button onClick={() => setLang("en")}>English</button>
-      </div>
+/** KONPIL mesaj otomatikman ak tout chan ki vini nan fòm nan */
+function buildMessage_(e) {
+  // e.namedValues gen { "Header": ["valè"] }
+  const lines = [];
+  lines.push('🔔 Nouvo tranzaksyon BSS');
+  lines.push('⏱ ' + Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyy-MM-dd HH:mm'));
+  lines.push('— — —');
+  Object.keys(e.namedValues).forEach(function (key) {
+    // Sote chan vid yo
+    const raw = (e.namedValues[key] || []).join(', ').trim();
+    if (raw) lines.push(key + ': ' + raw);
+  });
+  lines.push('— — —');
+  lines.push('BSS Bot');
+  // Limite longè (Twilio ka segmante, men n ap koupe si twò long)
+  return lines.join('\n').slice(0, 1200);
+}
 
-      <h1>{content[lang].title}</h1>
-      <h2>{content[lang].slogan}</h2>
-      <p>{content[lang].welcome}</p>
-
-      <nav style={{ marginTop: "30px" }}>
-        <a href="/fanbase" style={{ color: "#FFA500", margin: "0 15px" }}>{content[lang].fanbase}</a>
-        <a href="/store" style={{ color: "#FFA500", margin: "0 15px" }}>{content[lang].store}</a>
-        <a href="/videyo" style={{ color: "#FFA500", margin: "0 15px" }}>{content[lang].videos}</a>
-        <a href="/contact" style={{ color: "#FFA500", margin: "0 15px" }}>{content[lang].contact}</a>
-      </nav>
-
-      <footer style={{ marginTop: "50px" }}>
-        {content[lang].footer}
-      </footer>
-    </div>
-  );
-}// after computing role…
-const testBtn = document.getElementById('notifyTestBtn');
-if (testBtn) {
-  if (role === 'superadmin') {
-    testBtn.onclick = async () => {
-      const msg = document.getElementById('notifyTestMsg');
-      msg.textContent = 'Sending…';
-      try {
-        const r = await fetch('/api/notify-test', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({}) });
-        const j = await r.json();
-        msg.textContent = j.ok ? '✅ Sent. Check your inbox/SMS.' : `❌ ${j.error||'Failed'}`;
-      } catch (e) { msg.textContent = `❌ ${e.message}`; }
-    };
-  } else {
-    testBtn.parentElement.style.display = 'none';
+/** Trigger: ap rele otomatikman lè fòm nan soumèt (via Sheet) */
+function onFormSubmit(e) {
+  try {
+    const msg = buildMessage_(e);
+    ADMINS.forEach(function (to) { sendSMS(to, msg); });
+  } catch (err) {
+    Logger.log('SMS error: ' + err);
   }
+}
+
+/** Tès manyèl (ranvwaye yon SMS vid pou verifye kle yo) */
+function testSMS() {
+  sendSMS(ADMINS[0], 'Tès BSS: konfig Twilio mache ✅');
 }
