@@ -10,3 +10,36 @@
     <li><a href="index-fr.html" lang="fr" hreflang="fr">FR</a></li>
   </ul>
 </nav>
+<!doctype html>
+<html lang="ht">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mèsi – BSS</title>
+  <style>
+    :root{--orange:#ff8c1a;--orange-2:#ffb366;--black:#0b0b0b;--text:#f6f6f6;--radius:22px}
+    html,body{height:100%}
+    body{
+      margin:0;color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(1100px 600px at 60% -10%, var(--orange) 0%, rgba(255,140,26,.6) 30%, rgba(255,140,26,.12) 55%, transparent 60%),
+        radial-gradient(900px 500px at 20% 110%, rgba(255,140,26,.8) 0%, rgba(255,140,26,.18) 45%, transparent 55%),
+        linear-gradient(180deg, var(--black) 0%, #111 35%, #151515 60%, #0d0d0d 100%);
+      display:grid;place-items:center;padding:24px;text-align:center
+    }
+    .box{max-width:680px;background:#151515;border:1px solid var(--orange-2);border-radius:var(--radius);padding:22px}
+    h1{margin:0 0 8px;letter-spacing:.06em}
+    p{opacity:.9;margin:6px 0 14px}
+    a.btn{display:inline-block;margin-top:6px;padding:10px 16px;border-radius:16px;border:1px solid var(--orange-2);text-decoration:none;color:var(--text);background:#1a1a1a}
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>Mèsi!</h1>
+    <p>Tranzaksyon ou anreseye. W ap resevwa yon resi pa imèl.</p>
+    <p>Merci! Votre transaction a été enregistrée. Un reçu sera envoyé par e-mail.</p>
+    <p>Thank you! Your transaction has been recorded. A receipt will be emailed to you.</p>
+    <a class="btn" href="/index.html">← Retounen lakay</a>
+  </div>
+</body>
+</html>
