@@ -1,3 +1,0 @@
-@tailwind base; @tailwind components; @tailwind utilities;
-:root{ --bss-orange:#f97316; --bss-black:#000; }
-html,body{ background:#000; color:#fff; }
