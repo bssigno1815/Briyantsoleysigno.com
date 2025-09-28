@@ -1,0 +1,4 @@
+rm -rf node_modules
+npm install   # oswa yarn / pnpm, selon sa w itilize
+npm run build
+npm start     # oubyen 'npm run dev' si w nan dev
