@@ -1,0 +1,7 @@
+# Rechèch pou mo kle danjere
+grep -RIn "eval(" .
+grep -RIn "Function(" .
+grep -RIn "atob(" .
+grep -RIn "setInterval(" .
+grep -RIn "document.write(" .
+grep -RIn "[A-Za-z0-9+/]\{100,\}" .
