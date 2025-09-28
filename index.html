@@ -1,9 +1,44 @@
-<base href="/"><!doctype html>
+<!doctype html>
 <html lang="ht">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="refresh" content="0; url=/admin/index.html" />
-    <title>BRIYANT SOLÈY SIGNO 1815</title>
-  </head>
-  <body>Si paj pa chaje, <a href="/admin/index.html">klike isit la</a>.</body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>BRIYANT SOLÈY SIGNO 1815</title>
+  <meta name="color-scheme" content="dark">
+  <style>
+    :root { --orange:#f97316; --black:#000; --white:#fff; }
+    html,body{height:100%;margin:0}
+    body{
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      background: linear-gradient(to bottom, var(--orange), var(--black));
+      color: var(--white); font-family: system-ui, Arial, sans-serif; text-align:center;
+    }
+    .logo{width:140px;height:140px;object-fit:contain;border-radius:16px;border:2px solid var(--black);background:#0003;margin-bottom:16px}
+    h1{margin:0 0 8px 0;font-size:28px;letter-spacing:.5px}
+    .slogan{margin:0 0 24px 0;font-style:italic;opacity:.95}
+    .lang{display:flex;gap:8px;align-items:center;background:#0009;border:1px solid var(--orange);
+          padding:8px 10px;border-radius:10px}
+    select{background:var(--black);color:var(--orange);border:1px solid var(--orange);
+           padding:6px 10px;border-radius:8px}
+    footer{position:fixed;bottom:10px;left:0;right:0;text-align:center;font-size:12px;opacity:.8}
+  </style>
+</head>
+<body>
+  <!-- Si w gen logo a, mete /logo.png nan rasin repo a; si pa gen, kite imaj la retire li pa nesesè -->
+  <img src="/logo.png" alt="BSS" class="logo" onerror="this.remove()">
+
+  <h1>BRIYANT SOLÈY SIGNO 1815</h1>
+  <p class="slogan">Yon motè nèf, yon sèl kout kle san bri</p>
+
+  <div class="lang">
+    <label for="lang">Lang:</label>
+    <select id="lang" name="lang">
+      <option value="ht">Kreyòl</option>
+      <option value="fr">Français</option>
+      <option value="en">English</option>
+    </select>
+  </div>
+
+  <footer>&copy; 2025 BSS 1815</footer>
+</body>
 </html>
