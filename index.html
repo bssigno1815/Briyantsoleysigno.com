@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ht">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BRIYANT SOLÈY SIGNO 1815</title>
+  <meta name="color-scheme" content="dark" />
+  <style>
+    :root { --orange:#f97316; --black:#000; --white:#fff; }
+    * { box-sizing:border-box }
+    html,body { height:100%; margin:0; }
+    body {
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      gap:18px; text-align:center; color:var(--white);
+      background: linear-gradient(to bottom, var(--orange), var(--black));
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    .wrap {
+      width:100%; max-width:720px; padding:24px;
+      background: rgba(0,0,0,.25); border:1px solid rgba(249,115,22,.5);
+      border-radius:16px; backdrop-filter: blur(2px);
+    }
+    .logo {
+      width:140px; height:140px; object-fit:contain;
+      border-radius:20px; border:2px solid var(--black);
+      background:#0003; display:block; margin:0 auto 12px;
+    }
+    h1 { margin:0 0 6px 0; font-size:28px; letter-spacing:.3px; }
+    .slogan { margin:0 0 16px 0; font-size:16px; font-style:italic; opacity:.95; }
+    .langbox {
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px; border-radius:12px;
+      background:#000; border:1px solid var(--orange);
+    }
+    label { font-size:14px; color:#fff; }
+    select {
+      appearance:none; background:var(--black); color:var(--orange);
+      border:1px solid var(--orange); padding:8px 12px; border-radius:8px; font-size:14px;
+    }
+    .grid {
+      margin-top:18px; display:grid; gap:10px;
+      grid-template-columns: 1fr; 
+    }
+    .btn {
+      display:block; width:100%; text-decoration:none; text-align:center;
+      padding:12px 14px; border-radius:12px; font-weight:600;
+      border:1px solid var(--orange); color:var(--black); background:var(--orange);
+    }
+    .btn.alt { background:transparent; color:var(--orange); }
+    footer { position:fixed; bottom:10px; left:0; right:0; text-align:center; font-size:12px; opacity:.85; }
+    @media (min-width:560px){ .grid { grid-template-columns: 1fr 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- Logo (opsyonèl): mete /logo.png nan rasin repo a; si pa gen, li pral kache tèt li -->
+    <img src="/logo.png" alt="BSS" class="logo" onerror="this.style.display='none'">
+    <h1>BRIYANT SOLÈY SIGNO 1815</h1>
+    <p class="slogan">Yon motè nèf, yon sèl kout klé san bri</p>
+
+    <!-- 1 sèl lang -->
+    <div class="langbox" aria-label="Chwazi lang">
+      <label for="lang">Lang</label>
+      <select id="lang" name="lang">
+        <option value="ht">Kreyòl</option>
+        <option value="fr">Français</option>
+        <option value="en">English</option>
+      </select>
+    </div>
+
+    <!-- Bouton vit (ou ka chanje lyen yo pita) -->
+    <div class="grid" role="navigation" aria-label="Seksyon prensipal">
+      <a class="btn" href="/dirijan.html">Dirijan</a>
+      <a class="btn alt" href="/fanatik.html">Fanatik</a>
+    </div>
+  </div>
+
+  <footer>&copy; 2025 BSS 1815 — Orange & Black Only</footer>
+</body>
+</html>
