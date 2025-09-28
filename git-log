@@ -1,0 +1,5 @@
+# Gade dernye komi yo pou jwenn bon pwen retou
+git log --oneline
+
+# Retabli fichye kle yo nan dènye komi ki te bon an
+git checkout <GOOD_COMMIT_SHA> -- package.json package-lock.json yarn.lock pnpm-lock.yaml vercel.json tsconfig.json .prettierrc .eslintrc.json .npmrc
