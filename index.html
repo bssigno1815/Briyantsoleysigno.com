@@ -1,6 +1,50 @@
 <!doctype html>
 <html lang="ht">
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>BRIYANT SOLÈY SIGNO 1815</title>
+  <meta name="color-scheme" content="dark">
+  <style>
+    :root{ --orange:#f97316; --black:#000; --white:#fff; }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0}
+    body{
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+      background: linear-gradient(to bottom, var(--black) 0%, var(--black) 35%, var(--orange) 100%);
+      color:var(--white); font-family: system-ui, Arial, sans-serif; text-align:center;
+    }
+    .logo{width:140px;height:140px;object-fit:contain;border-radius:18px;border:2px solid var(--black);background:#0006}
+    h1{margin:6px 0 4px 0;font-size:28px;letter-spacing:.4px}
+    .slogan{margin:0 0 10px 0;font-style:italic;opacity:.95}
+    .lang{display:flex;gap:10px;align-items:center;background:#0009;border:1px solid var(--orange);
+          padding:10px 12px;border-radius:12px}
+    select{background:var(--black);color:var(--orange);border:1px solid var(--orange);
+           padding:8px 12px;border-radius:10px}
+    footer{position:fixed;bottom:10px;left:0;right:0;text-align:center;font-size:12px;opacity:.8}
+  </style>
+</head>
+<body>
+  <!-- Mete fichye logo ou a kòm /logo.png nan rasin repo a (si pa gen, imaj la ap sote) -->
+  <img src="/logo.png" alt="BSS" class="logo" onerror="this.remove()">
+
+  <h1>BRIYANT SOLÈY SIGNO 1815</h1>
+  <p class="slogan">Yon motè nèf, yon sèl kout kle san bri</p>
+
+  <div class="lang">
+    <label for="lang">Lang:</label>
+    <select id="lang" name="lang">
+      <option value="ht">Kreyòl</option>
+      <option value="fr">Français</option>
+      <option value="en">English</option>
+    </select>
+  </div>
+
+  <footer>&copy; 2025 BSS 1815</footer>
+</body>
+</html><!doctype html>
+<html lang="ht">
+<head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>BRIYANT SOLÈY SIGNO 1815</title>
