@@ -1,180 +1,34 @@
-<div style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
-font-size:28px;font-weight:700;background:#111;color:#ffe600;z-index:999999;">
-  If you can read this, HTML is rendering ✔
-</div><img src="./assets/img/logo.png" alt="BSS"><link rel="stylesheet" href="./assets/styles.css">
-<script src="./assets/main.js" defer></script><!doctype html>
-<html lang="ht">
-  <head><meta charset="utf-8"><title>Smoke test</title></head>
-  <body><h1>It works ✅</h1></body>
-</html><!DOCTYPE html>
-<html lang="ht">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Briyant Solèy Signo 1815</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(135deg, #000000, #FFB347); /* nwa ak jon abrikot */
-      color: white;
-      font-family: Arial, sans-serif;
-      text-align: center;
-    }
-    img {
-      width: 150px;
-      margin-bottom: 20px;
-    }
-    h1 {
-      font-size: 2.5em;
-      margin-bottom: 15px;
-    }
-    p {
-      font-size: 1.2em;
-      max-width: 600px;
-      line-height: 1.6;
-    }
-  </style>
-</head>
-<body>
-  <!-- Logo -->
-  <img src="logo.png" alt="Briyant Solèy Signo 1815 Logo">
 
-  <!-- Tit -->
-  <h1>Briyant Solèy Signo 1815</h1>
-
-  <!-- Slogan -->
-  <p>
-    “Briyant Solèy se yon mountain, yon vision, yon limyè ki pap janm ka etenn. 
-    Tout wouj jon abrikot e nwa, ni rad la.”
-  </p>
-</body>
-</html><!doctype html>
-<html lang="ht">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>BRIYANT SOLÈY SIGNO 1815</title>
-  <meta name="color-scheme" content="dark">
-  <style>
-    :root{ --orange:#f97316; --black:#000; --white:#fff; }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0}
-    body{
-      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
-      background: linear-gradient(to bottom, var(--black) 0%, var(--black) 35%, var(--orange) 100%);
-      color:var(--white); font-family: system-ui, Arial, sans-serif; text-align:center;
-    }
-    .logo{width:140px;height:140px;object-fit:contain;border-radius:18px;border:2px solid var(--black);background:#0006}
-    h1{margin:6px 0 4px 0;font-size:28px;letter-spacing:.4px}
-    .slogan{margin:0 0 10px 0;font-style:italic;opacity:.95}
-    .lang{display:flex;gap:10px;align-items:center;background:#0009;border:1px solid var(--orange);
-          padding:10px 12px;border-radius:12px}
-    select{background:var(--black);color:var(--orange);border:1px solid var(--orange);
-           padding:8px 12px;border-radius:10px}
-    footer{position:fixed;bottom:10px;left:0;right:0;text-align:center;font-size:12px;opacity:.8}
-  </style>
-</head>
-<body>
-  <!-- Mete fichye logo ou a kòm /logo.png nan rasin repo a (si pa gen, imaj la ap sote) -->
-  <img src="/logo.png" alt="BSS" class="logo" onerror="this.remove()">
-
-  <h1>BRIYANT SOLÈY SIGNO 1815</h1>
-  <p class="slogan">Yon motè nèf, yon sèl kout kle san bri</p>
-
-  <div class="lang">
-    <label for="lang">Lang:</label>
-    <select id="lang" name="lang">
-      <option value="ht">Kreyòl</option>
-      <option value="fr">Français</option>
-      <option value="en">English</option>
-    </select>
-  </div>
-
-  <footer>&copy; 2025 BSS 1815</footer>
-</body>
-</html><!doctype html>
+<!doctype html>
 <html lang="ht">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BRIYANT SOLÈY SIGNO 1815</title>
-  <meta name="color-scheme" content="dark" />
   <style>
-    :root { --orange:#f97316; --black:#000; --white:#fff; }
-    * { box-sizing:border-box }
-    html,body { height:100%; margin:0; }
+    /* simple orange fade background */
+    html, body {height:100%; margin:0}
     body {
-      display:flex; flex-direction:column; align-items:center; justify-content:center;
-      gap:18px; text-align:center; color:var(--white);
-      background: linear-gradient(to bottom, var(--orange), var(--black));
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-family: system-ui, sans-serif; color:#fff;
+      background: linear-gradient(120deg, #000 20%, #602 40%, #f90 100%);
+      display:flex; align-items:center; justify-content:center; text-align:center;
     }
-    .wrap {
-      width:100%; max-width:720px; padding:24px;
-      background: rgba(0,0,0,.25); border:1px solid rgba(249,115,22,.5);
-      border-radius:16px; backdrop-filter: blur(2px);
-    }
-    .logo {
-      width:140px; height:140px; object-fit:contain;
-      border-radius:20px; border:2px solid var(--black);
-      background:#0003; display:block; margin:0 auto 12px;
-    }
-    h1 { margin:0 0 6px 0; font-size:28px; letter-spacing:.3px; }
-    .slogan { margin:0 0 16px 0; font-size:16px; font-style:italic; opacity:.95; }
-    .langbox {
-      display:inline-flex; align-items:center; gap:8px;
-      padding:10px 12px; border-radius:12px;
-      background:#000; border:1px solid var(--orange);
-    }
-    label { font-size:14px; color:#fff; }
-    select {
-      appearance:none; background:var(--black); color:var(--orange);
-      border:1px solid var(--orange); padding:8px 12px; border-radius:8px; font-size:14px;
-    }
-    .grid {
-      margin-top:18px; display:grid; gap:10px;
-      grid-template-columns: 1fr; 
-    }
-    .btn {
-      display:block; width:100%; text-decoration:none; text-align:center;
-      padding:12px 14px; border-radius:12px; font-weight:600;
-      border:1px solid var(--orange); color:var(--black); background:var(--orange);
-    }
-    .btn.alt { background:transparent; color:var(--orange); }
-    footer { position:fixed; bottom:10px; left:0; right:0; text-align:center; font-size:12px; opacity:.85; }
-    @media (min-width:560px){ .grid { grid-template-columns: 1fr 1fr; } }
+    .box {background: rgba(0,0,0,.45); padding:32px 24px; border-radius:16px}
+    h1 {margin:0 0 8px; letter-spacing:.5px}
+    small {opacity:.8}
+    select {margin-top:16px; padding:8px 12px; border-radius:8px; border:0}
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <!-- Logo (opsyonèl): mete /logo.png nan rasin repo a; si pa gen, li pral kache tèt li -->
-    <img src="/logo.png" alt="BSS" class="logo" onerror="this.style.display='none'">
+  <div class="box">
     <h1>BRIYANT SOLÈY SIGNO 1815</h1>
-    <p class="slogan">Yon motè nèf, yon sèl kout klé san bri</p>
-
-    <!-- 1 sèl lang -->
-    <div class="langbox" aria-label="Chwazi lang">
-      <label for="lang">Lang</label>
-      <select id="lang" name="lang">
-        <option value="ht">Kreyòl</option>
-        <option value="fr">Français</option>
-        <option value="en">English</option>
-      </select>
-    </div>
-
-    <!-- Bouton vit (ou ka chanje lyen yo pita) -->
-    <div class="grid" role="navigation" aria-label="Seksyon prensipal">
-      <a class="btn" href="/dirijan.html">Dirijan</a>
-      <a class="btn alt" href="/fanatik.html">Fanatik</a>
-    </div>
+    <small>Pou pèp la — inite, travay, respè.</small><br/>
+    <label for="lang">Language:</label>
+    <select id="lang">
+      <option>Kreyòl (HT)</option>
+      <option>Français (FR)</option>
+      <option>English (EN)</option>
+    </select>
   </div>
-
-  <footer>&copy; 2025 BSS 1815 — Orange & Black Only</footer>
 </body>
 </html>
