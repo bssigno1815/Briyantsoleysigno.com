@@ -1,4 +1,9 @@
 {
+  "version": 2,
+  "builds": [
+    { "src": "index.html", "use": "@vercel/static" }
+  ]
+}{
   "name": "app",
   "version": "1.0.0",
   "private": true,
