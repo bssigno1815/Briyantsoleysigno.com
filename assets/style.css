@@ -1,4 +1,4 @@
-/* Global reset */
+<link rel="stylesheet" href="/assets/styles/style.css">/* Global reset */
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
   --orange:#ff8c2b;     /* jon abrikot */
