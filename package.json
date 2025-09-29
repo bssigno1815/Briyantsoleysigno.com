@@ -1,6 +1,0 @@
-npm i
-npm run build
-npm run dev   # tcheke lokal: http://localhost:3000
-git add -A
-git commit -m "fix: scaffold minimòm pou sispann paj blan"
-git push
