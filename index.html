@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="ht">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Briyant Solèy Signo 1815</title>
+  <meta name="description" content="Briyant Solèy Signo 1815 — BSS" />
+  <style>
+    :root{
+      --apricot:#FFA552; /* jon abrikot ofisyèl */
+      --text:#fff; --glass:rgba(255,255,255,.06); --border:rgba(255,255,255,.12);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0}
+    body{
+      background: linear-gradient(to bottom,#000 35%,var(--apricot) 100%);
+      display:flex; align-items:center; justify-content:center;
+      color:var(--text); font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
+    .wrap{width:min(100%,1100px);padding:24px;display:grid;gap:22px;justify-items:center;text-align:center}
+    .card{
+      width:min(100%,860px); background:var(--glass); border:1px solid var(--border);
+      border-radius:24px; padding:28px 22px 30px; backdrop-filter:blur(6px);
+      box-shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    .logo-wrap{display:grid;gap:14px;place-items:center}
+    .logo{width:min(60vw,260px);height:auto;display:block;filter:drop-shadow(0 10px 28px rgba(0,0,0,.55))}
+    h1{margin:0; font-size:clamp(22px,3.6vw,38px); letter-spacing:.6px; text-shadow:0 2px 10px rgba(0,0,0,.55)}
+    .slogan{opacity:.9;margin:4px 0 0;font-size:clamp(13px,2.1vw,16px)}
+    /* Lang bar */
+    .langbar{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:14px}
+    .langbar a{
+      border:1px solid var(--border); background:rgba(0,0,0,.25);
+      padding:8px 12px; border-radius:999px; color:var(--text); font-size:14px; text-decoration:none
+    }
+    .langbar a[aria-current="true"]{background:rgba(255,255,255,.18)}
+    /* Seksyon lang yo */
+    .panel{display:none}
+    /* Default: Kreyòl si pa gen hash */
+    body:not(:target) #ht, :target#ht ~ main #ht{display:block}
+    /* Affiche selon hash: #fr, #en */
+    :target#fr ~ main #fr{display:block}
+    :target#en ~ main #en{display:block}
+    /* Watermark */
+    .wm{position:fixed; inset:auto -40px -40px auto; width:min(46vw,420px); opacity:.16; pointer-events:none;
+        filter:drop-shadow(0 6px 18px rgba(0,0,0,.35))}
+    /* Boutons */
+    .cta{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:18px}
+    .btn{
+      background:#000; color:#fff; border:1px solid var(--border);
+      padding:10px 16px; border-radius:12px; text-decoration:none; font-weight:600
+    }
+    .btn.secondary{background:transparent}
+    .foot{font-size:12px;opacity:.85;margin-top:18px}
+  </style>
+</head>
+<body>
+  <!-- Anchors lang kòm "target" san JS -->
+  <a id="ht"></a><a id="fr"></a><a id="en"></a>
+
+  <!-- Gwo logo watermark -->
+  <svg class="wm" viewBox="0 0 200 200" aria-hidden="true">
+    <circle cx="100" cy="100" r="88" fill="#000"/>
+    <text x="100" y="105" text-anchor="middle" fill="#FFA552" font-size="28" font-weight="800" font-family="Segoe UI,Arial,sans-serif">BSS</text>
+  </svg>
+
+  <main class="wrap">
+    <section class="card">
+      <div class="logo-wrap">
+        <!-- LOGO SVG entegre (ou ka ranplase pa logo.png pita) -->
+        <svg class="logo" viewBox="0 0 512 512" role="img" aria-label="Logo BSS">
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#000"/>
+              <stop offset="100%" stop-color="#FFA552"/>
+            </linearGradient>
+          </defs>
+        <circle cx="256" cy="256" r="248" fill="url(#g)"/>
+        <circle cx="256" cy="210" r="90" fill="#000" opacity=".35"/>
+        <text x="256" y="220" text-anchor="middle" font-size="62" font-weight="800" fill="#fff" font-family="Segoe UI,Arial,sans-serif">BSS</text>
+        <text x="256" y="270" text-anchor="middle" font-size="22" font-weight="700" fill="#fff" font-family="Segoe UI,Arial,sans-serif">SIGNO 1815</text>
+        </svg>
+        <!-- <img src="logo.png" alt="Briyant Solèy Signo 1815" class="logo"> -->
+
+        <!-- Lang switch (san JS): se lyen ki chanje #hash la -->
+        <nav class="langbar" aria-label="Language">
+          <!-- Ajiste aria-current selon hash you prefer; default nou mete Kreyòl -->
+          <a href="#ht" aria-current="true">Kreyòl</a>
+          <a href="#fr">Français</a>
+          <a href="#en">English</a>
+        </nav>
+      </div>
+
+      <!-- KREYÒL -->
+      <div id="ht-panel" class="panel" style="display:block" aria-live="polite">
+        <h1>BRIYANT SOLÈY SIGNO 1815</h1>
+        <p class="slogan">Briyant Solèy toujou kléré</p>
+        <div class="cta">
+          <a href="#" class="btn">KONTAK</a>
+          <a href="#" class="btn secondary">DOKIMAN</a>
+          <a href="#" class="btn secondary">BOUTIK</a>
+        </div>
+        <div class="foot">Slogan: Yon motè nèf, yon sèl kout klé san bri — MAXIMAX ALWAY MAXIMIZED</div>
+      </div>
+
+      <!-- FRANÇAIS -->
+      <div id="fr-panel" class="panel" aria-live="polite">
+        <h1>BRIYANT SOLÈY SIGNO 1815</h1>
+        <p class="slogan">Briyant Solèy toujours brillant</p>
+        <div class="cta">
+          <a href="#" class="btn">CONTACT</a>
+          <a href="#" class="btn secondary">DOCUMENTS</a>
+          <a href="#" class="btn secondary">BOUTIQUE</a>
+        </div>
+        <div class="foot">Slogan : Un moteur neuf, un seul démarrage silencieux — MAXIMAX ALWAY MAXIMIZED</div>
+      </div>
+
+      <!-- ENGLISH -->
+      <div id="en-panel" class="panel" aria-live="polite">
+        <h1>BRIYANT SOLÈY SIGNO 1815</h1>
+        <p class="slogan">Briyant Solèy always shining</p>
+        <div class="cta">
+          <a href="#" class="btn">CONTACT</a>
+          <a href="#" class="btn secondary">DOCUMENTS</a>
+          <a href="#" class="btn secondary">STORE</a>
+        </div>
+        <div class="foot">Slogan: A new engine, one quiet start — MAXIMAX ALWAY MAXIMIZED</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- RÈG CSS pou montre seksyon ki koresponn ak hash la (san JS) -->
+  <style>
+    /* Default: HT deja visible (inline style). Si gen hash, nou sèvi li: */
+    :target#ht ~ main #ht-panel{display:block}
+    :target#fr ~ main #ht-panel{display:none}
+    :target#en ~ main #ht-panel{display:none}
+
+    :target#fr ~ main #fr-panel{display:block}
+    :target#ht ~ main #fr-panel{display:none}
+    :target#en ~ main #fr-panel{display:none}
+
+    :target#en ~ main #en-panel{display:block}
+    :target#ht ~ main #en-panel{display:none}
+    :target#fr ~ main #en-panel{display:none}
+  </style>
+</body>
+</html>
