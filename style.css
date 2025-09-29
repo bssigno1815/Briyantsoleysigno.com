@@ -1,3 +1,15 @@
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(to bottom, black, orange);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  max-width: 300px;
+}
 <link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="./styles.css"><link rel="stylesheet" href="style.css">/* Kenbe 1 sèl selektè lang; kache kopi yo */
 .lang-picker:not(:first-of-type) { display: none !important; }:root {
   --orange: #ff8a00;
