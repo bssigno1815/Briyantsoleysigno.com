@@ -1,3 +1,160 @@
+<!DOCTYPE html>
+<html lang="ht">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BRIYANT SOLEY SIGNO 1815 — BSS</title>
+  <meta name="description" content="Briyant Soley toujou klere — Yon mote nef, yon sel kout kle." />
+  <style>
+    :root{
+      --black:#000000;
+      --orange:#ff8c00; /* zoranj BSS */
+      --text:#ffffff;
+      --muted:#d9d9d9;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      /* Nwa → Zoranj fade */
+      background:
+        radial-gradient(60vmin 60vmin at 70% 45%, rgba(255,140,0,.25), transparent 60%),
+        linear-gradient(180deg, var(--black) 0%, #0a0a0a 35%, #1a1207 60%, #2a1a08 75%, var(--orange) 120%);
+      overflow-x:hidden;
+    }
+    .wrap{
+      min-height:100%;
+      display:grid;
+      place-items:center;
+      padding:40px 20px;
+    }
+    .card{
+      width:min(1100px, 92vw);
+      border-radius:24px;
+      padding:48px 28px;
+      background:rgba(0,0,0,.35);
+      backdrop-filter: blur(6px);
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow: 0 20px 50px rgba(0,0,0,.55);
+      display:grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap:28px;
+    }
+    @media (max-width:900px){
+      .card{grid-template-columns:1fr; padding:32px 22px}
+    }
+    .brand{
+      display:flex; align-items:center; gap:18px; margin-bottom:18px; opacity:.95
+    }
+    .logo{
+      width:70px;height:70px;border-radius:50%;
+      display:grid;place-items:center;
+      background: radial-gradient(circle at 35% 30%, #ffcd7a, #ff9d2a 55%, #7a3f00 100%);
+      color:#1a1006;font-weight:800;letter-spacing:.5px
+    }
+    /* Si w gen logo.png, dekomante 2 liy sa yo epi retire background radial anwo a
+       .logo{background:#000}
+       .logo img{width:100%;height:100%;object-fit:cover;border-radius:50%} */
+    h1{
+      margin:0;
+      font-size: clamp(28px, 5.2vw, 54px);
+      line-height:1.02;
+      letter-spacing:.8px;
+    }
+    .tag{font-size:14px; color:var(--muted); margin-top:2px}
+    .hero{
+      display:flex; flex-direction:column; gap:14px; margin-top:10px
+    }
+    .kicker{
+      font-size: clamp(18px, 2.8vw, 22px);
+      letter-spacing:.6px; text-transform:uppercase; opacity:.9
+    }
+    .slogan{
+      font-size: clamp(18px, 3.1vw, 26px);
+      font-weight:600; line-height:1.25;
+    }
+    .cta{
+      margin-top:18px; display:flex; gap:12px; flex-wrap:wrap
+    }
+    .btn{
+      border:none; cursor:pointer;
+      padding:12px 18px; border-radius:12px; font-weight:700;
+      background:#151515; color:#fff; transition:.2s transform ease, .2s background ease;
+      border:1px solid rgba(255,255,255,.12)
+    }
+    .btn.alt{
+      background:linear-gradient(135deg,#ffb24d,#ff8c00 60%, #ba5a00);
+      color:#1a0e02; border:none;
+    }
+    .btn:hover{transform:translateY(-2px)}
+    .right{
+      display:grid; place-items:center;
+    }
+    .orbit{
+      width:min(460px, 85vw); aspect-ratio:1/1; border-radius:50%;
+      background:
+        radial-gradient(circle at 35% 35%, #ffcd7a 0%, #ff9d2a 52%, #7a3f00 100%),
+        radial-gradient(65% 65% at 70% 70%, rgba(0,0,0,.25), transparent 60%);
+      box-shadow: inset 0 -30px 80px rgba(0,0,0,.35), 0 30px 120px rgba(0,0,0,.45);
+      display:grid;place-items:center;
+      position:relative;
+    }
+    .orbit::after{
+      content:"BSS 1815";
+      font-weight:800; letter-spacing:1.6px;
+      color:#1a0e02; background:rgba(255,255,255,.65);
+      padding:10px 16px; border-radius:999px; border:1px solid rgba(0,0,0,.15);
+      box-shadow: 0 4px 14px rgba(0,0,0,.25);
+    }
+    footer{
+      text-align:center; color:var(--muted);
+      font-size:13px; margin-top:24px
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="card">
+      <div>
+        <div class="brand">
+          <div class="logo">BSS</div>
+          <!-- Si ou gen logo.png:
+          <div class="logo"><img src="logo.png" alt="BSS logo"></div> -->
+          <div>
+            <div class="kicker">BRIYANT SOLEY SIGNO <b>1815</b></div>
+            <div class="tag">Idantite ofisyèl BSS</div>
+          </div>
+        </div>
+
+        <h1>BRIYANT SOLEY<br/>SIGNO <span style="white-space:nowrap;">1815</span></h1>
+
+        <div class="hero">
+          <p class="slogan">Briyant Soley toujou klere.</p>
+          <p class="slogan" style="opacity:.9">Yon mote nef, yon sel kout kle.</p>
+
+          <div class="cta">
+            <a class="btn alt" href="#dokiman">Dokiman</a>
+            <a class="btn" href="#kontak">Kontak</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="right">
+        <div class="orbit" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <footer>© <span id="y"></span> BSS • Tout dwa rezève.</footer>
+  </main>
+
+  <script>
+    // Sa a se sèl ti JS pou mete ane otomatikman. Si ou pa vle okenn JS, efase blòk sa a
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
 <!doctype html>
 <html lang="ht">
 <head>
