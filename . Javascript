@@ -1,3 +1,79 @@
+/***** CONFIG: fill these *****/
+const ADMIN_EMAILS = ["admin@example.com"];        // who gets email notifications
+const ADMIN_PHONES = ["+1XXXXXXXXXX"];            // who gets SMS (Twilio)
+const USE_TWILIO = false;                         // set true after you add Twilio creds
+const TWILIO = {
+  accountSid: "ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  authToken:  "your_auth_token_here",
+  from:       "+1TWILIO_NUMBER"
+};
+/********************************/
+
+function onFormSubmit(e) {
+  const nv = e.namedValues; // all answers by question title
+
+  // Try to read common fields (rename to your exact Form question titles)
+  const name  = first(nv["Non konplè"]) || first(nv["Non"]) || "";
+  const role  = first(nv["Wòl (Mizisyen / Machann)"]) || "";
+  const email = first(nv["Imèl"]) || first(nv["Email"]) || "";
+  const phone = first(nv["Telefòn"]) || first(nv["Phone"]) || "";
+
+  // Transaction/Badge ID
+  const trxId = "BSS-" + Utilities.formatDate(new Date(), Session.getScriptTimeZone(), "yyyyMMdd-HHmmss");
+
+  // Build a compact summary of all answers for admin email/SMS
+  const summary = Object.keys(nv)
+    .map(k => `${k}: ${first(nv[k])}`)
+    .join("\n");
+
+  // 1) Email receipt to the submitter (if email present)
+  if (email) {
+    const subject = `BSS — Resevwa soumèt ou (${trxId})`;
+    const html = `
+      <div style="font-family:Arial,sans-serif">
+        <h2>Briyant Soley Signo 1815</h2>
+        <p>Mèsi, <b>${name || "Patnè"}</b>! Nou resevwa fòm ou.</p>
+        <p><b>ID:</b> ${trxId}<br>
+           <b>Wòl:</b> ${role || "-"}</p>
+        <p>Resi sa a se prèv soumèt ou.</p>
+        <hr><small>© BSS 1815</small>
+      </div>`;
+    GmailApp.sendEmail(email, subject, "Resi BSS", {htmlBody: html});
+  }
+
+  // 2) Notify admins by email
+  if (ADMIN_EMAILS.length) {
+    const subjectA = `BSS — Nouvo soumèt (${trxId}) • ${name || role || "Moun"}`
+    const bodyA = `ID: ${trxId}\n${summary}`;
+    ADMIN_EMAILS.forEach(em => GmailApp.sendEmail(em, subjectA, bodyA));
+  }
+
+  // 3) Optional SMS to admins (Twilio)
+  if (USE_TWILIO) {
+    const sms = `BSS NEW FORM • ${name || role || "Moun"} • ID ${trxId}`;
+    ADMIN_PHONES.forEach(num => sendTwilio(num, sms));
+  }
+
+  // 4) Write extra columns (ID + timestamp)
+  const sheet = e.range.getSheet();
+  const row = e.range.getRow();
+  const now = new Date();
+  sheet.getRange(row, sheet.getLastColumn()+1).setValue(trxId);
+  sheet.getRange(row, sheet.getLastColumn()+2).setValue(now);
+}
+
+function first(v){ return (v && v[0]) ? String(v[0]) : ""; }
+
+function sendTwilio(to, body){
+  const url = "https://api.twilio.com/2010-04-01/Accounts/"+TWILIO.accountSid+"/Messages.json";
+  const options = {
+    method: "post",
+    payload: { To: to, From: TWILIO.from, Body: body },
+    headers: { Authorization: "Basic " + Utilities.base64Encode(TWILIO.accountSid + ":" + TWILIO.authToken) },
+    muteHttpExceptions: true
+  };
+  UrlFetchApp.fetch(url, options);
+}
 /****  BSS — SMS Admin sou Form Submit (Twilio)  ****/
 
 const TWILIO_SID   = 'ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'; // Twilio Account SID
