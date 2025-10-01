@@ -3,6 +3,75 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BRIYANT SOLEY SIGNO 1815 — BSS</title>
+  <meta name="description" content="Briyant Soley toujou klere. Yon mote nef, yon sel kout kle." />
+  <link rel="icon" href="favicon.png" />
+  <style>
+    :root{
+      --black:#000000;
+      --orange:#ff8a00; /* BSS orange */
+      --text:#f5f5f5;
+      --muted:#d0d0d0;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      /* Orange → Black vètikal */
+      background: linear-gradient(180deg, var(--orange) 0%, #2a1a08 30%, #0f0d0b 60%, var(--black) 100%);
+      background-attachment: fixed;
+    }
+    .wrap{
+      min-height:100%;
+      display:grid;
+      place-items:center;
+      padding:40px 16px;
+    }
+    .card{
+      width:min(1100px,92vw);
+      border-radius:26px;
+      background: rgba(0,0,0,.35);
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow: 0 18px 60px rgba(0,0,0,.55);
+      backdrop-filter: blur(6px);
+      padding: clamp(24px,4vw,42px);
+      text-align:center;
+    }
+    .emblem{
+      width:min(240px,40vw); aspect-ratio:1/1; margin:0 auto 16px;
+      border-radius:50%;
+      display:grid; place-items:center;
+      background:
+        radial-gradient(circle at 40% 35%, #ffcf8a 0%, #ff9d2a 55%, #7a3f00 100%),
+        radial-gradient(70% 70% at 70% 70%, rgba(0,0,0,.25), transparent 60%);
+      outline:4px solid #ffb14d; outline-offset:6px;
+      color:#1a0e02; font-weight:900; letter-spacing:.14em;
+      font-size: clamp(26px,6vw,36px);
+    }
+    h1{
+      margin:6px 0 2px;
+      font-size: clamp(28px,6vw,54px);
+      font-weight:900; line-height:1.06; letter-spacing:.06em; text-transform:uppercase;
+      text-shadow: 0 2px 0 #0007, 0 18px 40px #000a;
+    }
+    .tag{
+      display:inline-block; margin:4px 0 14px;
+      font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted);
+      padding:.4em .8em; border:1px solid rgba(255,255,255,.18); border-radius:999px;
+    }
+    .slogan{
+      margin:.3em 0; font-size:clamp(16px,3.2vw,20px); font-weight:700;
+    }
+    .links{ margin:18px 0 0; display:flex; gap:10px; flex-wrap:wrap; justify-content:center }
+    .btn{
+      text-decoration:none; color:var(--text);
+      border:1px solid rgba(255<!doctype html>
+<html lang="ht">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Briyant Soley Signo</title>
   <style>
     :root{
