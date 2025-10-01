@@ -1,0 +1,6 @@
+TWILIO_ACCOUNT_SID=ACxxxxxxxxxxxxxxxx
+TWILIO_AUTH_TOKEN=xxxxxxxxxxxxxxxx
+TWILIO_FROM=+18557233430
+ADMIN_PIN=YourStrongPIN_OnlyYouKnow
+SESSION_SECRET=super-long-random-string
+ALLOW_SMS_ORIGINS=https://briyantsoleysigno.com
