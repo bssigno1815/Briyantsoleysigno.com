@@ -1,1 +1,4 @@
+git add -A
+git commit -m "Home: BSS orange→black gradient, remove Maximax text, keep slogans"
+git push
 
