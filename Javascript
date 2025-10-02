@@ -1,4 +1,47 @@
 function onFormSubmit(e) {
+  const props = PropertiesService.getScriptProperties();
+  const SID = props.getProperty('TWILIO_SID');
+  const TOKEN = props.getProperty('TWILIO_TOKEN');
+  const FROM = props.getProperty('TWILIO_FROM'); // e.g. +1855XXXXXXX or 'whatsapp:+14155238886'
+  const ADMIN = props.getProperty('ADMIN_NUMBER'); // e.g. +1516XXXXXXX or 'whatsapp:+1XXXXXXXXXX'
+
+  // Pull useful fields from the form submission
+  const row = e.values; // [Timestamp, Full Name, Phone, Amount, Type, Ref, Date, ...]
+  const fullName = row[1] || '';
+  const phone = row[2] || '';
+  const amount = row[3] || '';
+  const type = row[4] || '';
+  const ref = row[5] || '';
+  const date = row[6] || '';
+
+  const msgUser = `BSS: Mèsi ${fullName}! Nou resevwa tranzaksyon ${type} la: $${amount}. Ref: ${ref}. Dat: ${date}.`;
+  const msgAdmin = `BSS ALERT: ${fullName} (${phone}) ${type} $${amount} | Ref ${ref} | ${date}`;
+
+  sendTwilioMessage(ADMIN, msgAdmin, SID, TOKEN, FROM);
+  if (phone) sendTwilioMessage(formatE164(phone), msgUser, SID, TOKEN, FROM); // user receipt
+}
+
+function sendTwilioMessage(to, body, sid, token, from) {
+  const url = `https://api.twilio.com/2010-04-01/Accounts/${sid}/Messages.json`;
+  const payload = { To: to, From: from, Body: body };
+  const options = {
+    method: 'post',
+    payload: payload,
+    headers: { Authorization: 'Basic ' + Utilities.base64Encode(sid + ':' + token) },
+    muteHttpExceptions: true
+  };
+  const res = UrlFetchApp.fetch(url, options);
+  Logger.log(res.getResponseCode() + ' ' + res.getContentText());
+}
+
+function formatE164(haitiOrUsNumber) {
+  // normalize numbers like 509-xxx or 1-xxx; adjust to your locales
+  const digits = ('' + haitiOrUsNumber).replace(/\D/g, '');
+  if (digits.startsWith('1')) return '+' + digits;       // US/CA
+  if (digits.length === 10) return '+1' + digits;        // US 10-digit
+  if (digits.startsWith('509')) return '+509' + digits.slice(3); // Haiti
+  return '+' + digits;
+}function onFormSubmit(e) {
   // 1) Pull form values
   const row = e.values; // [Timestamp, Name, Phone, Service, Message, ...]
   const ts = row[0];
