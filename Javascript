@@ -1,0 +1,53 @@
+function onFormSubmit(e) {
+  // 1) Pull form values
+  const row = e.values; // [Timestamp, Name, Phone, Service, Message, ...]
+  const ts = row[0];
+  const name = row[1] || "";
+  let phone = row[2] || ""; // e.g., 13175381150 (no spaces)
+  const service = row[3] || "";
+  const note = row[4] || "";
+
+  // Normalize phone (basic)
+  phone = phone.replace(/[^\d]/g, "");
+  if (!phone.startsWith("1") && phone.length === 10) phone = "1" + phone; // US default; adjust for your country
+
+  // 2) Build WhatsApp message
+  const msg =
+    `Hi ${name}, thanks for your submission!\n` +
+    `Service: ${service}\n` +
+    (note ? `Note: ${note}\n` : "") +
+    `Received: ${ts}\n` +
+    `— MAXIMAX ALWAY MAXIMIZED`;
+
+  // 3) Secrets
+  const props = PropertiesService.getScriptProperties();
+  const SID = props.getProperty('TWILIO_SID');
+  const AUTH = props.getProperty('TWILIO_AUTH');
+  const FROM = props.getProperty('TWILIO_FROM'); // e.g., whatsapp:+14155238886 (sandbox) or your prod sender
+  const TO = `whatsapp:+${phone}`;
+
+  // 4) Send via Twilio
+  const url = `https://api.twilio.com/2010-04-01/Accounts/${SID}/Messages.json`;
+  const payload = {
+    From: FROM,
+    To: TO,
+    Body: msg
+  };
+
+  const options = {
+    method: 'post',
+    payload: payload,
+    headers: {
+      Authorization: 'Basic ' + Utilities.base64Encode(SID + ':' + AUTH)
+    },
+    muteHttpExceptions: true
+  };
+
+  const res = UrlFetchApp.fetch(url, options);
+  const code = res.getResponseCode();
+  if (code >= 200 && code < 300) {
+    Logger.log('WhatsApp sent to ' + TO);
+  } else {
+    Logger.log('Twilio error ' + code + ': ' + res.getContentText());
+  }
+}
