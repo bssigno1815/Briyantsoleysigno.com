@@ -1,30 +1,32 @@
-:root {
-  --abriko: #FFB347;
-  --nwa: #000000;
+/* styles/globals.css */
+.bss-bg-layer{
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(180deg, #FFB347 0%, #000 100%);
 }
 
-html, body {
-  height: 100%;
+html, body { height: 100%; }
+body{
   margin: 0;
-  background: linear-gradient(180deg, var(--abriko) 0%, var(--nwa) 100%);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  color: white;
+  color: #fff;
+  background: transparent !important;
 }
 
-* {
+main.home { min-height: 100svh; }
+
+main, section, header, footer,
+.container, .wrapper, .content, .hero, .surface, .paper, .card,
+[class*="container"], [class*="wrapper"], [class*="content"],
+[class*="Paper"], [class*="Card"], [class*="Surface"],
+[class*="bg-white"], [class*="bg_light"], [class*="bg-light"]{
+  background: transparent !important;
   background-color: transparent !important;
-}:root{
-  --abriko:#FFB347;
-  --nwa:#000000;
+  box-shadow: none !important;
+  border: none !important;
 }
-html, body, #__next {
-  height: 100%;
-}
-html, body {
-  margin: 0;
-  background: linear-gradient(180deg, var(--abriko) 0%, var(--nwa) 100%);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
-* { background-color: transparent !important; } /* retire lòt koulè background */
+
+#__next, #root { background: transparent !important; }
+
+a { color: #FFD27F; }
