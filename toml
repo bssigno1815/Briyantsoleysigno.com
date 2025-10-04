@@ -1,0 +1,28 @@
+# netlify.toml (mete nan root repo a)
+[[redirects]]
+  from = "http://briyantsoleysigno.com/*"
+  to   = "https://www.briyantsoleysigno.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://briyantsoleysigno.com/*"
+  to   = "https://www.briyantsoleysigno.com/:splat"
+  status = 301
+  force = true
+
+# Si sit la se SPA:
+# [[redirects]]
+#   from = "/*"
+#   to   = "/index.html"
+#   status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    X-Content-Type-Options    = "nosniff"
+    X-Frame-Options           = "DENY"
+    Referrer-Policy           = "no-referrer-when-downgrade"
+    Permissions-Policy        = "camera=(), microphone=(), geolocation=()"
+    Content-Security-Policy   = "default-src 'self' https: data: blob: 'unsafe-inline' 'unsafe-eval';"
