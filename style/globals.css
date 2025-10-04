@@ -1,4 +1,20 @@
-:root{
+:root {
+  --abriko: #FFB347;
+  --nwa: #000000;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background: linear-gradient(180deg, var(--abriko) 0%, var(--nwa) 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: white;
+}
+
+* {
+  background-color: transparent !important;
+}:root{
   --abriko:#FFB347;
   --nwa:#000000;
 }
