@@ -1,0 +1,1 @@
+npx netlify-cli deploy --prod --dir=<PUBLISH_DIR>
