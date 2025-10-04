@@ -1,4 +1,6 @@
-git add -A
+git add public/_redirects public/_headers public/robots.txt public/sitemap.xml
+git commit -m "Added redirects, headers, and sitemap configs"
+git push origin maingit add -A
 git commit -m "Home: BSS orange→black gradient, remove Maximax text, keep slogans"
 git push
 
