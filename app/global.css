@@ -1,6 +1,38 @@
-:root{ --abriko:#FFB347; --nwa:#000000; }
-html, body { height:100%; margin:0;
-  background: linear-gradient(180deg, var(--abriko) 0%, var(--nwa) 100%);
-  background-repeat:no-repeat; background-attachment:fixed;
+/* src/app/globals.css */
+
+/* KOUCH GRADYAN AN, fiks, kouvri tout ekran an */
+.bss-bg-layer{
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(180deg, #FFB347 0%, #000 100%);
 }
-* { background-color: transparent !important; }
+
+/* Bati tèren an */
+html, body { height: 100%; }
+body{
+  margin: 0;
+  color: #fff;
+  background: transparent !important; /* kite kouch la parèt */
+}
+
+/* Forse seksyon paj dakèy la pran wotè ekran an */
+main.home { min-height: 100svh; }
+
+/* KRAZE tout blòk blan yo (bootstrap/tailwind/ui libs) */
+main, section, header, footer,
+.container, .wrapper, .content, .hero, .surface, .paper, .card,
+[class*="container"], [class*="wrapper"], [class*="content"],
+[class*="Paper"], [class*="Card"], [class*="Surface"],
+[class*="bg-white"], [class*="bg_light"], [class*="bg-light"]{
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Netlify preview shell / Next root */
+#__next, #root { background: transparent !important; }
+
+a { color: #FFD27F; }
