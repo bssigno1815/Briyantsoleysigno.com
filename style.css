@@ -1,41 +1,30 @@
-<link rel="stylesheet" href="/style.css">
-<img src="/assets/logo.png" alt="BSS Logo">
-body{
-  margin:0; height:100vh; display:flex; align-items:center; justify-content:center;
-  /* kouch zoranj → nwa sou yon baz nwa */
-  background:
-    linear-gradient(to bottom, rgba(255,165,0,.75) 0%, rgba(0,0,0,.95) 70%),
-    #000000;
-  font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-}
-h1{ color:#fff; text-shadow:0 2px 10px rgba(255,165,0,.35); }
-:root{ --apricot:#F4A460; }
-html,body{height:100%;margin:0}
-body{
-  background: linear-gradient(to bottom,#000 35%,var(--apricot) 100%);
-  display:flex;align-items:center;justify-content:center;
-  font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-}
-.wrap{text-align:center}
-.title{color:#fff;margin:0 0 6px;text-shadow:0 2px 8px rgba(0,0,0,.6)}
-.subtitle{color:rgba(255,255,255,.85);font-size:14px}
-:root{ --apricot:#F4A460; }
-html,body{height:100%;margin:0}
-body{
-  background: linear-gradient(to bottom,#000 35%,var(--apricot) 100%);
-  display:flex;align-items:center;justify-content:center;
-  font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-}
-.wrap{text-align:center}
-.title{color:#fff;margin:0 0 6px;text-shadow:0 2px 8px rgba(0,0,0,.6);letter-spacing:.5px}
-.subtitle{color:rgba(255,255,255,.85);font-size:14px}
-:root{ --apricot:#F4A460; }
-html,body{height:100%;margin:0}
-body{
-  background: linear-gradient(to bottom,#000 35%,var(--apricot) 100%);
-  display:flex;align-items:center;justify-content:center;
-  font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-}
-.wrap{text-align:center}
-.title{color:#fff;margin:0 0 6px;text-shadow:0 2px 8px rgba(0,0,0,.6);letter-spacing:.5px}
-.subtitle{color:rgba(255,255,255,.85);font-size:14px}
+<!doctype html>
+<html lang="ht">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BSS</title>
+  <style>
+    :root {
+      --abriko: #FFB347; /* jon abrikot sèlman */
+      --nwa: #000000;    /* nwa sèlman */
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(180deg, var(--abriko) 0%, var(--nwa) 100%);
+      /* retire tout lòt bagay ki ta kache background lan */
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+    /* Si te gen imaj/tèksti ki te bay koulè, wete yo: */
+    body, main, #app, #root {
+      background: transparent !important;
+    }
+  </style>
+</head>
+<body>
+  <!-- rès kontni paj ou a -->
+</body>
+</html>
