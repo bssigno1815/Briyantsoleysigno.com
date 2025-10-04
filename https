@@ -1,0 +1,5 @@
+http://briyantsoleysigno.com/*   https://www.briyantsoleysigno.com/:splat   301!
+https://briyantsoleysigno.com/*  https://www.briyantsoleysigno.com/:splat   301!
+
+# Si sit la se SPA (deep links bay 404), retire # sou liy anba a:
+# /*  /index.html  200
