@@ -1,4 +1,51 @@
-:root{ --abriko:#FFB347; --nwa:#000; }
+/* ----- Global brand background: 🍊 → ⚫ ----- */
+:root{
+  --abriko: #FFB347;
+  --nwa: #000000;
+}
+html, body { height: 100%; }
+* { box-sizing: border-box; }
+
+/* No white flash, no extra colors */
+body{
+  margin: 0;
+  color: #ffffff;
+  background: linear-gradient(180deg, var(--abriko) 0%, var(--nwa) 100%) fixed;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Kill any white/gray panels from old styles */
+main, section, header, footer, div, article, aside, nav,
+.container, .wrapper, .content, .hero, .card, .panel, .surface, .paper {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Homepage layout */
+.home{
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: transparent !important;
+  text-align: center;
+}
+.brand h1{
+  margin: 0 0 8px;
+  font-size: clamp(28px, 6vw, 56px);
+  letter-spacing: .5px;
+}
+.brand .slogan{
+  margin: 0;
+  font-size: clamp(14px, 2.5vw, 20px);
+  opacity: .95;
+}
+
+/* Links readable on dark */
+a{ color:#FFD27F; text-decoration:none; }
+a:hover{ text-decoration:underline; }:root{ --abriko:#FFB347; --nwa:#000; }
 html,body{ height:100%; margin:0; }
 body{
   background: linear-gradient(180deg, var(--abriko) 0%, var(--nwa) 100%) fixed;
