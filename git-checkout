@@ -1,2 +1,0 @@
-git checkout -b backup-prestatic
-git push -u origin backup-prestatic
