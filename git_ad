@@ -1,4 +1,6 @@
 git add .
+git commit -m "Convert to pure static site: HTML/CSS only (no JS/JSON)"
+git pushgit add .
 git commit -m "Add fixed gradient layer + force transparent panels"
 git pushgit add .
 git commit -m "Force gradient body + transparent containers for clean home"
