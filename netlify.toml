@@ -1,4 +1,6 @@
 [build]
+  command = ""     # no build step
+  publish = "."    # serve files from the repo root (where index.html lives)[build]
   command = ""      # no build step
   publish = "."     # or "site" if index.html is in /site[build]
   command = "npm run build"
