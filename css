@@ -1,4 +1,10 @@
-:root{
+/* Global background: orange fading into black */
+html, body {
+  height: 100%;
+  margin: 0;
+  background: linear-gradient(180deg, #FFA42E 0%, #000000 100%);
+  background-attachment: fixed;
+}:root{
   :root { --bss-orange: #ff8c2a; --bss-black: #000; }
 
 html, body {
