@@ -1,4 +1,20 @@
-<!doctype html>
+:root{ --abriko:#FFB347; --nwa:#000; }
+html,body{ height:100%; margin:0; }
+body{
+  background: linear-gradient(180deg, var(--abriko) 0%, var(--nwa) 100%) fixed;
+  color:#fff;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+/* retire tout blan potansyèl */
+*{ background-color:transparent !important; box-shadow:none; border:0; }
+
+.home{
+  min-height:100vh; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; text-align:center;
+  padding:24px;
+}
+h1{ font-size:clamp(28px,4vw,56px); margin:0 0 12px; letter-spacing:1px; }
+.slogan{ font-size:clamp(16px,2.2vw,22px); opacity:.95; }<!doctype html>
 <html lang="ht">
 <head>
   <meta charset="utf-8" />
