@@ -1,0 +1,7 @@
+git checkout main
+
+# EF ASE tout sa ki fè JS/JSON/Next:
+git rm -rf package.json package-lock.json yarn.lock pnpm-lock.yaml
+git rm -rf node_modules .next next.config.* tsconfig.* vite.config.* webpack.* rollup.* 
+git rm -rf app pages src components public/*.js public/*.json
+git rm -rf *.js *.ts *.tsx *.json
