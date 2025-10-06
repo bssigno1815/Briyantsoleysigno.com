@@ -1,4 +1,6 @@
 git add .
+git commit -m "Updated index.html with official BSS background"
+git pushgit add .
 git commit -m "BSS: single-page static, brand gradient enforced"
 git pushgit add .
 git commit -m "Convert to pure static site: HTML/CSS only (no JS/JSON)"
