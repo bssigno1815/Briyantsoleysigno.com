@@ -1,1 +1,0 @@
-"scripts": { "build": "next build && next export" }"scripts": { "build": "next build" }
