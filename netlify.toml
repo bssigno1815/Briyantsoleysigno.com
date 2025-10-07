@@ -1,4 +1,6 @@
 [build]
+  publish = "."
+  command = ""[build]
   command = ""     # no build step
   publish = "."    # serve files from the repo root (where index.html lives)[build]
   command = ""      # no build step
