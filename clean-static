@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ht">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>BRIYANT SOLÈY SIGNO 1815</title>
+    <style>
+      :root { --orange: #ff8c2b; --black: #000000; }
+      html,body{height:100%;margin:0}
+      body{
+        background: linear-gradient(135deg, var(--orange) 0%, var(--black) 65%);
+        background-attachment: fixed;
+        color:#fff; font: 700 2.5rem/1.1 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        display:grid; place-items:center; text-align:center;
+      }
+      h1{letter-spacing:.06em; text-shadow:0 2px 18px rgba(0,0,0,.35); margin:0}
+      .tag{font-weight:600; opacity:.85; font-size:1rem; margin-top:.75rem; letter-spacing:.12em}
+      /* No other colors, no external files */
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>BRIYANT SOLÈY SIGNO 1815</h1>
+      <div class="tag">BSS</div>
+    </main>
+  </body>
+</html>
