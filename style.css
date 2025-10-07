@@ -1,4 +1,13 @@
-/* ----- Global brand background: 🍊 → ⚫ ----- */
+body {
+  background-color: black;
+  color: #ffa447;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding-top: 100px;
+}
+h1 {
+  font-size: 2.5em;
+}/* ----- Global brand background: 🍊 → ⚫ ----- */
 :root{
   --abriko: #FFB347;
   --nwa: #000000;
