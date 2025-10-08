@@ -1,4 +1,6 @@
-// Add this inside your return() — before the main content
+<div className="pt-24"> 
+  {/* Your main content starts here */}
+</div>// Add this inside your return() — before the main content
 <header className="fixed top-0 left-0 w-full bg-black text-orange-400 z-50 shadow-lg">
   <nav className="flex justify-center space-x-10 py-4 font-bold text-lg">
     <a href="#dirijan" className="hover:text-white transition">DIRIJAN</a>
