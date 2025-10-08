@@ -1,0 +1,134 @@
+:root {
+  --orange: #ff7a00;  /* PURE ORANGE */
+  --black: #000000;   /* PURE BLACK  */
+}
+
+/* Reset-ish */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  color: var(--orange);      /* Orange text on black */
+  background:
+    linear-gradient(90deg, var(--black) 25%, #0a0700 45%, #1a0f00 60%, var(--orange) 100%);
+  font: 500 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Arial;
+}
+
+/* Sticky header */
+.site-header {
+  position: sticky; top: 0; z-index: 1000;
+  display: grid; grid-template-columns: 1fr auto auto; gap: 1rem;
+  align-items: center;
+  padding: .75rem 1rem;
+  background: rgba(0,0,0,.9);
+  border-bottom: 1px solid var(--orange);
+  backdrop-filter: blur(6px);
+}
+
+.brand { display: inline-flex; align-items: center; gap: .75rem; text-decoration: none; color: var(--orange); }
+.brand-text { font-weight: 700; letter-spacing: .03em; white-space: nowrap; }
+
+.logo {
+  display: inline-grid; place-items: center;
+  width: 40px; height: 40px; border-radius: 999px;
+  background: var(--orange); color: var(--black);
+  font-weight: 800;
+  border: 2px solid var(--black);
+}
+
+/* Nav */
+.main-nav { display: flex; gap: 1rem; align-items: center; }
+.main-nav a {
+  color: var(--orange); text-decoration: none; font-weight: 700; letter-spacing: .04em;
+  padding: .35rem .6rem; border: 1px solid transparent; border-radius: 999px;
+}
+.main-nav a:hover, .main-nav a:focus-visible { border-color: var(--orange); }
+
+/* Language switch */
+.lang-switch { display: flex; gap: .5rem; }
+.lang {
+  background: var(--black); color: var(--orange); border: 1px solid var(--orange);
+  padding: .35rem .6rem; border-radius: 999px; cursor: pointer; font-weight: 800;
+}
+.lang.active { background: var(--orange); color: var(--black); }
+
+/* Hero */
+.hero {
+  min-height: calc(100svh - 68px);
+  display: grid; place-items: center;
+  text-align: center;
+}
+.hero-inner { width: min(1100px, 92vw); padding: 8vh 0 6vh; }
+
+.split {
+  display: grid; gap: .2rem;
+  font-size: clamp(38px, 8vw, 96px);
+  line-height: .9; margin: 0 0 1rem;
+  text-transform: uppercase; letter-spacing: .06em; font-weight: 900;
+}
+
+.slogan { font-size: clamp(18px, 2.6vw, 24px); margin: 1rem 0 2rem; max-width: 60ch; margin-inline: auto; }
+
+/* Hero visual (engine) */
+.hero-visual {
+  display: grid; place-items: center; margin: 1.25rem auto 2rem;
+  width: min(780px, 92vw);
+  border: 2px solid var(--orange);
+  border-radius: 16px;
+  padding: 1rem;
+  background:
+    radial-gradient(120% 120% at 50% 50%, var(--orange) 0%, #170b00 55%, var(--black) 100%);
+}
+.hero-visual img { width: 100%; height: auto; display: block; filter: drop-shadow(0 0 12px #201000); }
+
+/* Call-to-action buttons */
+.cta {
+  display: inline-block;
+  background: var(--orange); color: var(--black);
+  border: 2px solid var(--orange);
+  padding: .7rem 1.1rem; border-radius: 999px; text-decoration: none; font-weight: 900;
+}
+.cta:hover, .cta:focus-visible { transform: translateY(-1px); }
+
+/* Outlined button for dark section */
+.cta.outline {
+  background: var(--black); color: var(--orange); border-color: var(--orange);
+}
+
+/* Sections */
+.section {
+  padding: 72px 20px;
+  width: min(1100px, 92vw);
+  margin: 0 auto;
+  background: #0000; /* transparent over gradient */
+  border-left: 2px solid var(--orange);
+  border-right: 2px solid var(--orange);
+}
+.section + .section { border-top: 1px dashed var(--orange); }
+
+.section.alt {
+  background:
+    linear-gradient(180deg, #000000B3 0%, #00000080 35%, #0000 100%);
+}
+
+.section h2 {
+  margin: 0 0 .5rem;
+  font-size: clamp(24px, 4.2vw, 40px);
+  letter-spacing: .06em; text-transform: uppercase;
+  color: var(--orange);
+}
+.section p { margin: 0; max-width: 70ch; }
+
+/* Footer */
+.site-footer {
+  display: flex; align-items: center; justify-content: center; gap: .75rem;
+  padding: 28px 12px; border-top: 1px solid var(--orange);
+  background: rgba(0,0,0,.9);
+}
+.foot-note { letter-spacing: .03em; }
+
+/* Small screens */
+@media (max-width: 840px) {
+  .brand-text { display: none; }
+  .main-nav { display: none; } /* keep it minimal; sticky header still shows brand + language */
+}
