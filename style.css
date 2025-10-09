@@ -1,4 +1,13 @@
-/* === BSS GLOBAL (black + orange only) === */
+:root{
+  --bss-black:#000;
+  --bss-orange:#ff7a00; /* keep your chosen orange */
+}
+header{
+  position: sticky; top: 0; z-index: 1000;
+  background: linear-gradient(to right, var(--bss-black) 35%, var(--bss-orange));
+}
+nav a{ color: var(--bss-orange); }
+nav a:hover, nav a:focus{ color: var(--bss-orange); opacity:.85; }/* === BSS GLOBAL (black + orange only) === */
 
 /* Reset */
 * { box-sizing: border-box; margin: 0; padding: 0; }
