@@ -1,1 +1,1 @@
-<img src="/assets/engine.png" alt="Engine" style="max-width:520px; width:100%; display:block; margin:2rem auto; filter: drop-shadow(0 8px 24px rgba(0,0,0,.4));">
+<img src="/engine.png" alt="Engine" className="engine-img" />
