@@ -1,4 +1,10 @@
-<img src="/engine.png" alt="Engine" className="mx-auto mt-6 w-64" />/* Global background: orange fading into black */
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: linear-gradient(to bottom, #F4A261 0%, #000000 90%);
+  color: #fff;
+  min-height: 100vh;
+}<img src="/engine.png" alt="Engine" className="mx-auto mt-6 w-64" />/* Global background: orange fading into black */
 html, body {
   height: 100%;
   margin: 0;
