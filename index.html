@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="ht">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Briyant Solèy Signo 1815 — Ofisyèl</title>
+
+  <!-- STYLE ENTÈN: nwa + aprikot, san zòn blan -->
+  <style>
+    :root{
+      --orange:#F4A261;     /* aprikot */
+      --orange-d:#e28d4b;
+      --black:#0b0b0c;      /* nwa fon */
+      --ink:#111;
+      --text:#f2f2f2;       /* ekriti klè */
+      --muted:#bdbdbd;
+      --card:#161617;
+      --line:#262629;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--black);color:var(--text);
+      font-family:system-ui,-apple-system,Inter,Segoe UI,Roboto,Arial,sans-serif}
+    a{color:var(--orange);text-decoration:none}
+    a:hover{color:#ffd9b6}
+
+    .container{max-width:1100px;margin:0 auto;padding:0 16px}
+    .row{display:flex;gap:12px}.between{justify-content:space-between}.center{align-items:center}
+
+    /* HEAD */
+    .site-header{position:sticky;top:0;z-index:10;background:#0e0e10;border-bottom:1px solid var(--line)}
+    .brand{gap:12px}
+    .brand .logo{width:56px;height:56px;object-fit:contain;background:#000;border-radius:12px}
+    .brand h1{margin:0;font-size:1.1rem;letter-spacing:.02em}
+    .brand .slogan{margin:2px 0 0;color:var(--muted);font-size:.9rem}
+    .nav a{margin-left:14px;font-weight:700;color:#ededed}
+    .nav a:hover{color:var(--orange)}
+    .nav .btn{background:var(--orange);color:#000;padding:8px 12px;border-radius:12px}
+
+    /* HERO ak FOTO MOTÈ A */
+    .hero{
+      position:relative; isolation:isolate;
+      padding:64px 0 60px; border-bottom:3px solid var(--orange);
+      background:radial-gradient(1200px 400px at 50% -10%, rgba(244,162,97,.35), rgba(0,0,0,.0)),
+                 linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.55));
+      overflow:hidden;
+    }
+    .hero::before{ /* FOTO MOTÈ A */
+      content:""; position:absolute; inset:0; z-index:-1;
+      background:url('assets/mote.jpg') center/cover no-repeat;
+      filter:brightness(.55) saturate(1.08);
+    }
+    .hero h2{margin:0 0 10px;font-size:2rem}
+    .hero p{margin:0 0 18px;color:#e9e9e9}
+    .btn{
+      display:inline-block;font-weight:800;background:var(--orange);color:#000;
+      padding:12px 16px;border-radius:14px
+    }
+    .btn.outline{background:transparent;color:#fff;border:2px solid var(--orange)}
+
+    /* BLOK SEKSYON */
+    .section{padding:44px 0;background:#0e0e10;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .section.alt{background:#121214}
+    h3{font-size:1.35rem;margin:0 0 14px}
+
+    /* KAT / GRIY */
+    .grid{display:grid;gap:18px;grid-template-columns:repeat(3,1fr)}
+    .grid.two{grid-template-columns:repeat(2,1fr)}
+    @media(max-width:860px){.grid,.grid.two{grid-template-columns:1fr}}
+
+    .card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+    .card .body{padding:14px}
+    .product img,.honore img{width:100%;height:220px;object-fit:cover;background:#0c0c0c}
+    .price{font-weight:900;color:#ffd9b6}
+
+    /* FÒM */
+    .form{padding:16px}
+    .form input,.form textarea{
+      width:100%;padding:12px 14px;border:1px solid var(--line);background:#0f0f10;color:#eee;border-radius:10px
+    }
+    .form button{margin-top:10px}
+
+    /* PYE PAJ */
+    .site-footer{border-top:1px solid var(--line);padding:18px 0;background:#0e0e10}
+    .site-footer p{margin:0;color:#b9b9b9}
+    .muted{color:var(--muted)}
+    .tag{display:inline-block;background:#1d1d20;border:1px solid var(--line);padding:2px 8px;border-radius:999px;font-size:.8rem;color:#e6e6e6}
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container row between center">
+      <div class="brand row center">
+        <img class="logo" src="assets/logo-bss.png" alt="BSS Logo" onerror="this.style.display='none'">
+        <div>
+          <h1>BRIYANT SOLÈY SIGNO 1815</h1>
+          <p class="slogan">Yon motè nèf, yon sèl kout klé san bri</p>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="#lakay">Lakay</a>
+        <a href="#magazen">Magazen</a>
+        <a href="#onhe">Onè Onorifik</a>
+        <a href="#dokiman">Dokiman</a>
+        <a href="#kontak">Kontak</a>
+        <a class="btn" href="admin.html">Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="lakay" class="hero">
+    <div class="container">
+      <h2>Briyant Solèy: yon montay, yon vizyon, yon limyè ki pap janm etenn.</h2>
+      <p>Tout wouj jon abrikòt e nwa, ni rad la.</p>
+      <div class="row" style="gap:12px;flex-wrap:wrap">
+        <a class="btn" href="#magazen">Ale nan Magazen</a>
+        <a class="btn outline" href="#onhe">Gade Onè Onorifik</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAGAZEN (ti vitrin) -->
+  <section id="magazen" class="section alt">
+    <div class="container">
+      <h3>Magazen Ofisyèl</h3>
+      <p class="muted">T-shirt, tchatcha, kèpi, drapo, gode, braslè… (mete foto & pri lè pare)</p>
+      <div class="grid">
+        <article class="card product">
+          <img src="assets/prod-tshirt.jpg" alt="T-shirt BSS" onerror="this.src='assets/placeholder.jpg'">
+          <div class="body"><strong>T-shirt BSS</strong><div class="price">$20</div></div>
+        </article>
+        <article class="card product">
+          <img src="assets/prod-tchatcha.jpg" alt="Tchatcha" onerror="this.src='assets/placeholder.jpg'">
+          <div class="body"><strong>Tchatcha</strong><div class="price">$12</div></div>
+        </article>
+        <article class="card product">
+          <img src="assets/prod-cap.jpg" alt="Kèpi" onerror="this.src='assets/placeholder.jpg'">
+          <div class="body"><strong>Kèpi</strong><div class="price">$18</div></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ONÈ ONORIFIK -->
+  <section id="onhe" class="section">
+    <div class="container">
+      <h3>Onè Onorifik</h3>
+      <p class="muted">Nou onore moun ki make listwa BSS la. (Ranplase foto ak non yo lè pare.)</p>
+      <div class="grid">
+        <article class="card honore">
+          <img src="assets/honore-1.jpg" alt="Onore 1" onerror="this.src='assets/placeholder.jpg'">
+          <div class="body">
+            <strong>Papouche Stratège</strong> <span class="tag">Memwa Etenèl</span>
+            <p class="muted">Gran poto mitan nan BSS. Travay li p ap janm bliye.</p>
+          </div>
+        </article>
+        <article class="card honore">
+          <img src="assets/honore-2.jpg" alt="Onore 2" onerror="this.src='assets/placeholder.jpg'">
+          <div class="body">
+            <strong>Anpèré Ti Rat</strong> <span class="tag">Ansyen</span>
+            <p class="muted">Te pote rara a sou zepòl li. Respè san fen.</p>
+          </div>
+        </article>
+        <article class="card honore">
+          <img src="assets/honore-3.jpg" alt="Onore 3" onerror="this.src='assets/placeholder.jpg'">
+          <div class="body">
+            <strong>Grènn</strong> <span class="tag">Ikòn</span>
+            <p class="muted">Ansien Prezidan • Senbòl fòs fanmi an.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOKIMAN -->
+  <section id="dokiman" class="section alt">
+    <div class="container">
+      <h3>Dokiman Ofisyèl</h3>
+      <ul>
+        <li><a href="docs/rapo.pdf" target="_blank">Rapò Peman (PDF)</a></li>
+        <li><a href="docs/rezilta.pdf" target="_blank">Rezilta Evènman (PDF)</a></li>
+        <li><a href="docs/reg-ofisyel.pdf" target="_blank">Règ Ofisyèl (PDF)</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- KONTAK -->
+  <section id="kontak" class="section">
+    <div class="container grid two">
+      <form class="card form" action="https://formsubmit.co/briyantsigno@gmail.com" method="POST">
+        <div class="row" style="gap:12px;flex-wrap:wrap">
+          <input type="text" name="name" placeholder="Non ou" required>
+          <input type="email" name="email" placeholder="Imèl ou" required>
+        </div>
+        <textarea name="message" rows="5" placeholder="Mesaj ou..." required></textarea>
+        <button class="btn" type="submit">Voye</button>
+      </form>
+      <div class="card" style="padding:16px">
+        <h4>Enfòmasyon</h4>
+        <p>Email: <a href="mailto:briyantsigno@gmail.com">briyantsigno@gmail.com</a></p>
+        <p>WhatsApp: <a href="https://wa.me/13175381150" target="_blank">(317) 538-1150</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container row between center">
+      <p>© <span id="y"></span> Briyant Solèy Signo 1815 — Tout dwa rezève.</p>
+      <a href="#lakay">Retounen anlè</a>
+    </div>
+  </footer>
+
+  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>
