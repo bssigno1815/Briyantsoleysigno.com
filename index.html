@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ht">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Briyant Solèy Signo 1815</title>
+  <link rel="icon" href="assets/logo-bss.png" />
+  <style>
+    :root{ --orange:#F4A261; --black:#000000; }
+    html,body{margin:0;padding:0;min-height:100%;
+      background:linear-gradient(to bottom,var(--black) 0%,var(--black) 30%,var(--orange) 100%);
+      font-family:system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial,sans-serif;
+      color:var(--black);
+    }
+    /* Zones */
+    .on-black,* .on-black{color:var(--orange)!important}
+    .on-orange,* .on-orange{color:var(--black)!important}
+
+    /* Header */
+    .header{position:sticky;top:0;z-index:10;background:var(--black);
+      border-bottom:2px solid var(--orange);padding:12px 16px;display:flex;align-items:center;gap:12px}
+    .logo{width:44px;height:44px;object-fit:contain;background:#000;border-radius:10px}
+    .brand{font-weight:900;letter-spacing:.5px}
+    .nav{margin-left:auto;display:flex;gap:14px}
+    .nav a{color:var(--orange);text-decoration:none;font-weight:700}
+
+    /* Hero */
+    .hero{position:relative;isolation:isolate;padding:60px 16px 40px}
+    .hero::before{content:"";position:absolute;inset:0;z-index:-1;
+      background:url('assets/mote.jpg') center/cover no-repeat;filter:brightness(.42) saturate(1.05)}
+    .hero h1{margin:0 0 8px 0;font-size:clamp(28px,4vw,44px)}
+    .hero p{margin:0 0 16px 0}
+    .btn{display:inline-block;padding:12px 16px;border-radius:14px;font-weight:800;text-decoration:none}
+    .btn.on-black{background:var(--orange);color:var(--black);border:0}
+    .btn.on-orange{background:var(--black);color:var(--orange);border:2px solid var(--black)}
+
+    /* Sections */
+    .wrap{max-width:1000px;margin:0 auto}
+    section{padding:36px 16px}
+    h2{margin:0 0 12px 0;font-size:clamp(20px,3vw,28px)}
+    .cards{display:grid;gap:16px;grid-template-columns:repeat(3,1fr)}
+    .card{border:2px solid var(--black);border-radius:16px;padding:14px}
+    .card.on-black{border-color:var(--orange)}
+    .card.on-orange{border-color:var(--black)}
+    @media (max-width:860px){ .cards{grid-template-columns:1fr} }
+
+    /* Footer (solid black end) */
+    .footer{background:var(--black);color:var(--orange);
+      border-top:2px solid var(--orange);padding:18px 16px;text-align:center}
+  </style>
+</head>
+<body>
+
+  <!-- Header (always on black) -->
+  <header class="header on-black wrap">
+    <img class="logo" src="assets/logo-bss.png" alt="BSS" />
+    <div class="brand on-black">BRIYANT SOLÈY SIGNO 1815</div>
+    <nav class="nav">
+      <a href="#lakay">Lakay</a>
+      <a href="#magazen">Magazen</a>
+      <a href="#dirijan">Ansyen Dirijan</a>
+      <a href="#dokiman">Dokiman</a>
+      <a href="#kontak">Kontak</a>
+      <a href="/fr/index.html">FR</a>
+      <a href="/en/index.html">EN</a>
+    </nav>
+  </header>
+
+  <!-- Hero (text in orange on black) -->
+  <section id="lakay" class="hero on-black">
+    <div class="wrap">
+      <h1>Yon motè nèf, yon sèl kout klé san bri.</h1>
+      <p>Briyant Solèy: yon montay, yon vizyon, yon limyè ki pap janm etenn.</p>
+      <a class="btn on-black" href="#magazen">Ale nan Magazen</a>
+    </div>
+  </section>
+
+  <!-- Magazen (stay in black zone) -->
+  <section id="magazen" class="on-black">
+    <div class="wrap">
+      <h2>Magazen Ofisyèl</h2>
+      <div class="cards">
+        <div class="card on-black">Atik #1</div>
+        <div class="card on-black">Atik #2</div>
+        <div class="card on-black">Atik #3</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ansyen Dirijan (place near orange zone) -->
+  <section id="dirijan" class="on-orange">
+    <div class="wrap">
+      <h2>Ansyen Dirijan</h2>
+      <div class="cards">
+        <div class="card on-orange">Non · Tit · Ane</div>
+        <div class="card on-orange">Non · Tit · Ane</div>
+        <div class="card on-orange">Non · Tit · Ane</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dokiman (also on orange side) -->
+  <section id="dokiman" class="on-orange">
+    <div class="wrap">
+      <h2>Dokiman</h2>
+      <div class="cards">
+        <div class="card on-orange"><a href="docs/yon-dokiman.pdf">Telechaje PDF</a></div>
+        <div class="card on-orange">Lis Dokiman</div>
+        <div class="card on-orange">Plis Byento</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kontak -->
+  <section id="kontak" class="on-orange">
+    <div class="wrap">
+      <h2>Kontak</h2>
+      <div class="cards">
+        <div class="card on-orange">
+          Imèl: briyantsigno@gmail.com<br/>
+          WhatsApp: (317) 538-1150
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer (solid black end) -->
+  <footer class="footer">
+    © 2025 Briyant Solèy Signo 1815 — Tout dwa rezève.
+  </footer>
+</body>
+</html>
