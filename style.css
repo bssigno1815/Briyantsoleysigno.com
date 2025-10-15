@@ -1,4 +1,14 @@
-background: linear-gradient(180deg,:root{
+.on-black {
+  color: #F4A261;  /* apricot orange text on black */
+}
+
+.on-orange {
+  color: #000000;  /* black text on orange */
+}
+
+h1, h2, h3, p {
+  margin: 0.5rem 0;
+}background: linear-gradient(180deg,:root{
   --orange:#F4A261; /* your apricot */
   --black:#000000;
 } #000000 0%, #000000 30%, #F4A261 100%);.logo {
