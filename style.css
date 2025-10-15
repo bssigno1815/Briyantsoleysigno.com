@@ -1,78 +1,49 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(180deg, #000000 0%, #ff8c00 100%);
-  color: white;
-  text-align: center;
+:root{
+  --noir:#0a0a0a;        /* nwa fonse */
+  --orange:#ff8c2a;     /* zoranj sèl koulè */
+  --orange-dim:#c56a1f; /* vèsyon pi fonse pou li sou zoranj */
 }
-
-/* Header ak logo */
-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1.5rem 0;
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family: system-ui, Arial, sans-serif;
+  background: linear-gradient(180deg, var(--orange) 0%, var(--noir) 38%);
+  color: var(--orange);
 }
-
-.logo {
-  width: 130px;
-  margin-bottom: 1rem;
-  filter: drop-shadow(0 0 10px #ff8c00);
+.topbar{
+  display:flex; align-items:center; gap:24px;
+  padding:14px 20px;
 }
+.logo{height:40px; width:auto; display:block}
 
-nav a {
-  color: #ff8c00;
-  margin: 0 8px;
-  text-decoration: none;
-  font-weight: bold;
+.nav{display:flex; gap:14px; flex-wrap:wrap}
+.nav__link{color:var(--orange); text-decoration:none; opacity:.9}
+.nav__link:hover{opacity:1; text-decoration:underline}
+
+/* Hero */
+.hero{
+  min-height: calc(100vh - 120px);
+  display:grid; place-items:center; text-align:center;
+  padding: 32px 16px;
 }
-
-nav a:hover {
-  color: white;
+.hero h1{font-size: clamp(28px, 6vw, 56px); letter-spacing:.5px}
+.hero p{margin-top:10px; font-size:clamp(14px, 2.5vw, 18px); opacity:.9}
+.cta{
+  margin-top:18px; display:inline-block;
+  border:2px solid var(--orange);
+  padding:10px 18px; border-radius:10px;
+  color:var(--orange); text-decoration:none; font-weight:600;
 }
+.cta:hover{background:rgba(255,140,42,.08)}
 
-/* Tèks prensipal */
-h1 {
-  color: #ff8c00;
-  font-size: 2rem;
-  margin-top: 1rem;
-}
-
-p {
-  color: white;
-  font-size: 1rem;
-}
-
-button {
-  background-color: #ff8c00;
-  color: #000;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-button:hover {
-  background-color: #ffa733;
-}
-
-/* Galeri motè */
-.gallery {
-  margin-top: 2rem;
-}
-
-.motor-photo {
-  width: 85%;
-  max-width: 500px;
-  border-radius: 12px;
-  border: 3px solid #ff8c00;
-  box-shadow: 0 0 15px #ff8c00;
+/* Engine image — sou bò dwat, pa deranje tèks */
+.engine{
+  margin-top:26px; width:min(420px, 70vw); height:auto;
+  filter: drop-shadow(0 0 18px rgba(255,140,42,.25));
 }
 
 /* Footer */
-footer {
-  margin-top: 2rem;
-  font-size: 0.9rem;
-  color: #ff8c00;
+.foot{
+  text-align:center; padding:16px; border-top:1px solid rgba(255,140,42,.25);
+  color:var(--orange-dim);
 }
