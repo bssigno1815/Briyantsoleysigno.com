@@ -1,4 +1,32 @@
-body {
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3rem;
+}
+
+.logo {
+  height: 70px;
+}
+
+nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* Hero section */
+.hero {
+  text-align: center;
+  padding: 8rem 2rem;
+}
+
+/* Lang switch */
+.lang-switch {
+  margin-left: 20px;
+  font-size: 0.9rem;
+}body {
   margin: 0;
   font-family: system-ui, sans-serif;
   background: linear-gradient(to bottom, #F4A261 0%, #000000 90%);
