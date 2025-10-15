@@ -1,4 +1,14 @@
-/* HERO: engine image under a dark mask; text = orange on black */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3rem;
+}
+nav a {
+  margin: 0 12px;
+  text-decoration: none;
+  font-weight: 600;
+}/* HERO: engine image under a dark mask; text = orange on black */
 .hero {
   position: relative;
   padding: 72px 16px 56px;
