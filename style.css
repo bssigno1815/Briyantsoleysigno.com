@@ -1,73 +1,78 @@
-/* --- Baz Layout --- */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(180deg, #000000 0%, #000000 50%, #f4a261 100%);
+  background: linear-gradient(180deg, #000000 0%, #ff8c00 100%);
   color: white;
   text-align: center;
 }
 
-/* --- Header --- */
+/* Header ak logo */
 header {
-  padding: 1.5rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  padding: 1.5rem 0;
 }
 
 .logo {
-  width: 120px;
+  width: 130px;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 10px #ff8c00);
 }
 
 nav a {
-  color: #f4a261;
+  color: #ff8c00;
+  margin: 0 8px;
   text-decoration: none;
-  margin: 0 10px;
   font-weight: bold;
 }
 
 nav a:hover {
-  text-decoration: underline;
-}
-
-.lang a {
   color: white;
-  margin: 0 4px;
 }
 
-/* --- Main Section --- */
-main {
-  padding: 4rem 1rem;
-}
-
+/* Tèks prensipal */
 h1 {
+  color: #ff8c00;
   font-size: 2rem;
-  margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 
 p {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
+  color: white;
+  font-size: 1rem;
 }
 
-/* --- Button --- */
-.btn {
-  background: #f4a261;
-  color: black;
-  text-decoration: none;
-  padding: 0.7rem 1.5rem;
+button {
+  background-color: #ff8c00;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
   border-radius: 5px;
+  cursor: pointer;
   font-weight: bold;
 }
 
-.btn:hover {
-  background: #ffb46a;
+button:hover {
+  background-color: #ffa733;
 }
 
-/* --- Footer --- */
+/* Galeri motè */
+.gallery {
+  margin-top: 2rem;
+}
+
+.motor-photo {
+  width: 85%;
+  max-width: 500px;
+  border-radius: 12px;
+  border: 3px solid #ff8c00;
+  box-shadow: 0 0 15px #ff8c00;
+}
+
+/* Footer */
 footer {
-  background: #000;
-  padding: 1rem;
+  margin-top: 2rem;
   font-size: 0.9rem;
+  color: #ff8c00;
 }
