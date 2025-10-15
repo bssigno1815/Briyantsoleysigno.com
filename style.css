@@ -1,0 +1,29 @@
+:root{
+  --orange: #ff7a00;   /* si w vle yon lòt ton, di m egzak kòd HEX la */
+  --black: #000000;
+}
+
+/* background: black ➜ orange (fade) */
+body{
+  background: linear-gradient(180deg, var(--black) 0%, #120a00 55%, var(--orange) 100%);
+  min-height: 100vh;
+}
+
+/* Tèks sou fon nwa = zoranj; sou fon zoranj = nwa */
+.on-black{ color: var(--orange); }
+.on-orange{ color: var(--black); }
+
+/* Tit prensipal yo sou fon nwa pou yo klere */
+h1,h2,h3{ color: var(--orange); }
+
+/* Bouton BSS: liy zoranj, tèks zoranj; sou hover vin zoranj ak tèks nwa */
+.btn{
+  background: transparent;
+  color: var(--orange);
+  border: 2px solid var(--orange);
+  padding: .6rem 1rem; border-radius: 10px;
+}
+.btn:hover{ background: var(--orange); color: var(--black); }
+
+/* Ti separe liy zoranj si w ap itilize yo */
+.hr-orange{ height:2px; background: linear-gradient(90deg,var(--orange),transparent); border:0; }
