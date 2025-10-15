@@ -1,7 +1,4 @@
-:background: linear-gradient(to right, #000000, #f7941d);root{
-  --orange:#ff8c00;  /* orange only */
-  --black:#000000;   /* black only */
-}
+
 
 /* Background: black ⇄ orange vertical gradient */
 html,body{
