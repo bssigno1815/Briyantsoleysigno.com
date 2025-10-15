@@ -1,0 +1,51 @@
+:root{
+  --orange:#ff8c00;  /* orange only */
+  --black:#000000;   /* black only */
+}
+
+/* Background: black ⇄ orange vertical gradient */
+html,body{
+  height:100%;
+  margin:0;
+}
+body{
+  background: linear-gradient(180deg, var(--black) 0%, var(--black) 40%, var(--orange) 60%, var(--orange) 100%);
+  font-family: system-ui, Arial, sans-serif;
+  color: var(--orange);           /* orange text on black */
+}
+
+/* Header */
+.site-header{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px 20px;
+}
+.brand{display:flex; align-items:center; gap:10px; text-decoration:none;}
+.logo{width:44px; height:auto; display:block;}
+.brand-text{color:var(--orange); font-weight:700; letter-spacing:.05em;}
+.nav a{color:var(--orange); text-decoration:none; margin-left:14px; font-weight:600;}
+.nav a:hover{outline:1px solid var(--orange); padding:2px 6px; border-radius:8px}
+
+/* Hero */
+.hero{max-width:980px; margin:8vh auto; padding:0 20px; text-align:left;}
+.title{
+  margin:0 0 10px 0; font-size:clamp(32px,6vw,72px); line-height:1.05;
+  color:var(--orange);
+  -webkit-text-stroke: 1px var(--black); /* stays readable over orange band */
+}
+.tag{margin:0 0 24px 0; font-size:clamp(16px,2.5vw,22px);}
+.cta{
+  display:inline-block; text-decoration:none;
+  color:var(--orange); border:2px solid var(--orange); border-radius:12px;
+  padding:10px 16px; font-weight:700;
+}
+.cta:hover{background:rgba(255,140,0,.12)}
+.engine{
+  display:block; width:min(420px,60vw); height:auto; margin:28px 0 0 0;
+  outline:2px solid var(--orange); /* visible even if image fails */
+}
+
+/* Footer */
+.site-footer{
+  padding:30px 20px; color:var(--black); text-align:left;
+  /* Footer sits on orange zone -> black text for contrast */
+}
