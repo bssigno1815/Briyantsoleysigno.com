@@ -1,4 +1,20 @@
-.on-black {
+/* HERO: engine image under a dark mask; text = orange on black */
+.hero {
+  position: relative;
+  padding: 72px 16px 56px;
+}
+.hero::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: url("assets/mote.jpg") center/cover no-repeat;
+  filter: brightness(0.35) saturate(1.05);  /* keeps it dark so orange text pops */
+  z-index: -1;
+}
+
+/* Buttons — only orange & black */
+.btn { display:inline-block; padding:12px 18px; border-radius:12px; font-weight:800; text-decoration:none; }
+.btn.on-black { background:#F4A261; color:#000; border:0; }   /* use on black area */
+.btn.on-orange{ background:#000; color:#F4A261; border:2px solid #000; } /* use on orange area */.on-black {
   color: #F4A261;  /* apricot orange text on black */
 }
 
