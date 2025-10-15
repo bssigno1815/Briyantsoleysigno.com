@@ -1,4 +1,19 @@
-:root{
+/* Logo + “BSS” */
+.brand{display:flex;align-items:center;gap:10px}
+.logo{height:44px;width:auto;display:block}
+.brand__text{
+  font-weight:800; letter-spacing:.08em;
+  color:var(--orange); /* fè “BSS” vizib sou nwa */
+}
+
+/* Mete motè a bèl epi vizib */
+.engine{
+  display:block;
+  margin:26px auto 0;
+  width:min(420px, 70vw);
+  height:auto;
+  filter: drop-shadow(0 0 18px rgba(255,140,42,.25));
+}:root{
   --noir:#0a0a0a;        /* nwa fonse */
   --orange:#ff8c2a;     /* zoranj sèl koulè */
   --orange-dim:#c56a1f; /* vèsyon pi fonse pou li sou zoranj */
