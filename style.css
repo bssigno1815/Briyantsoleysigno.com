@@ -1,4 +1,8 @@
-:root{
+.logo {
+  height: 90px;
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(255,140,0,0.4);
+}:root{
   --orange: #ff7a00;   /* si w vle yon lòt ton, di m egzak kòd HEX la */
   --black: #000000;
 }
