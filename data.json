@@ -1,3 +1,0 @@
-fetch('/data.json')               // ensure the path is correct
-  .then(r => r.json())            // server must return application/json
-  .then(data => { /* use it */ });
