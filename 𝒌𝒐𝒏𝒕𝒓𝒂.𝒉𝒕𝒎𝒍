@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ht">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kontra ak Ti Machann | BSS</title>
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+  <header>
+    <h1>Kontra ak Ti Machann</h1>
+  </header>
+
+  <main>
+    <p>Seksyon sa a ap pèmèt ou jere kontra, verifye done, epi telechaje dokiman ofisyèl Ti Machann yo.</p>
+  </main>
+
+  <footer>
+    <p>© Briyant Solèy Signo 1815</p>
+  </footer>
+</body>
+</html>
