@@ -1,4 +1,26 @@
-
+.lang-toggle {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-weight: 600;
+  background: rgba(0,0,0,.28);
+  padding: 6px 10px;
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
+}
+.lang-toggle a {
+  text-decoration: none;
+  color: #ffd7a3;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+.lang-toggle a:hover {
+  background: rgba(255,255,255,.08);
+}
+.lang-toggle span { opacity: .55; }
 
 /* layout */
 .container {
