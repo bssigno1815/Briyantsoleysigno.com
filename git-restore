@@ -1,1 +1,0 @@
-git restore --source=<GOOD_COMMIT_SHA> -- package.json vercel.json tsconfig.json
