@@ -1,2 +1,0 @@
-git tag -a v1.0-final -m "Final stable release of briyantsoleysigno.com"
-git push origin v1.0-final
