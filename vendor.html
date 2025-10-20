@@ -1,90 +1,55 @@
 <!doctype html>
-<html lang="en">
+<html lang="ht">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Ti Machann • Register</title>
-  <link rel="stylesheet" href="/css/normalize.css">
-  <link rel="stylesheet" href="/css/brand.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BSS — Vendor</title>
+  <style>
+    /* same palette */
+    :root{--bg1:#f59e0b;--bg2:#0b0b0b;--ink:#f5f5f5;--muted:#c4a98a;--chip:#1a1a1a;--chipRing:#f59e0b}
+    html,body{margin:0;padding:0;background:#000;color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
+    .wrap{min-height:100dvh;background:linear-gradient(180deg,var(--bg1),#3a2509 55%,var(--bg2));display:flex;align-items:center;justify-content:center;padding:24px}
+    .card{width:min(900px,100%);border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:24px;background:rgba(0,0,0,.35);backdrop-filter:saturate(140%) blur(6px);box-shadow:0 10px 40px rgba(0,0,0,.45)}
+    a{color:inherit;text-decoration:none}
+    .chip{display:inline-flex;gap:8px;align-items:center;background:var(--chip);padding:10px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.08)}
+    h1{margin:0 0 16px;font-size:clamp(22px,4.2vw,36px);letter-spacing:.04em}
+    form{display:grid;gap:12px;grid-template-columns:1fr 1fr}
+    label{font-size:13px;color:var(--muted)}
+    input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0f0f0f;color:var(--ink)}
+    .full{grid-column:1/-1}
+    .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+    .cta{background:#161616;border:1px solid rgba(245,158,11,.55)}
+  </style>
 </head>
 <body>
-<header class="nav">
-  <img class="logo" src="/img/logo-bss.svg" alt="BSS">
-  <div class="brand">Ti Machann • New</div>
-  <nav>
-    <a href="/index.html">Home</a>
-    <a href="/admin.html">Admin</a>
-  </nav>
-</header>
-
-<main style="padding:1.25rem">
-  <form id="vendorForm" class="card">
-    <div class="grid two">
-      <div>
-        <label>Vendor Name*</label>
-        <input name="name" required/>
+  <div class="wrap">
+    <main class="card">
+      <div class="row">
+        <a class="chip" href="index.html">← Retounen lakay</a>
       </div>
-      <div>
-        <label>Email*</label>
-        <input type="email" name="email" required/>
-      </div>
-      <div>
-        <label>Primary Phone*</label>
-        <input name="phone" placeholder="+1 555 123 4567" required/>
-      </div>
-      <div>
-        <label>Alt Phone</label>
-        <input name="phone2"/>
-      </div>
-      <div>
-        <label>Category / Goods</label>
-        <input name="category" placeholder="Food, Apparel, Drinks…"/>
-      </div>
-      <div>
-        <label>Company</label>
-        <input name="company"/>
-      </div>
-      <div>
-        <label>Address</label>
-        <input name="address"/>
-      </div>
-      <div>
-        <label>Social / Website</label>
-        <input name="social"/>
-      </div>
-      <div>
-        <label>Emergency Contact (name/phone)</label>
-        <input name="emergency"/>
-      </div>
-      <div>
-        <label>Notes</label>
-        <textarea name="notes" rows="3"></textarea>
-      </div>
-    </div>
-
-    <div class="grid two" style="margin-top:1rem">
-      <button type="button" class="btn outline" id="saveDraftBtn">Save Draft</button>
-      <button type="submit" class="btn">Finalize & Generate PDF</button>
-    </div>
-  </form>
-
-  <section class="card" style="margin-top:1rem">
-    <h3>Badge Preview</h3>
-    <div class="badge-preview" id="badge">
-      <div class="title">BSS • VENDOR</div>
-      <div id="badgeName">Your Name</div>
-    </div>
-    <div style="margin-top:1rem">
-      <button class="btn" id="downloadBadgeBtn">Download Badge</button>
-    </div>
-  </section>
-</main>
-
-<footer>© BSS 1815</footer>
-
-<script src="/js/firebase.js"></script>
-<script src="/js/vendor-form.js"></script>
-<script src="/js/pdf-badge.js"></script>
-<script src="/js/notify.js"></script>
+      <h1>Generate Vendor Badge</h1>
+      <form>
+        <div>
+          <label>Vendor Name</label>
+          <input placeholder="Non konpayi an" />
+        </div>
+        <div>
+          <label>Vendor ID</label>
+          <input placeholder="VW-0001" />
+        </div>
+        <div>
+          <label>Phone (for QR)</label>
+          <input placeholder="+1 555 123 4567" />
+        </div>
+        <div>
+          <label>Notes (optional)</label>
+          <input placeholder="Remak kout" />
+        </div>
+        <div class="full row">
+          <a class="chip cta" href="#">Telechaje Badge (PDF)</a>
+        </div>
+      </form>
+    </main>
+  </div>
 </body>
 </html>
