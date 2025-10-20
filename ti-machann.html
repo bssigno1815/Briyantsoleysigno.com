@@ -1,19 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="ht">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ti Machann | BSS</title>
-  <link rel="stylesheet" href="css/global.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BSS — Ti Machann</title>
+  <style>
+    :root{--bg1:#f59e0b;--bg2:#0b0b0b;--ink:#f5f5f5;--muted:#c4a98a;--chip:#1a1a1a;--chipRing:#f59e0b}
+    html,body{margin:0;padding:0;background:#000;color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
+    .wrap{min-height:100dvh;background:linear-gradient(180deg,var(--bg1),#3a2509 55%,var(--bg2));display:flex;align-items:center;justify-content:center;padding:24px}
+    .card{width:min(900px,100%);border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:24px;background:rgba(0,0,0,.35);backdrop-filter:saturate(140%) blur(6px);box-shadow:0 10px 40px rgba(0,0,0,.45)}
+    a{color:inherit;text-decoration:none}
+    .chip{display:inline-flex;gap:8px;align-items:center;background:var(--chip);padding:10px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.08)}
+    h1{margin:0 0 16px;font-size:clamp(22px,4.2vw,36px);letter-spacing:.04em}
+    .list{display:grid;gap:12px}
+    .item{display:flex;justify-content:space-between;gap:12px;align-items:center;background:#0f0f0f;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:12px 14px}
+    .muted{color:var(--muted);font-size:13px}
+  </style>
 </head>
 <body>
-  <header>
-    <img src="img/logo.png" alt="BSS Logo" class="logo" />
-    <h1>Ti Machann</h1>
-  </header>
-
-  <main>
-    <p>Section for Ti Machann info, badges, or contracts will go here.</p>
-  </main>
+  <div class="wrap">
+    <main class="card">
+      <div class="chip"><a href="index.html">← Retounen lakay</a></div>
+      <h1>Ti Machann</h1>
+      <div class="list">
+        <div class="item">
+          <div>
+            <strong>Machann A</strong>
+            <div class="muted">Resevwa peman | badge valide</div>
+          </div>
+          <a class="chip" href="#">Gade detay</a>
+        </div>
+        <div class="item">
+          <div>
+            <strong>Machann B</strong>
+            <div class="muted">An atant verifikasyon</div>
+          </div>
+          <a class="chip" href="#">Gade detay</a>
+        </div>
+      </div>
+    </main>
+  </div>
 </body>
 </html>
