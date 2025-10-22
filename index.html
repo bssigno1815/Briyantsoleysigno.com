@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ht">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Briyant Solèy Signo 1815</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background-color: #000;
+      color: #ffa64d; /* apricot orange */
+      text-align: center;
+    }
+
+    /* HEADER */
+    .brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background: linear-gradient(to bottom, #ffa64d, #000);
+      color: #ffa64d;
+      padding: 25px 15px;
+    }
+
+    .brand .logo {
+      width: 160px;
+      max-width: 90%;
+      border-radius: 12px;
+      margin-bottom: 10px;
+    }
+
+    .brand .title {
+      font-size: 1.8rem;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .brand .subtitle {
+      font-size: 1rem;
+      margin-top: 5px;
+      opacity: 0.9;
+    }
+
+    /* LANGUAGE TOGGLE */
+    .toggle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .toggle button {
+      background-color: #000;
+      color: #ffa64d;
+      border: 2px solid #ffa64d;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+
+    .toggle button:hover {
+      background-color: #ffa64d;
+      color: #000;
+    }
+
+    .toggle button[aria-pressed="true"] {
+      background-color: #ffa64d;
+      color: #000;
+    }
+
+    /* LANGUAGE DISPLAY CONTROL */
+    [data-lang="ht"] .i-fr, [data-lang="ht"] .i-en,
+    [data-lang="fr"] .i-ht, [data-lang="fr"] .i-en,
+    [data-lang="en"] .i-ht, [data-lang="en"] .i-fr {
+      display: none;
+    }
+
+    /* RESERVED ENGINE SECTION */
+    .engine {
+      margin: 20px 0;
+    }
+
+    .engine img {
+      width: 220px;
+      max-width: 90%;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .engine small {
+      display: block;
+      opacity: 0.85;
+      font-size: 0.9rem;
+    }
+
+  </style>
+</head>
+<body data-lang="ht">
+
+  <!-- HEADER SECTION -->
+  <header class="brand">
+    <img class="logo" src="/assets/bss-logo.png" alt="BSS Logo" onerror="this.style.display='none'">
+    <div>
+      <div class="title">BRIYANT SOLÈY SIGNO 1815</div>
+      <div class="subtitle i-ht">Yon motè nèf, yon sèl kout kle san bri.</div>
+      <div class="subtitle i-fr">Un moteur neuf, un seul tour de clé sans bruit.</div>
+      <div class="subtitle i-en">A brand-new engine; one clean turn, zero noise.</div>
+    </div>
+  </header>
+
+  <!-- RESERVED SECTION FOR REAL ENGINE IMAGE -->
+  <section class="engine">
+    <!-- Upload your official BSS engine image and uncomment below -->
+    <!-- <img src="/assets/engine-bss.jpg" alt="BSS Engine"> -->
+    <small class="i-ht">BSS Engine — vit, trankil, serye.</small>
+    <small class="i-fr">BSS Engine — rapide, silencieux, fiable.</small>
+    <small class="i-en">BSS Engine — fast, quiet, dependable.</small>
+  </section>
+
+  <!-- LANGUAGE TOGGLE -->
+  <div class="toggle" role="group" aria-label="Language toggle">
+    <button id="btn-ht" type="button" aria-pressed="true">KREYÒL</button>
+    <button id="btn-fr" type="button" aria-pressed="false">FRANÇAIS</button>
+    <button id="btn-en" type="button" aria-pressed="false">ENGLISH</button>
+  </div>
+
+  <!-- LANGUAGE SCRIPT -->
+  <script>
+    const root = document.body;
+    const langs = ["ht", "fr", "en"];
+    const btns = {
+      ht: document.getElementById("btn-ht"),
+      fr: document.getElementById("btn-fr"),
+      en: document.getElementById("btn-en"),
+    };
+
+    function setLang(lang) {
+      root.setAttribute("data-lang", lang);
+      langs.forEach(l => btns[l].setAttribute("aria-pressed", l === lang));
+      document.documentElement.lang = lang;
+      try { localStorage.setItem("bss_lang", lang); } catch(e){}
+    }
+
+    Object.entries(btns).forEach(([k, b]) =>
+      b.addEventListener("click", () => setLang(k))
+    );
+
+    try {
+      const saved = localStorage.getItem("bss_lang");
+      if (langs.includes(saved)) setLang(saved);
+    } catch(e){}
+  </script>
+
+</body>
+</html>
