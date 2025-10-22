@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ht">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BRIYANT SOLÈY SIGNO 1815</title>
+  <style>
+    :root{
+      --gold:#f2c46d; --amber:#ffb14a; --ink:#000; --cream:#1a1a1a; --text:#ffd27a;
+      --btn-bg:#0e0e0e; --btn-on:#2a1c07; --white:#fff;
+    }
+    html,body{height:100%;margin:0}
+    *,*:before,*:after{box-sizing:border-box}
+    body{
+      min-height:100vh; margin:0; background:#000; color:var(--text);
+      font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;
+      display:grid; place-items:center;
+    }
+    main{width:min(900px,92vw); text-align:center; padding:28px 16px}
+    /* top fade (amber→black) */
+    .fade{
+      height:120px; border:2px solid rgba(242,196,109,.35); border-radius:18px;
+      background:linear-gradient(180deg, var(--amber) 0%, #cf7d1f 35%, #000 80%);
+      margin:0 auto 20px; box-shadow:inset 0 -30px 50px rgba(0,0,0,.55);
+    }
+    .logo{
+      width:140px; max-width:60vw; height:auto; display:block; margin:-70px auto 10px;
+      filter:drop-shadow(0 2px 12px rgba(0,0,0,.6));
+    }
+    h1{margin:6px 0 6px; font-size:clamp(26px,5vw,44px); color:var(--white); letter-spacing:.02em}
+    .motto{margin:0 0 8px; color:var(--gold); font-weight:600; font-size:clamp(14px,2.3vw,18px)}
+    .tag{margin:0 0 24px; color:var(--text); font-size:clamp(14px,2.3vw,18px)}
+    .langs{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-bottom:20px}
+    .btn{
+      border:2px solid var(--gold); background:var(--btn-bg); color:var(--gold);
+      padding:12px 18px; border-radius:12px; font-weight:700; letter-spacing:.02em; cursor:pointer;
+      transition:.18s ease; box-shadow:0 0 0 0 rgba(242,196,109,.35);
+    }
+    .btn:hover{ transform:translateY(-1px) }
+    .btn.active{ background:var(--gold); color:var(--btn-on) }
+    .engine{
+      display:block; width:min(480px,92%); height:auto; margin:14px auto 0;
+      border-radius:14px; border:1px solid rgba(242,196,109,.25);
+      box-shadow:0 10px 30px rgba(0,0,0,.55);
+    }
+    footer{ margin-top:26px; font-size:12px; opacity:.75 }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="fade" aria-hidden="true"></div>
+
+    <!-- Images MUST be named exactly like the src below and live next to index.html -->
+    <img class="logo" src="./bss-logo.png" alt="BSS Logo" onerror="this.style.display='none'"/>
+
+    <h1 id="title">BRIYANT SOLÈY SIGNO 1815</h1>
+
+    <p id="motto" class="motto">Yon motè nèf, yon sèl kout kle san bri.</p>
+    <p id="tagline" class="tag">BSS Engine — vit, trankil, sereye.</p>
+
+    <div class="langs">
+      <button class="btn active" data-lang="ht">KREYÒL</button>
+      <button class="btn" data-lang="fr">FRANÇAIS</button>
+      <button class="btn" data-lang="en">ENGLISH</button>
+    </div>
+
+    <!-- Optional engine picture; remove if you don’t want it -->
+    <img class="engine" src="./engine.png" alt="Brand-new engine"
+         onerror="this.style.display='none'"/>
+
+    <footer>© 2025 Briyant Solèy Signo 1815 — Tout dwa rezève.</footer>
+  </main>
+
+  <script>
+    // One copy block, three languages
+    const copy = {
+      ht:{ title:"BRIYANT SOLÈY SIGNO 1815",
+           motto:"Yon motè nèf, yon sèl kout kle san bri.",
+           tag:"BSS Engine — vit, trankil, sereye." },
+      fr:{ title:"BRIYANT SOLÈY SIGNO 1815",
+           motto:"Un moteur neuf, un seul tour de clé sans bruit.",
+           tag:"BSS Engine — rapide, silencieux, fiable." },
+      en:{ title:"BRYANT SOLEY SIGNO 1815",
+           motto:"A brand-new engine; one clean turn, zero noise.",
+           tag:"BSS Engine — fast, quiet, steady." }
+    };
+    const $ = s => document.querySelector(s);
+    const title = $("#title"), motto=$("#motto"), tag=$("#tagline");
+    const btns = document.querySelectorAll(".btn[data-lang]");
+    const setLang = L => {
+      const c = copy[L] || copy.ht;
+      title.textContent = c.title; motto.textContent = c.motto; tag.textContent = c.tag;
+      btns.forEach(b => b.classList.toggle("active", b.dataset.lang===L));
+      document.documentElement.lang = L;
+      localStorage.setItem("bss_lang", L);
+    };
+    btns.forEach(b => b.addEventListener("click", () => setLang(b.dataset.lang)));
+    setLang(localStorage.getItem("bss_lang") || "ht");
+  </script>
+</body>
+</html>
