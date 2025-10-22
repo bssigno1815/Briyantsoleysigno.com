@@ -1,0 +1,57 @@
+<!-- HEADER SECTION -->
+<header class="brand">
+  <img class="logo" src="/assets/logo.png" alt="BSS Logo" onerror="this.style.display='none'">
+  <div>
+    <div class="title">BRIYANT SOLÈY SIGNO</div>
+    <div class="subtitle i-ht">Yon motè nèf, yon sèl kout kle san bri.</div>
+    <div class="subtitle i-fr">Un moteur neuf, un seul tour de clé sans bruit.</div>
+    <div class="subtitle i-en">A brand-new engine; one clean turn, zero noise.</div>
+  </div>
+</header>
+
+<!-- ENGINE IMAGE -->
+<section class="engine">
+  <img src="/assets/engine.png" alt="BSS Engine" onerror="this.style.display='none'">
+  <small class="i-ht">BSS Engine — vit, trankil, serye.</small>
+  <small class="i-fr">BSS Engine — rapide, silencieux, fiable.</small>
+  <small class="i-en">BSS Engine — fast, quiet, dependable.</small>
+</section>
+
+<!-- LANGUAGE TOGGLE -->
+<div class="toggle" role="group" aria-label="Language toggle">
+  <button id="btn-ht" type="button" aria-pressed="true">KREYÒL</button>
+  <button id="btn-fr" type="button" aria-pressed="false">FRANÇAIS</button>
+  <button id="btn-en" type="button" aria-pressed="false">ENGLISH</button>
+</div>
+
+<!-- LANGUAGE SWITCH SCRIPT -->
+<script>
+  const root = document.body;
+  const langs = ["ht", "fr", "en"];
+  const btns = {
+    ht: document.getElementById("btn-ht"),
+    fr: document.getElementById("btn-fr"),
+    en: document.getElementById("btn-en"),
+  };
+
+  function setLang(lang) {
+    root.setAttribute("data-lang", lang);
+    langs.forEach(l => btns[l].setAttribute("aria-pressed", l === lang));
+    document.documentElement.lang = lang;
+    try { localStorage.setItem("bss_lang", lang); } catch(e){}
+  }
+
+  Object.entries(btns).forEach(([k, b]) => b.addEventListener("click", () => setLang(k)));
+
+  try {
+    const saved = localStorage.getItem("bss_lang");
+    if (langs.includes(saved)) setLang(saved);
+  } catch(e){}
+</script>
+
+<!-- ADD TO YOUR CSS -->
+<style>
+  [data-lang="ht"] .i-fr, [data-lang="ht"] .i-en,
+  [data-lang="fr"] .i-ht, [data-lang="fr"] .i-en,
+  [data-lang="en"] .i-ht, [data-lang="en"] .i-fr { display:none; }
+</style>
