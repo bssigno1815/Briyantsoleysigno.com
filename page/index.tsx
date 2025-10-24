@@ -1,8 +1,6 @@
-import Head from 'next/head'
-
-export default function Home() {
-  return (
-    <>
+<img src="/assets/your-logo-name.png" alt="BSS Logo">
+<img src="/assets/your-engine-name.png" alt="BSS Engine">
+    
       <Head>
         <title>Briyant Solèy Signo 1815</title>
         <meta name="description" content="BSS - Sit ofisyèl" />
