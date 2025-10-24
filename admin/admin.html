@@ -1,4 +1,43 @@
-import CommentsBox from "@/components/CommentsBox";
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>BSS Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="bss-theme.css" rel="stylesheet">
+</head>
+<body class="theme-bss">
+
+  <header class="header-bss">
+    <div class="center p-16" style="justify-content:space-between;">
+      <div class="center">
+        <img src="logo-bss.png" alt="BSS" style="height:40px;">
+        <strong style="margin-left:8px;">BSS Admin</strong>
+      </div>
+      <div class="badge-bss">Super Admin</div>
+    </div>
+  </header>
+
+  <main class="p-16">
+    <div class="card-bss">
+      <h2 style="margin-top:0;">Panel</h2>
+      <div class="center" style="flex-wrap:wrap;">
+        <a class="btn-bss" href="engine.html">BSS-ENGINE</a>
+        <a class="btn-bss btn-bss-outline" href="index.html">Retounen lakay</a>
+      </div>
+      <div class="mt-16">
+        <label style="display:block;margin-bottom:8px;">Chèche</label>
+        <input class="input-bss" placeholder="Non, kategori, ref #">
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer-bss p-16">
+    Admin • BSS
+  </footer>
+
+</body>
+</html>import CommentsBox from "@/components/CommentsBox";
 
 export default function CommentsAdmin() {
   return (
