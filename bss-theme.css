@@ -1,0 +1,97 @@
+/* BSS Theme – Orange & Black */
+/* Brand tokens */
+:root {
+  --bss-orange: #FF8C00;  /* Apricot orange */
+  --bss-black: #000000;   /* Deep black */
+  --bss-offblack: #0a0a0a;
+  --bss-text: #ffffff;
+  --bss-muted: #e5e5e5;
+  --bss-border: #1f1f1f;
+}
+
+/* Apply to the whole app */
+.theme-bss {
+  background-color: var(--bss-black);
+  color: var(--bss-text);
+  accent-color: var(--bss-orange);
+}
+
+/* Header / Nav */
+.header-bss {
+  background: var(--bss-black);
+  border-bottom: 2px solid var(--bss-orange);
+}
+
+/* Footer */
+.footer-bss {
+  background: var(--bss-offblack);
+  border-top: 1px solid var(--bss-border);
+}
+
+/* Cards / Panels */
+.card-bss {
+  background: #0d0d0d;
+  border: 1px solid var(--bss-border);
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+/* Buttons */
+.btn-bss {
+  background: var(--bss-orange);
+  color: #000000;
+  border: 1px solid var(--bss-orange);
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-weight: 600;
+  transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+}
+.btn-bss:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(255,140,0,0.25);
+}
+.btn-bss:active { transform: translateY(0); }
+
+.btn-bss-outline {
+  background: transparent;
+  color: var(--bss-orange);
+  border: 1px solid var(--bss-orange);
+}
+.btn-bss-outline:hover { background: rgba(255,140,0,0.1); }
+
+/* Links */
+.link-bss {
+  color: var(--bss-orange);
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(255,140,0,0.4);
+}
+.link-bss:hover { border-bottom-color: var(--bss-orange); }
+
+/* Inputs */
+.input-bss {
+  background: #0b0b0b;
+  color: var(--bss-text);
+  border: 1px solid var(--bss-border);
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+.input-bss:focus {
+  outline: none;
+  border-color: var(--bss-orange);
+  box-shadow: 0 0 0 3px rgba(255,140,0,0.2);
+}
+
+/* Badges */
+.badge-bss {
+  background: #0b0b0b;
+  color: var(--bss-orange);
+  border: 1px solid var(--bss-orange);
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+
+/* Utilities */
+.bg-bss-orange { background: var(--bss-orange) !important; }
+.text-bss-orange { color: var(--bss-orange) !important; }
+.bg-bss-black { background: var(--bss-black) !important; }
+.text-bss-black { color: var(--bss-black) !important; }
