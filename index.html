@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Briyant Solèy Signo 1815 — One Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    /* ===== BSS Theme – Orange & Black (static, no JS) ===== */
+    :root{
+      --bss-orange:#FF8C00;
+      --bss-black:#000000;
+      --bss-offblack:#0a0a0a;
+      --bss-text:#ffffff;
+      --bss-border:#1f1f1f;
+    }
+    html,body{margin:0;padding:0;background:var(--bss-black);color:var(--bss-text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;}
+    a{color:inherit}
+
+    /* Header / Nav */
+    .container{max-width:1100px;margin:0 auto;padding:0 16px;}
+    .header{background:var(--bss-black);border-bottom:2px solid var(--bss-orange);position:sticky;top:0;z-index:10;}
+    .row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0;}
+    .brand{display:flex;align-items:center;gap:10px;}
+    .brand img{height:44px;width:auto;display:block;}
+    .brand-title{font-weight:700;font-size:18px;letter-spacing:.4px;}
+    .nav a{display:inline-block;padding:8px 12px;border:1px solid var(--bss-orange);border-radius:12px;margin-left:8px;text-decoration:none;}
+    .nav a:hover{background:rgba(255,140,0,.12)}
+
+    /* Sections */
+    section{padding:28px 0;}
+    .card{background:#0d0d0d;border:1px solid var(--bss-border);border-radius:16px;padding:18px;box-shadow:0 6px 20px rgba(0,0,0,.25);}
+    .lead{font-size:40px;font-weight:800;margin:0 0 8px;}
+    .muted{color:#bbb}
+
+    /* Buttons */
+    .btn{display:inline-block;background:var(--bss-orange);color:#000;border:1px solid var(--bss-orange);border-radius:12px;padding:10px 16px;font-weight:700;text-decoration:none}
+    .btn:hover{filter:brightness(1.05)}
+    .btn-outline{background:transparent;color:var(--bss-orange)}
+
+    /* Inputs */
+    .input{background:#0b0b0b;color:var(--bss-text);border:1px solid var(--bss-border);border-radius:12px;padding:10px 12px;width:100%;}
+    .input:focus{outline:none;border-color:var(--bss-orange);box-shadow:0 0 0 3px rgba(255,140,0,.2);}
+
+    /* Badges */
+    .badge{background:#0b0b0b;color:var(--bss-orange);border:1px solid var(--bss-orange);border-radius:999px;padding:4px 10px;display:inline-block}
+
+    /* Layout helpers */
+    .grid{display:grid;gap:16px}
+    @media(min-width:900px){.grid-2{grid-template-columns:1fr 1fr}}
+    .mt8{margin-top:8px}.mt16{margin-top:16px}.mt24{margin-top:24px}
+    .footer{background:var(--bss-offblack);border-top:1px solid var(--bss-border);color:#bbb;padding:18px 0;margin-top:24px}
+
+    /* Optional watermark for ENGINE panel */
+    .engine-watermark{position:relative;overflow:hidden}
+    .engine-watermark::after{
+      content:"Briyant Solèy Signo 1815";
+      position:absolute;right:-40px;bottom:-20px;
+      font:800 64px/1 sans-serif;letter-spacing:.06em;
+      color:rgba(255,140,0,.08);transform:rotate(-12deg);
+      pointer-events:none;user-select:none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="row">
+        <div class="brand">
+          <img src="logo-bss.png" alt="BSS Logo">
+          <div class="brand-title">Briyant Solèy Signo 1815</div>
+        </div>
+        <nav class="nav" aria-label="Main">
+          <a href="#home">Akèy</a>
+          <a href="#engine">BSS-ENGINE</a>
+          <a href="#admin">Admin</a>
+          <a href="#contact">Kontak</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- HOME -->
+  <section id="home">
+    <div class="container">
+      <div class="card">
+        <h1 class="lead">Byenveni</h1>
+        <p>Site la kouri sou koulè ofisyèl yo: <span class="badge">Orange</span> &amp; <span class="badge">Nwa</span>.</p>
+        <div class="mt16">
+          <a class="btn" href="#engine">Ale nan BSS-ENGINE</a>
+          <a class="btn btn-outline" href="#admin" style="margin-left:8px;">Ale nan Admin</a>
+        </div>
+      </div>
+
+      <div class="grid grid-2 mt24">
+        <div class="card">
+          <h2 style="margin:0 0 6px;">Briyan Solèy — Slogan</h2>
+          <p class="muted">“Yon motè nèf — yon sèl kout kle san bri.”</p>
+        </div>
+        <div class="card">
+          <h2 style="margin:0 0 6px;">Anons Rapid</h2>
+          <p class="muted">Tout koòdone a mete ajou an orange &amp; nwa. Logo ofisyèl la anplas sou tèt la.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENGINE -->
+  <section id="engine">
+    <div class="container">
+      <div class="card engine-watermark">
+        <h2 style="margin:0 0 12px;">BSS-ENGINE</h2>
+        <p style="margin:0 0 12px;">Zòn travay prensipal la.</p>
+
+        <div class="grid grid-2 mt16">
+          <div>
+            <label>Antre done</label>
+            <input class="input mt8" placeholder="Tape isit la…">
+          </div>
+          <div>
+            <label>Referans</label>
+            <input class="input mt8" placeholder="#ID, Non, Kategori">
+          </div>
+        </div>
+
+        <div class="mt16">
+          <a class="btn" href="#engine">Aksyon prensipal</a>
+          <a class="btn btn-outline" href="#home" style="margin-left:8px;">Retounen lakay</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADMIN -->
+  <section id="admin">
+    <div class="container">
+      <div class="card">
+        <h2 style="margin:0 0 12px;">BSS Admin</h2>
+        <div class="grid grid-2">
+          <div>
+            <p class="muted">Zòn administratif (statik). Bouton yo se lyen vid pou kounye a.</p>
+            <div class="mt16">
+              <a class="btn" href="#admin">Gade Dosye</a>
+              <a class="btn btn-outline" href="#home" style="margin-left:8px;">Retounen</a>
+            </div>
+          </div>
+          <div>
+            <label>Chèche</label>
+            <input class="input mt8" placeholder="Non, kategori, ref #">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="card">
+        <h2 style="margin:0 0 12px;">Kontak</h2>
+        <p class="muted">Imèl: <a href="mailto:briyantsigno@gmail.com">briyantsigno@gmail.com</a></p>
+        <p class="muted">© Briyant Solèy Signo 1815 — Tout dwa rezève.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">BSS • Orange &amp; Nwa • One-page static</div>
+  </footer>
+</body>
+</html>
