@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="ht">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Briyant Solèy Signo 1815</title>
+  <style>
+    :root{
+      --orange:#f5a623;
+      --orange-2:#ffb440;
+      --ink:#0b0b0b;
+      --ink-2:#0f0f0f;
+      --ring:#f2b04d;
+    }
+    html,body{height:100%}
+    body{
+      margin:0;
+      color:#f4d7a6;
+      background: linear-gradient(to bottom, var(--orange-2) 0%, #f2aa3a 18%, #d18122 32%, #2b1a0d 58%, #141414 100%);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .frame{
+      width:min(1100px, 92vw);
+      border:2px solid var(--ring);
+      border-radius:16px;
+      background: rgba(0,0,0,0.4);
+      box-shadow: 0 20px 60px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,190,80,.25);
+      padding:28px 28px 44px;
+      position:relative;
+    }
+    /* header */
+    .bar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px; margin-bottom:28px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px; min-width:0;
+      color:#ffe2a8; font-weight:700; letter-spacing:.03em;
+      text-shadow:0 1px 0 #000;
+    }
+    .brand img{
+      width:56px; height:56px; border-radius:50%;
+      outline:2px solid var(--ring); outline-offset:3px;
+      object-fit:cover; background:#1a1a1a;
+    }
+    .menu{display:flex; gap:12px; flex-wrap:wrap}
+    .chip{
+      padding:10px 16px; border-radius:12px;
+      border:2px solid var(--ring); background:rgba(0,0,0,.35);
+      color:#ffe5b3; font-weight:600; letter-spacing:.02em;
+      text-decoration:none;
+    }
+    .chip:hover{background:rgba(255,180,64,.12)}
+
+    h1{
+      margin:8px 0 6px; text-align:center;
+      font-size:clamp(30px, 4.6vw, 56px);
+      letter-spacing:.04em; color:#ffe6b8;
+      text-shadow:0 1px 0 #000;
+    }
+    .tag{
+      text-align:center; opacity:.92; margin:0 0 22px;
+      font-weight:600; letter-spacing:.03em; color:#ffd99a;
+    }
+
+    /* language row */
+    .langs{display:flex; gap:12px; justify-content:center; margin:8px 0 26px}
+    .btn{
+      padding:11px 18px; border-radius:14px; border:2px solid var(--ring);
+      background:rgba(0,0,0,.35); color:#ffe5b3; font-weight:800;
+      letter-spacing:.03em; text-decoration:none; display:inline-block;
+    }
+    .btn:hover{background:rgba(255,180,64,.12)}
+
+    /* engine image (with graceful fallback) */
+    .engine-wrap{
+      margin:6px auto 4px; width:min(920px, 95%); border-radius:14px;
+      border:2px solid var(--ring); padding:10px; background:rgba(0,0,0,.35);
+    }
+    .engine{
+      width:100%; height:auto; display:block; border-radius:10px;
+      background:#111;
+    }
+    .engine[onerror]{ /* nothing; attribute only used for fallback text */
+    }
+    .fallback{
+      display:none; /* revealed if image missing via css trick below */
+      width:100%; aspect-ratio: 16/7; border-radius:10px;
+      background:
+        repeating-linear-gradient(135deg, #1d1d1d 0 8px, #222 8px 16px);
+      color:#f7c87b; font-weight:700; letter-spacing:.03em;
+      align-items:center; justify-content:center; text-align:center;
+    }
+    /* if the img fails (naturalWidth==0), we can keep the user hint via alt area in onerror below */
+    footer{
+      margin-top:18px; text-align:center; font-size:12px; color:#f0c37a; opacity:.9;
+    }
+
+    /* small screens */
+    @media (max-width:520px){
+      .brand span{display:none}
+      .menu{justify-content:flex-end}
+    }
+  </style>
+</head>
+<body>
+  <main class="frame">
+
+    <div class="bar">
+      <div class="brand">
+        <!-- Logo -->
+        <img src="assets/bss-logo.png" alt="BSS Logo"
+             onerror="this.style.display='none';document.getElementById('logo-fallback').style.display='inline-block'">
+        <span id="logo-fallback" style="display:none;">BSS Logo</span>
+        <span>BRIYANT SOLÈY SIGNO 1815</span>
+      </div>
+
+      <!-- Menu -->
+      <nav class="menu" aria-label="Main">
+        <a class="chip" href="#">Akèy</a>
+        <a class="chip" href="#">Magazen</a>
+        <a class="chip" href="#">Ansyen Dijinn</a>
+        <a class="chip" href="#">Dokiman</a>
+        <a class="chip" href="#">Kontak</a>
+      </nav>
+    </div>
+
+    <h1>BRIYANT SOLÈY SIGNO 1815</h1>
+    <p class="tag">Yon motè tou nèf — yon sèl kout kle san bri.</p>
+
+    <!-- Language toggle -->
+    <div class="langs" role="group" aria-label="Language">
+      <a class="btn" href="#">KREYÒL</a>
+      <a class="btn" href="#">FRANÇAIS</a>
+      <a class="btn" href="#">ENGLISH</a>
+    </div>
+
+    <!-- Engine image with graceful fallback -->
+    <div class="engine-wrap">
+      <img class="engine" src="assets/engine.png" alt="BSS Engine"
+           onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'fallback',innerText:'BSS Engine — add /assets/engine.png'}));">
+    </div>
+
+    <footer>© 2025 Briyant Solèy Signo 1815 — Tout dwa rezève.</footer>
+  </main>
+</body>
+</html>
