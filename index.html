@@ -35,7 +35,34 @@
       background: linear-gradient(180deg, var(--orange) 0%, var(--black) 70%);
       display:flex; align-items:center; justify-content:center;
       text-align:center;
-    }
+<!-- ===== BSS add-ons: logo + menu + engine ===== -->
+<style>
+  /* scope to our block only */
+  #bss-addons { position: relative; width:100%; }
+  #bss-addons .bar {
+    max-width: 980px; margin: 0 auto; padding: 8px 16px;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:16px;
+  }
+  #bss-logo {
+    height: 52px; width:auto; display:block;
+    filter: drop-shadow(0 1px 0 rgba(0,0,0,.4));
+  }
+  #bss-menu a{
+    font: 600 14px/1.1 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    color:#ffb347; text-decoration:none; padding:8px 12px; border-radius:12px;
+    border:1px solid rgba(255,179,71,.45);
+    display:inline-block; margin-left:10px;
+  }
+  #bss-menu a:hover{ background: rgba(255,179,71,.08); }
+
+  /* engine band sits UNDER your title/buttons, centered */
+  #bss-engine-wrap{
+    max-width:980px; margin: 22px auto 0; padding: 0 16px; text-align:center;
+  }
+  #bss-engine{
+    width: 100%; max-width: 720px; height:auto; border-radius:10px;
+    box-shadow: 0 6px 28px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255    }
 
     /* Stack */
     .wrap{ width:min(900px, 92vw); padding:20px }
