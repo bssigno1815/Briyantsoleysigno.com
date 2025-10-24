@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ht">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BRIYANTSOLEYSIGNO1815 — Sit Ofisyèl</title>
+
+  <!-- Basic SEO / share -->
+  <meta name="description" content="BRIYANTSOLEYSIGNO1815 — SLOGAN: YON MOTÈ TOU NÈF YON SEL KOUT KLE SAN BRI." />
+  <meta property="og:title" content="BRIYANTSOLEYSIGNO1815" />
+  <meta property="og:description" content="SLOGAN: YON MOTÈ TOU NÈF YON SEL KOUT KLE SAN BRI." />
+  <meta property="og:image" content="/assets/logo-bss.png" />
+  <link rel="icon" href="/assets/logo-bss.png" />
+
+  <style>
+    :root{
+      --orange:#F49B31;    /* apricot/orange */
+      --orange-deep:#E07B1A;
+      --black:#0b0b0b;
+      --text:#fff;
+      --muted:#ffe4cc;
+      --radius:20px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      /* ORANGE -> BLACK gradient base */
+      background: linear-gradient(180deg, var(--orange) 0%, var(--black) 65%);
+      /* Engine image layered on top with soft blend */
+      background-image:
+        linear-gradient(180deg, rgba(0,0,0,.0) 0%, rgba(0,0,0,.55) 70%),
+        url("/assets/engine.jpg");
+      background-size: cover;
+      background-position: center 30%;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      display:flex; align-items:center; justify-content:center;
+      min-height:100vh; padding:24px;
+    }
+    .card{
+      width:min(1000px,100%);
+      backdrop-filter: blur(3px) saturate(120%);
+      background: rgba(0,0,0,.38);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius);
+      padding: clamp(22px, 5vw, 48px);
+      text-align:center;
+      box-shadow: 0 18px 60px rgba(0,0,0,.45);
+    }
+    .logo{
+      width:120px; height:auto; margin:0 auto 14px; display:block;
+      filter: drop-shadow(0 6px 18px rgba(0,0,0,.55));
+    }
+    h1{
+      margin:6px 0 8px;
+      font-size: clamp(28px, 6vw, 56px);
+      letter-spacing:.6px;
+    }
+    .slogan{
+      font-size: clamp(16px, 2.8vw, 22px);
+      color: var(--muted);
+      margin: 8px 0 0;
+      line-height: 1.4;
+    }
+    .cta{
+      margin-top: 26px;
+      display:flex; gap:12px; flex-wrap:wrap; justify-content:center;
+    }
+    .btn{
+      appearance:none; border:none; cursor:pointer; text-decoration:none;
+      padding:13px 18px; border-radius:999px; font-weight:700; letter-spacing:.3px;
+      color:#1b120a; background: linear-gradient(180deg, var(--orange) 0%, var(--orange-deep) 100%);
+      box-shadow: 0 10px 24px rgba(224,123,26,.4);
+      transition: transform .08s ease, filter .15s ease;
+    }
+    .btn:hover{ transform: translateY(-2px); filter: saturate(112%); }
+    footer{ margin-top: 20px; font-size:12px; color:#ffe1c4; opacity:.9; }
+  </style>
+</head>
+<body>
+  <main class="card" role="main" aria-label="Briyant Solèy Signo 1815">
+    <!-- Optional logo; remove the <img> if you don't want it -->
+    <img class="logo" src="/assets/logo-bss.png" alt="BSS Logo" />
+
+    <h1>BRIYANTSOLEYSIGNO1815</h1>
+    <p class="slogan"><strong>SLOGAN:</strong> YON MOTÈ TOU NÈF YON SEL KOUT KLE SAN BRI</p>
+
+    <div class="cta">
+      <!-- Buttons are placeholders—link them when ready -->
+      <a class="btn" href="#kreyol">KREYÒL</a>
+      <a class="btn" href="#fr">FRANÇAIS</a>
+      <a class="btn" href="#en">ENGLISH</a>
+    </div>
+
+    <footer>© 2025 Briyant Solèy Signo 1815 — Tout dwa rezève.</footer>
+  </main>
+</body>
+</html>
