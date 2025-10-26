@@ -1,37 +1,65 @@
+
 <!doctype html>
 <html lang="ht">
 <head>
   <meta charset="utf-8">
   <title>Briyant Solèy Signo 1815 — Ofisyèl</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <style>
-    /* PURE BLACK + ORANGE — NO WHITE */
-    :root{ --nwa:#000; --orange:#FF8C00; --txt:#FF9F2E; --panel:#0b0b0b; --bord:#1a1a1a; }
-    html,body{margin:0;padding:0;background:var(--nwa);color:var(--txt);
+    /* ===== BSS: Nwa & Orange (san blan) ===== */
+    :root{
+      --nwa:#000000;
+      --orange:#FF8C00;   /* Aprikot ofisyèl */
+      --orange2:#FF9F2E;  /* Tekst limyè sou nwa (pa blan) */
+      --borde:#1a1a1a;
+      --panel:#0b0b0b;
+    }
+
+    /* Global */
+    html,body{margin:0;padding:0;background:var(--nwa);color:var(--orange2);
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+    *,*:before,*:after{box-sizing:border-box}
+    a{color:var(--orange2);text-decoration:none}
+
+    /* Layout */
     .wrap{max-width:1080px;margin:0 auto;padding:0 16px}
-    header{background:var(--nwa);border-bottom:2px solid var(--orange)}
-    .bar{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+    section{padding:22px 0}
+
+    /* Header */
+    header{border-bottom:2px solid var(--orange);background:var(--nwa)}
+    .bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0}
     .brand{display:flex;align-items:center;gap:10px}
-    .brand img{height:56px;width:auto;display:block}
-    .brand-title{color:var(--orange);font-weight:900}
-    nav a{display:inline-block;color:var(--orange);border:1px solid var(--orange);border-radius:10px;padding:8px 12px;margin-left:8px;text-decoration:none}
-    main{padding:22px 0}
-    .panel{background:var(--panel);border:1px solid var(--bord);border-radius:14px;padding:16px;margin:18px 0}
-    .lead{color:var(--orange);font-size:32px;font-weight:900;margin:0 0 10px}
-    .btn{display:inline-block;background:var(--orange);color:var(--nwa);border:1px solid var(--orange);border-radius:10px;padding:10px 16px;font-weight:800;text-decoration:none}
+    .brand img{height:54px;width:auto;display:block}
+    .brand-title{color:var(--orange);font-weight:800;letter-spacing:.4px}
+    nav a{display:inline-block;padding:8px 12px;border:1px solid var(--orange);border-radius:10px;margin-left:8px;color:var(--orange)}
+    nav a:hover{background:rgba(255,140,0,.12)}
+
+    /* Blocks */
+    .panel{background:var(--panel);border:1px solid var(--borde);border-radius:14px;padding:16px}
+    .lead{color:var(--orange);font-size:36px;font-weight:900;margin:0 0 8px}
+    .muted{opacity:.95}
+
+    /* Buttons (san blan) */
+    .btn{display:inline-block;background:var(--orange);color:var(--nwa);border:1px solid var(--orange);
+         border-radius:10px;padding:10px 16px;font-weight:800}
+    .btn:hover{filter:brightness(1.05)}
     .btn-outline{background:transparent;color:var(--orange)}
-    .engine{width:100%;display:block;border-radius:12px;margin:12px 0;border:1px solid var(--bord)}
-    footer{border-top:1px solid var(--bord);background:var(--nwa);color:var(--txt);text-align:center;padding:16px 0}
+
+    /* Images */
+    .engine{width:100%;display:block;border-radius:12px;margin:12px 0;border:1px solid var(--borde)}
+
+    /* Footer */
+    footer{border-top:1px solid var(--borde);color:var(--orange2);background:var(--nwa);padding:16px 0;text-align:center}
   </style>
 </head>
 <body>
 
-  <!-- LOGO ON TOP -->
+  <!-- LOGO ANWO -->
   <header>
     <div class="wrap bar">
       <div class="brand">
-        <img src="logo-bss.png" alt="">
+        <img src="logo-bss.png" alt="Logo BSS">
         <div class="brand-title">Briyant Solèy Signo 1815</div>
       </div>
       <nav aria-label="Navigasyon">
@@ -45,33 +73,41 @@
 
   <main class="wrap">
     <!-- AKÈY -->
-    <section id="akay" class="panel">
-      <h1 class="lead">Byenveni</h1>
-      <p>Koulè ofisyèl: <span style="color:var(--orange);font-weight:800">Orange</span> & <span style="color:var(--orange);font-weight:800">Nwa</span>.</p>
-      <div style="margin-top:12px">
-        <a class="btn" href="#engine">Ale nan BSS-ENGINE</a>
-        <a class="btn btn-outline" href="#admin" style="margin-left:8px">Ale nan Admin</a>
+    <section id="akay">
+      <div class="panel">
+        <h1 class="lead">Byenveni</h1>
+        <p class="muted">Koulè ofisyèl platfòm nan: <strong style="color:var(--orange)">Orange</strong> & <strong style="color:var(--orange)">Nwa</strong>.</p>
+        <div style="margin-top:12px">
+          <a class="btn" href="#engine">Ale nan BSS-ENGINE</a>
+          <a class="btn btn-outline" href="#admin" style="margin-left:8px">Ale nan Admin</a>
+        </div>
       </div>
     </section>
 
-    <!-- ENGINE IN THE MIDDLE -->
-    <section id="engine" class="panel">
-      <h2 class="lead" style="font-size:28px">BSS-ENGINE</h2>
-      <img src="engine-bss.png" alt="" class="engine">
-      <p>Zòn travay prensipal la.</p>
+    <!-- ENGINE: LOGO ANWO DEJA, ENJEN AN MITAN -->
+    <section id="engine">
+      <div class="panel">
+        <h2 class="lead" style="font-size:28px">BSS-ENGINE</h2>
+        <img src="engine-bss.png" alt="BSS Engine" class="engine">
+        <p class="muted">Zòn travay prensipal la.</p>
+      </div>
     </section>
 
     <!-- ADMIN -->
-    <section id="admin" class="panel">
-      <h2 class="lead" style="font-size:28px">Administrasyon</h2>
-      <p>Panel administratif (egzanp estatik). Nou ka lye bouton yo ak zouti w yo pita.</p>
+    <section id="admin">
+      <div class="panel">
+        <h2 class="lead" style="font-size:28px">Administrasyon</h2>
+        <p class="muted">Panel administratif (egzanp estatik). Nou ka lye bouton yo ak zouti w yo pita.</p>
+      </div>
     </section>
 
     <!-- KONTAK -->
-    <section id="kontak" class="panel">
-      <h2 class="lead" style="font-size:28px">Kontak</h2>
-      <p>Imèl: <a href="mailto:briyantsigno@gmail.com">briyantsigno@gmail.com</a></p>
-      <p>© Briyant Solèy Signo 1815 — Toujou Kléré • 1815</p>
+    <section id="kontak">
+      <div class="panel">
+        <h2 class="lead" style="font-size:28px">Kontak</h2>
+        <p class="muted">Imèl: <a href="mailto:briyantsigno@gmail.com">briyantsigno@gmail.com</a></p>
+        <p class="muted">© Briyant Solèy Signo 1815 — Toujou Kléré • 1815</p>
+      </div>
     </section>
   </main>
 
