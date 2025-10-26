@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ht">
+<head>
+  <meta charset="utf-8">
+  <title>Briyant Solèy Signo 1815 — Ofisyèl</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    :root{
+      --nwa:#000000;
+      --orange:#FF8C00;     /* BSS Orange */
+      --txt:#FF9F2E;        /* warm text (no white) */
+      --panel:#0b0b0b;
+      --borde:#1a1a1a;
+    }
+    html,body{margin:0;padding:0;background:var(--nwa);color:var(--txt);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+    *,*:before,*:after{box-sizing:border-box}
+    a{color:var(--orange);text-decoration:none}
+
+    .wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+    header{background:var(--nwa);border-bottom:2px solid var(--orange)}
+    .bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0}
+    .brand{display:flex;align-items:center;gap:10px}
+    .brand img{height:56px;width:auto;display:block}
+    .brand-title{color:var(--orange);font-weight:900;letter-spacing:.4px}
+
+    nav a{display:inline-block;padding:8px 12px;border:1px solid var(--orange);border-radius:10px;margin-left:8px;color:var(--orange)}
+    nav a:hover{background:rgba(255,140,0,.12)}
+
+    main{padding:22px 0}
+    section{padding:20px 0}
+    .panel{background:var(--panel);border:1px solid var(--borde);border-radius:14px;padding:16px}
+    .lead{color:var(--orange);font-size:36px;font-weight:900;margin:0 0 10px}
+    .btn{display:inline-block;background:var(--orange);color:var(--nwa);border:1px solid var(--orange);
+         border-radius:10px;padding:10px 16px;font-weight:800}
+    .btn-outline{background:transparent;color:var(--orange)}
+    .engine{width:100%;display:block;border-radius:12px;margin:12px 0;border:1px solid var(--borde)}
+    footer{border-top:1px solid var(--borde);background:var(--nwa);color:var(--txt);text-align:center;padding:16px 0}
+  </style>
+</head>
+<body>
+
+  <!-- LOGO ON TOP -->
+  <header>
+    <div class="wrap bar">
+      <div class="brand">
+        <img src="logo-bss.png" alt="">
+        <div class="brand-title">Briyant Solèy Signo 1815</div>
+      </div>
+      <nav aria-label="Navigasyon">
+        <a href="#akay">Akèy</a>
+        <a href="#engine">BSS-ENGINE</a>
+        <a href="#admin">Admin</a>
+        <a href="#kontak">Kontak</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- AKÈY -->
+    <section id="akay">
+      <div class="panel">
+        <h1 class="lead">Byenveni</h1>
+        <p>Koulè ofisyèl: <strong style="color:var(--orange)">Orange</strong> & <strong style="color:var(--orange)">Nwa</strong>.</p>
+        <div style="margin-top:12px">
+          <a class="btn" href="#engine">Ale nan BSS-ENGINE</a>
+          <a class="btn btn-outline" href="#admin" style="margin-left:8px">Ale nan Admin</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ENGINE IN THE MIDDLE -->
+    <section id="engine">
+      <div class="panel">
+        <h2 class="lead" style="font-size:28px">BSS-ENGINE</h2>
+        <img src="engine-bss.png" alt="" class="engine">
+        <p>Zòn travay prensipal la.</p>
+      </div>
+    </section>
+
+    <!-- ADMIN -->
+    <section id="admin">
+      <div class="panel">
+        <h2 class="lead" style="font-size:28px">Administrasyon</h2>
+        <p>Panel administratif (egzanp estatik). Nou ka lye bouton yo ak zouti w yo pita.</p>
+      </div>
+    </section>
+
+    <!-- KONTAK -->
+    <section id="kontak">
+      <div class="panel">
+        <h2 class="lead" style="font-size:28px">Kontak</h2>
+        <p>Imèl: <a href="mailto:briyantsigno@gmail.com">briyantsigno@gmail.com</a></p>
+        <p>© Briyant Solèy Signo 1815 — Toujou Kléré • 1815</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>Platfòm BSS • Nwa &amp; Orange • Yon sèl paj</footer>
+</body>
+</html>
