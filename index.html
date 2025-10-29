@@ -6,7 +6,366 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>MAXIMAX Multi Services — ALWAY MAXIMIZED</title>
     <meta name="description" content="MAXIMAX Multi Services: Immigration services, taxes, official forms, translations, resume builder, and appointments. Multilingual: Kreyòl • English • Español." />
+    <meta name="theme-color" content="#111111" /><!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MAXIMAX Multi Services — ALWAY MAXIMIZED</title>
+    <meta name="description" content="MAXIMAX Multi Services: Immigration services, taxes, official forms, translations, resume builder, and appointments. Multilingual: Kreyòl • English • Español." />
     <meta name="theme-color" content="#111111" />
+
+    <!-- Tailwind CSS CDN (for fast iteration) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Tailwind custom theme: brand colors
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              apricot: {
+                DEFAULT: '#F59E0B', // jon abrikot (approx)
+                dark: '#D97706',
+                light: '#FBBF24'
+              },
+              brandblack: '#0B0B0B'
+            }
+          }
+        }
+      }
+    </script>
+
+    <!-- Favicons (optional placeholders) -->
+    <link rel="icon" href="/favicon.ico" />
+
+    <style>
+      /* Minimal custom tweaks */
+      html { scroll-behavior: smooth; }
+      .max-container { max-width: 1200px; }
+    </style>
+  </head>
+  <body class="bg-neutral-50 text-brandblack antialiased">
+    <!--
+      ==========================
+      MAXIMAX INDEX.HTML (Ordered)
+      Order of sections:
+      0. Top utility bar (language + contact)
+      1. Header / Navigation
+      2. Hero
+      3. Alerts (ALERTE)
+      4. Services Grid (Immigration, Tax, Forms)
+      5. Document Upload CTA
+      6. Appointments / Calendar
+      7. Tools: Resume Builder + Translation
+      8. Testimonials (optional)
+      9. Contact
+      10. Footer
+      ==========================
+    -->
+
+    <!-- 0. Top utility bar -->
+    <div class="w-full bg-brandblack text-white">
+      <div class="mx-auto max-container px-4 py-2 flex items-center justify-between text-sm">
+        <div class="flex items-center gap-4">
+          <span class="opacity-80">MAXIMAX Multi Services</span>
+          <span class="hidden sm:inline opacity-50">|</span>
+          <a href="#contact" class="hover:text-apricot-light">(317) 538-1150</a>
+          <span class="hidden sm:inline opacity-50">/</span>
+          <a href="mailto:louismaxauto600@gmail.com" class="hover:text-apricot-light">louismaxauto600@gmail.com</a>
+        </div>
+        <div class="flex items-center gap-2">
+          <button class="px-2 py-1 rounded hover:bg-white/10" data-lang="ht">Kreyòl</button>
+          <button class="px-2 py-1 rounded hover:bg-white/10" data-lang="en">English</button>
+          <button class="px-2 py-1 rounded hover:bg-white/10" data-lang="es">Español</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1. Header / Navigation -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur">
+      <div class="mx-auto max-container px-4">
+        <div class="flex items-center justify-between py-4">
+          <a href="#top" class="flex items-center gap-3">
+            <div class="size-9 rounded-full bg-apricot"></div>
+            <div class="leading-tight">
+              <div class="font-extrabold text-xl tracking-tight">MAXIMAX</div>
+              <div class="text-xs uppercase tracking-wide text-neutral-500">ALWAY MAXIMIZED</div>
+            </div>
+          </a>
+          <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+            <a href="#services" class="hover:text-apricot">Services</a>
+            <a href="#alerts" class="hover:text-apricot">Alerte</a>
+            <a href="#upload" class="hover:text-apricot">Upload</a>
+            <a href="#appointments" class="hover:text-apricot">Randevou</a>
+            <a href="#tools" class="hover:text-apricot">Zouti</a>
+            <a href="#contact" class="hover:text-apricot">Kontak</a>
+          </nav>
+          <button id="menuBtn" class="md:hidden inline-flex items-center justify-center rounded-xl border px-3 py-2">
+            <span class="sr-only">Open menu</span>☰
+          </button>
+        </div>
+        <div id="mobileMenu" class="md:hidden hidden pb-4">
+          <div class="grid gap-2 text-sm">
+            <a href="#services" class="px-3 py-2 rounded hover:bg-neutral-100">Services</a>
+            <a href="#alerts" class="px-3 py-2 rounded hover:bg-neutral-100">Alerte</a>
+            <a href="#upload" class="px-3 py-2 rounded hover:bg-neutral-100">Upload</a>
+            <a href="#appointments" class="px-3 py-2 rounded hover:bg-neutral-100">Randevou</a>
+            <a href="#tools" class="px-3 py-2 rounded hover:bg-neutral-100">Zouti</a>
+            <a href="#contact" class="px-3 py-2 rounded hover:bg-neutral-100">Kontak</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- 2. Hero -->
+    <section id="top" class="bg-gradient-to-b from-apricot to-apricot-light text-brandblack">
+      <div class="mx-auto max-container px-4 py-20">
+        <div class="grid md:grid-cols-2 items-center gap-10">
+          <div>
+            <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">
+              MAXIMAX Multi Services
+            </h1>
+            <p class="mt-4 text-lg md:text-xl max-w-prose">
+              Immigration • Tax • Official Forms • Translations • Resume Builder • Appointments. Multilingual support in Kreyòl, English, and Spanish.
+            </p>
+            <div class="mt-6 flex flex-wrap gap-3">
+              <a href="#services" class="inline-flex items-center justify-center rounded-xl bg-brandblack text-white px-5 py-3 font-semibold hover:bg-brandblack/90">Explore Services</a>
+              <a href="#upload" class="inline-flex items-center justify-center rounded-xl bg-white text-brandblack px-5 py-3 font-semibold hover:bg-white/90">Upload Documents</a>
+            </div>
+          </div>
+          <div class="bg-white/80 rounded-2xl p-6 shadow">
+            <div class="text-sm font-semibold text-neutral-600">Slogan</div>
+            <div class="text-2xl md:text-3xl font-black tracking-tight">MAXIMAX ALWAY MAXIMIZED</div>
+            <p class="mt-3 text-neutral-700">Stratèj Vizyonè • Jon abrikot &amp; nwa</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Alerts (ALERTE) -->
+    <section id="alerts" class="bg-white">
+      <div class="mx-auto max-container px-4 py-14">
+        <div class="flex items-center justify-between">
+          <h2 class="text-2xl md:text-3xl font-extrabold">ALERTE</h2>
+          <a href="/alerte" class="text-apricot-dark hover:underline">See all updates →</a>
+        </div>
+        <div class="mt-6 grid md:grid-cols-3 gap-4">
+          <!-- Example alert cards -->
+          <article class="rounded-2xl border bg-neutral-50 p-5">
+            <div class="text-xs uppercase tracking-wide text-neutral-500">Immigration</div>
+            <h3 class="mt-1 font-semibold">Policy update headline</h3>
+            <p class="mt-1 text-sm text-neutral-700">Short summary of the change. Add the date and a link to details.</p>
+            <a href="#" class="mt-3 inline-block text-sm font-semibold text-apricot-dark hover:underline">Read more</a>
+          </article>
+          <article class="rounded-2xl border bg-neutral-50 p-5">
+            <div class="text-xs uppercase tracking-wide text-neutral-500">Taxes</div>
+            <h3 class="mt-1 font-semibold">Tax filing notice</h3>
+            <p class="mt-1 text-sm text-neutral-700">Key deadline or requirement with a quick explanation.</p>
+            <a href="#" class="mt-3 inline-block text-sm font-semibold text-apricot-dark hover:underline">Read more</a>
+          </article>
+          <article class="rounded-2xl border bg-neutral-50 p-5">
+            <div class="text-xs uppercase tracking-wide text-neutral-500">Benefits</div>
+            <h3 class="mt-1 font-semibold">SNAP / Housing update</h3>
+            <p class="mt-1 text-sm text-neutral-700">What changed and who it helps. Link to official source.</p>
+            <a href="#" class="mt-3 inline-block text-sm font-semibold text-apricot-dark hover:underline">Read more</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Services Grid -->
+    <section id="services" class="bg-neutral-50">
+      <div class="mx-auto max-container px-4 py-16">
+        <h2 class="text-2xl md:text-3xl font-extrabold">Services</h2>
+        <p class="mt-2 text-neutral-700 max-w-prose">Choose a service to get started. You can upload documents and book an appointment after you select a service.</p>
+        <div class="mt-8 grid md:grid-cols-3 gap-6">
+          <!-- Service: Immigration -->
+          <a href="/immigration" class="group rounded-2xl border bg-white p-6 hover:shadow">
+            <div class="text-sm uppercase tracking-wide text-neutral-500">Immigration</div>
+            <h3 class="mt-1 text-xl font-bold">USCIS Forms &amp; Support</h3>
+            <p class="mt-2 text-neutral-700">I-130, I-485, N-400, work permits, renewals, and more.</p>
+            <span class="mt-4 inline-block text-apricot-dark font-semibold group-hover:underline">Open →</span>
+          </a>
+          <!-- Service: Tax -->
+          <a href="/tax" class="group rounded-2xl border bg-white p-6 hover:shadow">
+            <div class="text-sm uppercase tracking-wide text-neutral-500">Tax</div>
+            <h3 class="mt-1 text-xl font-bold">Personal &amp; Business Filing</h3>
+            <p class="mt-2 text-neutral-700">E-file, refunds, amendments, and IRS correspondence help.</p>
+            <span class="mt-4 inline-block text-apricot-dark font-semibold group-hover:underline">Open →</span>
+          </a>
+          <!-- Service: Forms -->
+          <a href="/forms" class="group rounded-2xl border bg-white p-6 hover:shadow">
+            <div class="text-sm uppercase tracking-wide text-neutral-500">Official Forms</div>
+            <h3 class="mt-1 text-xl font-bold">SNAP • Social Security • Housing</h3>
+            <p class="mt-2 text-neutral-700">Unemployment, Medicaid/Medicare, Child Support, and more.</p>
+            <span class="mt-4 inline-block text-apricot-dark font-semibold group-hover:underline">Open →</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Document Upload CTA -->
+    <section id="upload" class="bg-white">
+      <div class="mx-auto max-container px-4 py-16">
+        <div class="rounded-2xl border p-8 md:p-12 flex flex-col md:flex-row items-center gap-8">
+          <div class="flex-1">
+            <h2 class="text-2xl md:text-3xl font-extrabold">Secure Document Upload</h2>
+            <p class="mt-2 text-neutral-700">Send us your files safely. You will receive an automatic receipt with a reference number.</p>
+            <ul class="mt-4 list-disc list-inside text-neutral-700">
+              <li>Accepts PDF, JPG, PNG, DOCX</li>
+              <li>Automatic email/SMS receipt</li>
+              <li>Admin dashboard tracking</li>
+            </ul>
+            <a href="/upload" class="mt-6 inline-flex items-center justify-center rounded-xl bg-apricot text-brandblack px-5 py-3 font-semibold hover:bg-apricot-light">Go to Upload</a>
+          </div>
+          <form class="flex-1 w-full bg-neutral-50 rounded-xl p-6 border" onsubmit="event.preventDefault(); alert('Demo only — connect backend.');">
+            <label class="block text-sm font-medium">Attach file</label>
+            <input type="file" class="mt-1 w-full border rounded-lg p-2" />
+            <label class="block text-sm font-medium mt-4">Your email or phone</label>
+            <input type="text" placeholder="email@example.com / +1 555-555-5555" class="mt-1 w-full border rounded-lg p-2" />
+            <button class="mt-4 w-full rounded-lg bg-brandblack text-white py-2 font-semibold">Submit</button>
+            <p class="mt-2 text-xs text-neutral-500">This is a front-end demo. Connect to Firebase/Drive/Vercel Storage.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Appointments -->
+    <section id="appointments" class="bg-neutral-50">
+      <div class="mx-auto max-container px-4 py-16">
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <h2 class="text-2xl md:text-3xl font-extrabold">Book an Appointment</h2>
+            <p class="mt-2 text-neutral-700">Choose in-person or virtual. You'll receive confirmation and reminders.</p>
+            <a href="/appointments" class="mt-6 inline-flex items-center justify-center rounded-xl bg-apricot text-brandblack px-5 py-3 font-semibold hover:bg-apricot-light">Open Calendar</a>
+          </div>
+          <div class="rounded-2xl border bg-white p-6">
+            <div class="text-sm text-neutral-600">Embedded calendar (placeholder)</div>
+            <div class="mt-2 aspect-video w-full rounded-lg bg-neutral-100 grid place-items-center">Your calendar embed here</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Tools -->
+    <section id="tools" class="bg-white">
+      <div class="mx-auto max-container px-4 py-16">
+        <h2 class="text-2xl md:text-3xl font-extrabold">Tools</h2>
+        <div class="mt-8 grid md:grid-cols-2 gap-6">
+          <a href="/resume" class="group rounded-2xl border bg-neutral-50 p-6 hover:shadow">
+            <div class="text-sm uppercase tracking-wide text-neutral-500">AI Resume Builder</div>
+            <h3 class="mt-1 text-xl font-bold">Generate Resume (Kreyòl / English / Español)</h3>
+            <p class="mt-2 text-neutral-700">Answer a few questions and download a polished PDF.</p>
+            <span class="mt-4 inline-block text-apricot-dark font-semibold group-hover:underline">Start →</span>
+          </a>
+          <a href="/translate" class="group rounded-2xl border bg-neutral-50 p-6 hover:shadow">
+            <div class="text-sm uppercase tracking-wide text-neutral-500">Certified Translations</div>
+            <h3 class="mt-1 text-xl font-bold">Translate Birth/Marriage/Divorce Certificates</h3>
+            <p class="mt-2 text-neutral-700">Official formats available. Upload your document to begin.</p>
+            <span class="mt-4 inline-block text-apricot-dark font-semibold group-hover:underline">Start →</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Testimonials (optional) -->
+    <section id="testimonials" class="bg-neutral-50">
+      <div class="mx-auto max-container px-4 py-16">
+        <h2 class="text-2xl md:text-3xl font-extrabold">What Clients Say</h2>
+        <div class="mt-6 grid md:grid-cols-3 gap-6">
+          <figure class="rounded-2xl border bg-white p-6">
+            <blockquote class="text-neutral-800">“Professional and fast. Documents were handled perfectly.”</blockquote>
+            <figcaption class="mt-3 text-sm text-neutral-500">— Client A</figcaption>
+          </figure>
+          <figure class="rounded-2xl border bg-white p-6">
+            <blockquote class="text-neutral-800">“They walked me through every step in Kreyòl. Great team.”</blockquote>
+            <figcaption class="mt-3 text-sm text-neutral-500">— Client B</figcaption>
+          </figure>
+          <figure class="rounded-2xl border bg-white p-6">
+            <blockquote class="text-neutral-800">“Got my appointment quickly and received receipts by SMS.”</blockquote>
+            <figcaption class="mt-3 text-sm text-neutral-500">— Client C</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Contact -->
+    <section id="contact" class="bg-white">
+      <div class="mx-auto max-container px-4 py-16">
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h2 class="text-2xl md:text-3xl font-extrabold">Contact</h2>
+            <p class="mt-2 text-neutral-700">Questions? Need help choosing a service? Reach out and we’ll respond soon.</p>
+            <ul class="mt-4 space-y-2 text-neutral-800">
+              <li><strong>Phone:</strong> <a class="text-apricot-dark hover:underline" href="tel:+13175381150">(317) 538-1150</a></li>
+              <li><strong>Email:</strong> <a class="text-apricot-dark hover:underline" href="mailto:louismaxauto600@gmail.com">louismaxauto600@gmail.com</a></li>
+            </ul>
+          </div>
+          <form class="bg-neutral-50 rounded-2xl border p-6" onsubmit="event.preventDefault(); alert('Message sent (demo).');">
+            <label class="block text-sm font-medium">Full name</label>
+            <input class="mt-1 w-full border rounded-lg p-2" type="text" required />
+            <label class="block text-sm font-medium mt-4">Email or phone</label>
+            <input class="mt-1 w-full border rounded-lg p-2" type="text" required />
+            <label class="block text-sm font-medium mt-4">Message</label>
+            <textarea class="mt-1 w-full border rounded-lg p-2" rows="4" required></textarea>
+            <button class="mt-4 w-full rounded-lg bg-brandblack text-white py-2 font-semibold">Send</button>
+            <p class="mt-2 text-xs text-neutral-500">This is a front-end demo. Connect to your backend/email service.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. Footer -->
+    <footer class="bg-brandblack text-white">
+      <div class="mx-auto max-container px-4 py-10 grid md:grid-cols-4 gap-6">
+        <div>
+          <div class="font-extrabold text-lg">MAXIMAX</div>
+          <div class="text-xs uppercase tracking-wide text-neutral-400">ALWAY MAXIMIZED</div>
+          <p class="mt-3 text-neutral-300 max-w-xs">Immigration • Tax • Forms • Translations • Resume Builder • Appointments</p>
+        </div>
+        <div>
+          <div class="font-semibold">Pages</div>
+          <ul class="mt-2 space-y-1 text-neutral-300">
+            <li><a class="hover:text-apricot-light" href="#services">Services</a></li>
+            <li><a class="hover:text-apricot-light" href="#alerts">Alerte</a></li>
+            <li><a class="hover:text-apricot-light" href="#upload">Upload</a></li>
+            <li><a class="hover:text-apricot-light" href="#appointments">Randevou</a></li>
+            <li><a class="hover:text-apricot-light" href="#tools">Zouti</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="font-semibold">Contact</div>
+          <ul class="mt-2 space-y-1 text-neutral-300">
+            <li><a class="hover:text-apricot-light" href="tel:+13175381150">(317) 538-1150</a></li>
+            <li><a class="hover:text-apricot-light" href="mailto:louismaxauto600@gmail.com">louismaxauto600@gmail.com</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="font-semibold">Languages</div>
+          <div class="mt-2 flex gap-2 text-sm">
+            <button class="px-2 py-1 rounded bg-white/10 hover:bg-white/20">Kreyòl</button>
+            <button class="px-2 py-1 rounded bg-white/10 hover:bg-white/20">English</button>
+            <button class="px-2 py-1 rounded bg-white/10 hover:bg-white/20">Español</button>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-white/10">
+        <div class="mx-auto max-container px-4 py-4 text-xs text-neutral-400">© <span id="year"></span> MAXIMAX Multi Services. All rights reserved.</div>
+      </div>
+    </footer>
+
+    <!-- Minimal JS -->
+    <script>
+      // year
+      document.getElementById('year').textContent = new Date().getFullYear();
+      // mobile menu
+      const btn = document.getElementById('menuBtn');
+      const menu = document.getElementById('mobileMenu');
+      btn?.addEventListener('click', () => menu.classList.toggle('hidden'));
+    </script>
+  </body>
+</html>
+
 
     <!-- Tailwind CSS CDN (for fast iteration) -->
     <script src="https://cdn.tailwindcss.com"></script>
