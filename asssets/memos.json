@@ -1,0 +1,32 @@
+{
+  "memos": [
+    {
+      "id": "2025-10-01-immigration-deadline",
+      "title": "Immigration filing window update",
+      "category": "Immigration",
+      "date": "2025-10-01",
+      "body": "USCIS announced adjustments to filing deadlines. Clients should verify submission dates on the Alerte page."
+    },
+    {
+      "id": "2025-10-15-office-hours",
+      "title": "Office hours for holiday week",
+      "category": "Operations",
+      "date": "2025-10-15",
+      "body": "Adjusted schedule during the holiday period. Walk-ins limited; please use appointment form."
+    },
+    {
+      "id": "2025-10-28-fee-reminder",
+      "title": "Fee structure reminder",
+      "category": "Finance",
+      "date": "2025-10-28",
+      "body": "Service fees have been updated. Check the Forms and Payment pages for the latest details."
+    },
+    {
+      "id": "2025-11-03-new-policy",
+      "title": "New immigration policy memo",
+      "category": "Immigration",
+      "date": "2025-11-03",
+      "body": "A new USCIS policy memo introduces procedural changes. Clients are encouraged to read the full update under Memo Center."
+    }
+  ]
+}
